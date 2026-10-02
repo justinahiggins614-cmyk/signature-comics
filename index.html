@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- SITE TITLE PROVISIONAL — awaiting Manon's confirmation; safe to rename everywhere -->
+<title>The Signature Comic Store</title>
+<meta name="description" content="The Signature Comic Store: original Signature comics — 8 original series, original heroes, full story text with panel art, read-aloud, copy, download. Marching to 1,000,000 issues. Free, no login.">
+<link rel="canonical" href="https://justinahiggins614-cmyk.github.io/signature-comics/">
+<meta property="og:title" content="The Signature Comic Store">
+<meta property="og:description" content="Original Signature comics with panel art, full stories, and read-aloud. Marching to 1,000,000 issues.">
+<meta property="og:url" content="https://justinahiggins614-cmyk.github.io/signature-comics/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Signature Comic Store","url":"https://justinahiggins614-cmyk.github.io/signature-comics/","creator":{"@type":"Person","name":"Justin Addam Higgins"},"description":"Original generated comic books by/for the Signature system: 8 original series, original heroes, panel art, full story text."}</script>
+<style>
+:root{--ink:#0d0a12;--ink2:#171221;--paper:#f7f2e4;--yel:#ffd23f;--red:#e63946;--blu:#3a86ff;--org:#fb8500;--line:#3a2c5a;--mut:#b9aed6;--card:#1c1528}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:"Trebuchet MS",Verdana,Arial,sans-serif;line-height:1.5}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+ background-image:radial-gradient(#ffffff12 1.2px,transparent 1.3px);background-size:22px 22px}
+a{color:var(--yel)}
+.jahnet{background:#0a0f1e;color:#9aa4b2;font-size:.74em;padding:7px 10px;text-align:center;line-height:2.1;letter-spacing:.02em;border-bottom:1px solid #2a3a5f;font-family:Arial,Helvetica,sans-serif;position:relative;z-index:2}
+.jahnet-t{color:var(--yel);font-weight:700;letter-spacing:.25em;margin-right:10px}
+.jahnet a{color:#9fc2ff;text-decoration:none;margin:0 6px;white-space:nowrap}
+.jahnet a:hover{text-decoration:underline}
+.jahnet .cur{color:var(--yel);font-weight:700;margin:0 6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 14px;position:relative;z-index:1}
+header.hero{text-align:center;padding:30px 14px 16px}
+.kicker{display:inline-block;background:var(--red);color:#fff;font-weight:900;letter-spacing:.18em;padding:6px 18px;transform:rotate(-2deg);border:3px solid #000;box-shadow:4px 4px 0 #000;font-size:.85em}
+.hero h1{font-size:2.4em;margin:.25em 0 .1em;letter-spacing:.02em;color:#fff;
+ text-shadow:3px 3px 0 var(--red),6px 6px 0 #000;font-weight:900}
+.hero h1 .y{color:var(--yel)}
+.hero .sub{color:var(--mut);font-style:italic;margin:.2em 0 .8em}
+.stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.stat{background:var(--card);border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:6px;padding:8px 18px;min-width:130px}
+.stat b{display:block;font-size:1.4em;color:var(--yel)}
+.stat span{font-size:.78em;color:var(--mut)}
+.march{max-width:640px;margin:10px auto 4px}
+.march .bar{height:14px;background:#000;border:3px solid #000;border-radius:8px;overflow:hidden}
+.march .fill{height:100%;background:linear-gradient(90deg,var(--red),var(--yel));width:0%}
+.march small{color:var(--mut)}
+.seriesband{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:16px 0 6px}
+.scard{background:var(--card);border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:8px;padding:12px 14px;cursor:pointer}
+.scard:hover{transform:translateY(-2px)}
+.scard h3{margin:.1em 0;font-size:1.02em;letter-spacing:.03em}
+.scard p{font-size:.82em;color:var(--mut);margin:.3em 0}
+.scard .cnt{font-size:.78em;color:var(--yel);font-weight:700}
+.controls{position:sticky;top:0;z-index:20;background:rgba(13,10,18,.97);border-bottom:3px solid #000;padding:10px 0}
+.controls .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+input[type=search],input[type=text],select{background:#0a0714;color:var(--paper);border:2px solid var(--line);border-radius:8px;padding:9px 12px;font-size:1em;font-family:inherit}
+input[type=search]{min-width:min(400px,90vw)}
+button{cursor:pointer}
+.btn{background:var(--yel);color:#1a1206;border:3px solid #000;box-shadow:3px 3px 0 #000;border-radius:8px;padding:8px 16px;font-family:inherit;font-weight:900;font-size:.95em}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+.btn.ghost{background:var(--card);color:var(--paper)}
+.btn.red{background:var(--red);color:#fff}
+.az{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:8px}
+.az button{background:var(--card);border:2px solid var(--line);color:var(--mut);border-radius:6px;min-width:30px;padding:4px 6px;font-family:inherit;font-weight:700}
+.az button.on{background:var(--red);color:#fff;border-color:#000}
+#results{padding:18px 0 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px}
+.card{background:var(--card);border:3px solid #000;box-shadow:5px 5px 0 #000;border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .15s}
+.card:hover{transform:translateY(-3px) rotate(-.5deg)}
+.card svg{display:block;width:100%;height:auto}
+.card .meta{padding:9px 10px 11px}
+.card .t{font-weight:900;font-size:.92em;line-height:1.3;min-height:2.4em}
+.card .s{font-size:.78em;color:var(--yel);font-weight:700}
+.card .n{font-size:.72em;color:var(--mut)}
+.more{display:block;margin:18px auto}
+/* issue view */
+.issueview{padding:20px 0 60px}
+.iv-top{display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:26px;align-items:start}
+@media(max-width:760px){.iv-top{grid-template-columns:1fr}.iv-cover{max-width:340px;margin:0 auto}}
+.iv-cover svg{width:100%;height:auto;border:3px solid #000;box-shadow:6px 6px 0 #000;border-radius:4px}
+.iv-info h1{margin:.1em 0;font-size:1.8em;color:#fff;text-shadow:2px 2px 0 var(--red)}
+.iv-info .byline{color:var(--mut);font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:4px 12px;font-size:.8em;color:var(--yel);font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.desc{background:var(--card);border-left:4px solid var(--red);padding:12px 16px;margin:14px 0;font-style:italic}
+.cast{background:#101726;border:2px solid #2a3a5f;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:.9em}
+.cast h3{margin:.2em 0 .6em;color:#9fc2ff;font-size:1em}
+.cast .c{margin:.35em 0}
+.cast .c b{color:var(--yel)}
+.honest{font-size:.82em;color:var(--mut);border:2px dashed var(--line);border-radius:8px;padding:10px 14px;margin:14px 0}
+/* story pages */
+.pages h2{color:#fff;text-shadow:2px 2px 0 var(--red);border-bottom:3px solid #000;padding-bottom:6px}
+.page{background:var(--card);border:3px solid #000;box-shadow:5px 5px 0 #000;border-radius:8px;margin:0 0 22px;overflow:hidden}
+.page svg{display:block;width:100%;height:auto}
+.page .pbody{padding:12px 16px 16px}
+.page .pnum{font-size:.75em;color:var(--mut);font-weight:700;letter-spacing:.15em}
+.page .cap{font-size:1.02em;margin:.4em 0}
+.page .dlg{margin:.5em 0 0;padding:8px 12px;background:#0a0714;border-left:4px solid var(--yel);font-style:italic}
+.page .dlg b{color:var(--yel);font-style:normal}
+/* Q&A AI */
+.qa{margin:26px 0;background:#101726;border:3px solid #000;box-shadow:5px 5px 0 #000;border-radius:10px;padding:16px}
+.qa h2{margin:.1em 0 .4em;color:#9fc2ff;font-size:1.15em}
+.qa .qlog{max-height:320px;overflow-y:auto;margin:10px 0;display:flex;flex-direction:column;gap:8px}
+.qa .msg{padding:9px 13px;border-radius:10px;max-width:92%;font-size:.93em}
+.qa .msg.u{align-self:flex-end;background:var(--blu);color:#fff}
+.qa .msg.a{align-self:flex-start;background:#1c1528;border:1px solid #2a3a5f}
+.qa .qrow{display:flex;gap:8px;flex-wrap:wrap}
+.qa .qrow input{flex:1;min-width:200px}
+.qa .qsugs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.qa .qsugs button{background:#1c1528;border:2px solid #2a3a5f;color:#9fc2ff;border-radius:16px;padding:4px 12px;font-size:.8em}
+/* floating read-aloud bar */
+#rdbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;background:#0a0f1e;border-top:3px solid var(--yel);padding:10px 14px;font-family:Arial,Helvetica,sans-serif;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap}
+#rdbar.show{display:flex}
+#rdbar .prog{color:#9fc2ff;font-size:.85em}
+footer{border-top:3px solid #000;padding:26px 14px 60px;color:var(--mut);font-size:.88em;text-align:center}
+footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif;font-size:.85em}
+.note-provisional{font-size:.8em;color:var(--mut);font-style:italic}
+.loading{text-align:center;padding:40px;color:var(--mut)}
+.badge-new{display:inline-block;background:var(--red);color:#fff;font-size:.68em;font-weight:900;padding:2px 8px;border-radius:4px;vertical-align:middle;margin-left:8px;letter-spacing:.08em}
+</style>
+</head>
+<body>
+<div class="jahnet"><span class="jahnet-t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">The Signature AI Telephone Book</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">Signature Universal Paradox Immune Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">The Signature Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">Globally Rejustered Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">Signature Spec Catalog Pending Patents</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">The Signature PC System Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">Signature Cyber Mega Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">Signature University</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">Signature Book Depository</a><span class="cur">YOU ARE HERE: THE SIGNATURE COMIC STORE</span><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">Signature Global Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">Signature 3D Print Depository</a></div>
+
+<div id="home">
+<header class="hero wrap">
+<div class="kicker">SITE 13 OF 15 · GRAND OPENING</div>
+<h1>THE SIGNATURE <span class="y">COMIC STORE</span></h1>
+<div class="sub">Original Signature comics — original series, original heroes, original stories. Cover first, then the pages.</div>
+<div class="stats" id="stats"><div class="stat"><b>…</b><span>loading</span></div></div>
+<div class="march"><div class="bar"><div class="fill" id="marchfill"></div></div><small id="marchtxt">Marching to 1,000,000 issues</small></div>
+</header>
+
+<div class="wrap"><div class="seriesband" id="seriesband"></div></div>
+
+<div class="controls"><div class="wrap">
+<div class="row">
+<input type="search" id="q" placeholder="Search title, hero, or JAH-COMIC-######…" aria-label="Search comics">
+<select id="series" aria-label="Series filter"><option value="">All series</option></select>
+<select id="sort" aria-label="Sort"><option value="new">Newest first</option><option value="title">Title A–Z</option><option value="series">Series order</option></select>
+</div>
+<div class="az" id="az"></div>
+</div></div>
+
+<div class="wrap"><div id="results"><div class="loading">Opening the long boxes…</div></div></div>
+</div>
+
+<div id="issueview" class="wrap" style="display:none"></div>
+
+<div id="rdbar"><span>🔊 <span class="prog" id="rdprog">Reading…</span></span><button class="btn" id="rdstop">⏹ Stop</button></div>
+
+<footer>
+<div class="wrap">
+<p><b style="color:var(--yel)">The Signature Comic Store</b> — every issue an original generated comic by/for the Signature system, by <b>Justin Addam Higgins</b>. Original heroes and stories only: no real publishers' characters, titles, or likenesses. Generated material is labeled as generated.</p>
+<p class="note-provisional">Site title provisional — Manon to confirm.</p>
+<div class="sites">THE JAH NETWORK ·
+<a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">Telephone Book</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">Calculator</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">Dictionary</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">JAH Wiki</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">JAH-N Wiki</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">Patent Catalog</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">Spec Catalog</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-llama/">Signature Llama</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">PC Depository</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">Mega Mall</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-university/">University</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-books/">Book Depository</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">Newspaper Archive</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">3D Print Depository</a></div>
+<p>Free. No login. Machine-readable: <a href="data/index/api.json">api.json</a> · <a href="data/index/comics.idx.json.gz">comic index</a> · <a href="sitemap.xml">sitemap</a></p>
+</div>
+</footer>
+<script>
+"use strict";
+/* ============ config & utils ============ */
+var CHUNK=100, IDX_URL="data/index/comics.idx.json.gz", API_URL="data/index/api.json";
+var IDX=[], FILTERED=[], SHOWN=0, PAGE=48;
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function hashStr(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=(h*16777619)>>>0}return h}
+function numOf(id){return parseInt(id.slice(-6),10)}
+function chunkPath(id){var n=Math.ceil(numOf(id)/CHUNK);return "data/volumes/comics-c"+String(n).padStart(5,"0")+".json.gz"}
+function gunzip(buf){return new Response(buf).arrayBuffer().then(function(ab){
+  if(typeof DecompressionStream==="undefined")throw new Error("no gzip support");
+  return new Response(new Blob([ab]).stream().pipeThrough(new DecompressionStream("gzip"))).text()})}
+function fetchJSONgz(url){return fetch(url).then(function(r){if(!r.ok)throw new Error("fetch "+r.status);return r.arrayBuffer()}).then(gunzip).then(JSON.parse)}
+
+/* ============ series palettes ============ */
+var PALS={
+ signal:{bg:["#0b1035","#1b2456"],acc:"#39d0ff",ink:"#f2f6ff"},
+ ember:{bg:["#3a0f0a","#1c0705"],acc:"#ff7b2e",ink:"#ffeedd"},
+ circuit:{bg:["#0a0a12","#161626"],acc:"#ff2fb3",ink:"#f2f2ff"},
+ tide:{bg:["#062a3a","#041620"],acc:"#4fe3c1",ink:"#eafcf7"},
+ gloam:{bg:["#221c33","#100d1a"],acc:"#ffd23f",ink:"#f4eefc"},
+ starlog:{bg:["#0a1030","#1a1440"],acc:"#ffd23f",ink:"#eef2ff"},
+ clockwork:{bg:["#2e1d0e","#171006"],acc:"#e8b64c",ink:"#f7ecd4"},
+ junior:{bg:["#123a6b","#0a1f3d"],acc:"#ff9f1c",ink:"#ffffff"}};
+var SDESC={
+ signal:"A team of cosmic guardians keeps the beacon-network of the far colonies lit — and something out in the dark keeps trying to snuff it.",
+ ember:"In a valley of ash and frost, young wardens carry living ember-flames between the last warm holds of the Vale.",
+ circuit:"Neon-row couriers who dive the city's ghost frequencies discover a signal that was never meant to be heard.",
+ tide:"Harbor kids and old sailors bound by tide-oaths guard the sea-roads between Gullrest and the drowned places.",
+ gloam:"Lantern-keepers patrol the fog city after dark, solving the small strange mysteries the daylight misses.",
+ starlog:"An anthology of voyages: the survey ship Wayfarer charts the far dark, one strange world per issue.",
+ clockwork:"Tinkerers and their brass automatons keep the gear-city wound — and someone keeps loosening the springs.",
+ junior:"The Maple Street kids and their treehouse club: small heroes, big heart, everyday wonders."};
+var SNAME={signal:"THE SIGNALBEARERS",ember:"EMBERFALL",circuit:"THE HOLLOW CIRCUIT",tide:"TIDEBOUND",gloam:"THE GLOAMING WATCH",starlog:"STARFARER'S LOG",clockwork:"THE CLOCKWORK MENAGERIE",junior:"JUNIOR SIGNALS"};
+
+/* ============ deterministic comic art ============ */
+function rnd2(h,n){h=(h*1103515245+12345)>>>0;return{h:h,v:h%n}}
+function figureSVG(x,y,s,col,cape,flip){
+  var f=flip?-1:1;
+  return '<g transform="translate('+x+','+y+') scale('+(f*s)+','+s+')">'+
+   '<path d="M-6,-58 L-34,44 L-12,44 L-2,-40 Z" fill="'+cape+'" opacity="0.92"/>'+
+   '<path d="M6,-58 L34,44 L12,44 L2,-40 Z" fill="'+cape+'" opacity="0.75"/>'+
+   '<rect x="-13" y="-96" width="26" height="58" rx="9" fill="'+col+'"/>'+
+   '<circle cx="0" cy="-112" r="15" fill="'+col+'"/>'+
+   '<path d="M-15,-116 a15,15 0 0 1 30,0 l0,-4 l-30,0 Z" fill="#0d0a12" opacity="0.85"/>'+
+   '<rect x="-9" y="-118" width="18" height="6" rx="3" fill="#fff" opacity="0.9"/>'+
+   '<rect x="-20" y="-92" width="9" height="34" rx="4" fill="'+col+'"/>'+
+   '<rect x="11" y="-92" width="9" height="34" rx="4" fill="'+col+'"/>'+
+   '<rect x="-11" y="-38" width="9" height="44" rx="4" fill="'+col+'"/>'+
+   '<rect x="2" y="-38" width="9" height="44" rx="4" fill="'+col+'"/>'+
+   '<circle cx="0" cy="-67" r="7" fill="#ffd23f"/></g>';
+}
+function bgSVG(h,pal,W,H,scene){
+  var s=scene.toLowerCase(),g="g"+(h%99991),out="";
+  out+='<defs><linearGradient id="'+g+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+pal.bg[0]+'"/><stop offset="1" stop-color="'+pal.bg[1]+'"/></linearGradient></defs>';
+  out+='<rect width="'+W+'" height="'+H+'" fill="url(#'+g+')"/>';
+  var r;
+  if(/orbit|space|void|dark|star|moon|beacon|relay|array/.test(s)){
+    for(var i=0;i<70;i++){r=rnd2(h,1000000);h=r.h;var sx=r.v%W;r=rnd2(h,1000000);h=r.h;var sy=r.v%(H*0.75);
+      out+='<circle cx="'+sx+'" cy="'+sy+'" r="'+(1+r.v%2)+'" fill="#fff" opacity="'+(0.35+(r.v%50)/100)+'"/>'}
+    r=rnd2(h,1000);h=r.h;var px=W*0.75,py=H*0.22,pr=40+r.v%30;
+    out+='<circle cx="'+px+'" cy="'+py+'" r="'+pr+'" fill="'+pal.acc+'" opacity="0.85"/>';
+    out+='<circle cx="'+(px-pr*0.35)+'" cy="'+(py-pr*0.3)+'" r="'+(pr*0.72)+'" fill="'+pal.bg[0]+'" opacity="0.55"/>';
+  }else if(/row|alley|sector|city|market|lane|square|plaza|docks|rooftop/.test(s)){
+    for(var b=0;b<9;b++){r=rnd2(h,1000);h=r.h;var bw=W/9,bh=H*0.25+(r.v%(H*0.4)),bx=b*bw;
+      out+='<rect x="'+bx+'" y="'+(H-bh)+'" width="'+(bw-4)+'" height="'+bh+'" fill="#05040a"/>';
+      for(var wy=H-bh+10;wy<H-8;wy+=16)for(var wx=bx+5;wx<bx+bw-9;wx+=12){
+        if((wx+wy)%3)out+='<rect x="'+wx+'" y="'+wy+'" width="5" height="7" fill="'+pal.acc+'" opacity="0.5"/>'}}
+    out+='<circle cx="'+(W*0.2)+'" cy="'+(H*0.18)+'" r="26" fill="'+pal.acc+'" opacity="0.8"/>';
+  }else if(/water|tide|coral|drowned|sea|harbor|ocean|skerry|gull/.test(s)){
+    for(var wv=0;wv<6;wv++){var y=H*0.35+wv*44;
+      out+='<path d="M0,'+y+' Q80,'+(y-26)+' 160,'+y+' T320,'+y+' T480,'+y+' T640,'+y+'" fill="none" stroke="'+pal.acc+'" stroke-width="'+(5-wv*0.6)+'" opacity="'+(0.7-wv*0.1)+'"/>'}
+    out+='<circle cx="'+(W*0.8)+'" cy="'+(H*0.16)+'" r="30" fill="'+pal.acc+'" opacity="0.85"/>';
+  }else if(/vale|forest|fen|pine|tree|park|field|mountain|ashen/.test(s)){
+    for(var t=0;t<12;t++){r=rnd2(h,1000);h=r.h;var tx=(r.v%W),th=H*0.25+(r.v%(H*0.3));
+      out+='<polygon points="'+tx+','+(H-th)+' '+(tx-26)+','+H+' '+(tx+26)+','+H+'" fill="#04140a" opacity="0.9"/>'}
+    out+='<rect x="0" y="'+(H*0.8)+'" width="'+W+'" height="'+(H*0.2)+'" fill="#031007"/>';
+  }else if(/gear|brass|cog|furnace|works|tinker/.test(s)){
+    for(var gr=0;gr<7;gr++){r=rnd2(h,1000);h=r.h;var gx=r.v%W,gy=r.v%H,grr=24+(r.v%44);
+      out+='<circle cx="'+gx+'" cy="'+gy+'" r="'+grr+'" fill="none" stroke="'+pal.acc+'" stroke-width="7" opacity="0.4"/>';
+      out+='<circle cx="'+gx+'" cy="'+gy+'" r="'+(grr*0.4)+'" fill="none" stroke="'+pal.acc+'" stroke-width="4" opacity="0.4"/>'}
+  }else{
+    r=rnd2(h,1000);h=r.h;
+    out+='<circle cx="'+(W*0.7)+'" cy="'+(H*0.2)+'" r="42" fill="'+pal.acc+'" opacity="0.9"/>';
+    for(var c=0;c<5;c++){out+='<ellipse cx="'+(W*0.15+c*W*0.18)+'" cy="'+(H*0.25+(c%3)*30)+'" rx="52" ry="17" fill="#fff" opacity="0.16"/>'}
+  }
+  return{svg:out,h:h};
+}
+function panelSVG(page,chars,skey,seedTag){
+  var pal=PALS[skey]||PALS.signal,W=640,H=400,h=hashStr(seedTag+page.beat+page.scene),r;
+  var b=bgSVG(h,pal,W,H,page.scene);h=b.h;var out=b.svg;
+  r=rnd2(h,1000);h=r.h;var nfig=1+(r.v%2);
+  for(var f=0;f<nfig&&f<chars.length;f++){
+    r=rnd2(h,100000);h=r.h;var ch=chars[f%chars.length];
+    var cc="#"+(r.v%0xffffff).toString(16).padStart(6,"0");
+    var fx=W*(0.3+0.4*(r.v%100)/100),fy=H*0.86,s=1.1+((r.v>>8)%40)/100;
+    r=rnd2(h,2);h=r.h;
+    out+=figureSVG(fx.toFixed(0),fy.toFixed(0),s.toFixed(2),cc,pal.acc,r.v===1);
+  }
+  if(page.beat==="climax"||page.beat==="escalation"){
+    for(var l=0;l<14;l++){r=rnd2(h,1000);h=r.h;var lx=r.v%W;
+      out+='<line x1="'+lx+'" y1="0" x2="'+(lx+30)+'" y2="'+H+'" stroke="#fff" stroke-width="2" opacity="0.28"/>'}
+  }else if(page.beat==="turn"){
+    out+='<path d="M'+(W/2)+',30 l28,52 58,8 -42,42 10,58 -54,-28 -54,28 10,-58 -42,-42 58,-8 Z" fill="'+pal.acc+'" opacity="0.9"/>';
+  }
+  out+='<rect x="6" y="6" width="'+(W-12)+'" height="'+(H-12)+'" fill="none" stroke="#000" stroke-width="10"/>';
+  out+='<rect x="14" y="14" width="'+(W-28)+'" height="'+(H-28)+'" fill="none" stroke="#fff" stroke-width="2" opacity="0.6"/>';
+  return '<svg viewBox="0 0 '+W+" "+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comic panel: '+esc(page.cap).slice(0,80)+'">'+out+"</svg>";
+}
+function wrapTitle(t,maxw){var words=String(t).split(/\s+/),lines=[],cur="";
+  words.forEach(function(w){if((cur+" "+w).trim().length>maxw){if(cur)lines.push(cur);cur=w}else cur=(cur+" "+w).trim()});
+  if(cur)lines.push(cur);return lines.slice(0,4)}
+function coverSVG(row){
+  var skey=row.sk||"signal",pal=PALS[skey]||PALS.signal,h=hashStr(row.id),W=400,H=600,r;
+  var out='<svg viewBox="0 0 '+W+" "+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cover of '+esc(row.t)+'">';
+  out+='<defs><linearGradient id="cbg'+(h%99991)+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+pal.bg[0]+'"/><stop offset="1" stop-color="'+pal.bg[1]+'"/></linearGradient></defs>';
+  out+='<rect width="'+W+'" height="'+H+'" fill="url(#cbg'+(h%99991)+')"/>';
+  var b=bgSVG(h^0x5f3,pal,W,H,(SNAME[skey]||"")+" cover");out+=b.svg;h=b.h;
+  r=rnd2(h,100000);h=r.h;var cc="#"+(r.v%0xffffff).toString(16).padStart(6,"0");
+  out+=figureSVG(W/2,H*0.72,2.2,cc,pal.acc,false);
+  out+='<rect x="0" y="0" width="'+W+'" height="64" fill="#000"/>';
+  out+='<text x="'+(W/2)+'" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="34" letter-spacing="4" fill="'+pal.acc+'">SIGNATURE</text>';
+  out+='<rect x="0" y="64" width="'+W+'" height="40" fill="'+pal.acc+'"/>';
+  out+='<text x="'+(W/2)+'" y="93" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="22" letter-spacing="2" fill="#000">'+esc(SNAME[skey]||"")+"</text>";
+  var lines=wrapTitle(row.t,14),ty=H*0.30;
+  lines.forEach(function(ln,i){out+='<text x="'+(W/2)+'" y="'+(ty+i*44)+'" text-anchor="middle" font-family="Trebuchet MS,Arial,sans-serif" font-weight="900" font-size="38" fill="#fff" stroke="#000" stroke-width="1.4">'+esc(ln)+"</text>"});
+  out+='<g transform="translate('+(W-78)+',120)"><circle r="34" fill="#ffd23f" stroke="#000" stroke-width="4"/><text y="-4" text-anchor="middle" font-family="Arial" font-weight="900" font-size="15" fill="#000">ISSUE</text><text y="18" text-anchor="middle" font-family="Arial" font-weight="900" font-size="22" fill="#000">'+(row.n||"?")+"</text></g>";
+  out+='<rect x="0" y="'+(H-52)+'" width="'+W+'" height="52" fill="#000"/>';
+  out+='<text x="14" y="'+(H-20)+'" font-family="Arial,sans-serif" font-size="14" fill="'+pal.ink+'" opacity="0.85">'+esc(row.id)+'</text>';
+  out+='<text x="'+(W-14)+'" y="'+(H-20)+'" text-anchor="end" font-family="Arial,sans-serif" font-size="14" fill="'+pal.acc+'">ORIGINAL</text>';
+  out+='<rect x="8" y="8" width="'+(W-16)+'" height="'+(H-16)+'" fill="none" stroke="#000" stroke-width="6"/>';
+  return out+"</svg>";
+}
+
+/* ============ loading, stats, series band ============ */
+function init(){
+  fetch(API_URL).then(function(r){return r.json()}).then(function(api){
+    var nb=api.total_issues||0, nw=api.total_words||0;
+    $("stats").innerHTML=
+     '<div class="stat"><b>'+nb.toLocaleString()+"</b><span>finished issues</span></div>"+
+     '<div class="stat"><b>'+Object.keys(api.series||{}).length+"</b><span>original series</span></div>"+
+     '<div class="stat"><b>'+(nw/1000).toFixed(0)+"K</b><span>words of story</span></div>"+
+     '<div class="stat"><b>1M</b><span>issue goal</span></div>';
+    var pct=Math.min(100,nb/1000000*100);
+    $("marchfill").style.width=Math.max(pct,0.4)+"%";
+    $("marchtxt").textContent=nb.toLocaleString()+" of 1,000,000 issues ("+pct.toFixed(2)+"%) — X/1,000,000";
+    var ss=$("series");Object.keys(api.series||{}).sort().forEach(function(s){
+      var o=document.createElement("option");o.value=s;o.textContent=s+" ("+(api.series[s]).toLocaleString()+")";ss.appendChild(o)});
+    var band=$("seriesband");
+    band.innerHTML=Object.keys(api.series||{}).sort().map(function(s){
+      var k=Object.keys(SNAME).filter(function(k){return SNAME[k]===s})[0]||"signal";
+      var pal=PALS[k]||PALS.signal;
+      return '<div class="scard" data-s="'+esc(s)+'"><h3 style="color:'+pal.acc+'">'+esc(s)+
+       '</h3><p>'+esc(SDESC[k]||"")+'</p><div class="cnt">'+(api.series[s]).toLocaleString()+' issues</div></div>'}).join("");
+    band.querySelectorAll(".scard").forEach(function(el){el.onclick=function(){$("series").value=el.dataset.s;applyFilters();document.querySelector(".controls").scrollIntoView()}});
+  }).catch(function(){});
+  fetchJSONgz(IDX_URL).then(function(idx){IDX=idx;buildAZ();applyFilters()})
+    .catch(function(e){$("results").innerHTML='<div class="loading">Could not load the catalog index. Check your connection and reload.</div>'});
+  $("q").addEventListener("input",function(){applyFilters()});
+  ["series","sort"].forEach(function(id){$(id).addEventListener("change",applyFilters)});
+  window.addEventListener("hashchange",route);
+  route();
+}
+function buildAZ(){
+  var box=$("az");box.innerHTML="";
+  var mk=function(lbl,val){var b=document.createElement("button");b.textContent=lbl;b.dataset.v=val;
+    b.onclick=function(){box.querySelectorAll("button").forEach(function(x){x.classList.remove("on")});b.classList.add("on");applyFilters()};box.appendChild(b);return b};
+  var all=mk("★","");all.classList.add("on");
+  for(var c=65;c<=90;c++)mk(String.fromCharCode(c),String.fromCharCode(c));
+  mk("0-9","#");
+}
+function azVal(){var b=$("az").querySelector("button.on");return b?b.dataset.v:""}
+function titleKey(t){return String(t).replace(/^(The|A|An)\s+/i,"")}
+function applyFilters(){
+  var q=$("q").value.trim().toLowerCase(), s=$("series").value,
+      so=$("sort").value, az=azVal();
+  FILTERED=IDX.filter(function(b){
+    if(s&&b.s!==s)return false;
+    if(az){var k=titleKey(b.t).charAt(0).toUpperCase();if(az==="#"){if(!/[0-9]/.test(k))return false}else if(k!==az)return false}
+    if(q){var hay=(b.t+" "+b.s+" "+b.id+" "+(b.c||[]).join(" ")).toLowerCase();if(hay.indexOf(q)<0)return false}
+    return true});
+  if(so==="title")FILTERED.sort(function(a,b){return titleKey(a.t).localeCompare(titleKey(b.t))});
+  else if(so==="series")FILTERED.sort(function(a,b){return (a.sk<b.sk?-1:1)||(a.n-b.n)});
+  else FILTERED.sort(function(a,b){return b.id<a.id?-1:1});
+  SHOWN=0;render();
+}
+function render(){
+  var box=$("results");
+  if(!FILTERED.length){box.innerHTML='<div class="loading">No issues match. Try another search.</div>';return}
+  var slice=FILTERED.slice(0,SHOWN+PAGE);
+  var html='<p style="color:var(--mut)">'+FILTERED.length.toLocaleString()+' issues · showing '+slice.length+'</p><div class="grid">'+
+    slice.map(function(b){
+      return '<div class="card" data-id="'+b.id+'"><div>'+coverSVG(b)+'</div><div class="meta"><div class="t">'+esc(b.t)+
+       '</div><div class="s">'+esc(b.s)+" #"+b.n+'</div><div class="n">'+esc(b.id)+' · '+(b.c||[]).slice(0,2).join(", ")+'</div></div></div>'}).join("")+"</div>";
+  if(slice.length<FILTERED.length)html+='<button class="btn more" id="morebtn">Show more</button>';
+  box.innerHTML=html;
+  box.querySelectorAll("[data-id]").forEach(function(el){el.onclick=function(){location.hash="#issue="+el.dataset.id}});
+  var mb=$("morebtn");if(mb)mb.onclick=function(){SHOWN+=PAGE;render();window.scrollTo(0,document.body.scrollHeight)};
+}
+
+/* ============ issue detail ============ */
+var CUR=null, CURTEXT="";
+var _chome=null;
+function cHome(){if(!_chome){var md=document.querySelector('meta[name="description"]'),cl=document.querySelector('link[rel="canonical"]');_chome={d:md?md.getAttribute("content"):"",c:cl?cl.getAttribute("href"):"https://justinahiggins614-cmyk.github.io/signature-comics/"}}return _chome}
+function setIssueHead(rec){var h=cHome();var md=document.querySelector('meta[name="description"]');var cl=document.querySelector('link[rel="canonical"]');if(rec){if(md)md.setAttribute("content",String(rec.desc||"").slice(0,300));if(cl)cl.setAttribute("href","https://justinahiggins614-cmyk.github.io/signature-comics/?issue="+rec.id)}else{if(md)md.setAttribute("content",h.d);if(cl)cl.setAttribute("href",h.c)}}
+function route(){
+  var m=/^#issue=(JAH-COMIC-\d{6})/.exec(location.hash||"");
+  if(!m){var qb=null;try{qb=new URLSearchParams(location.search).get("issue")}catch(e){}
+    if(qb&&/^JAH-COMIC-\d{6}$/.test(qb)){try{history.replaceState(null,"","./")}catch(e2){}location.hash="#issue="+qb;return;}
+    var sq=null;try{sq=new URLSearchParams(location.search).get("series")}catch(e3){}
+    if(sq&&SNAME[sq]){try{history.replaceState(null,"","./")}catch(e4){}$("series").value=SNAME[sq];applyFilters();return;}}
+  else{openIssue(m[1]);return}
+  rdStop();$("issueview").style.display="none";$("home").style.display="block";document.title="The Signature Comic Store";setIssueHead(null);
+}
+function openIssue(id){
+  rdStop();$("home").style.display="none";var iv=$("issueview");iv.style.display="block";
+  iv.innerHTML='<div class="loading">Opening '+esc(id)+'…</div>';
+  window.scrollTo(0,0);
+  fetchJSONgz(chunkPath(id)).then(function(recs){
+    var rec=null;for(var i=0;i<recs.length;i++)if(recs[i].id===id)rec=recs[i];
+    if(!rec)throw new Error("not in chunk");
+    CUR=rec;CURTEXT=issueText(rec);renderIssue(rec);
+    document.title=rec.title+" ("+rec.series+" #"+rec.num+") — The Signature Comic Store";setIssueHead(rec);
+  }).catch(function(){iv.innerHTML='<div class="loading">Could not open '+esc(id)+'. <a href="#">Back to the racks</a></div>'});
+}
+function issueText(rec){
+  var t=rec.title+", "+rec.series+" number "+rec.num+". ";
+  rec.pages.forEach(function(p,i){t+="Page "+(i+1)+". "+p.cap+" ";if(p.dlg)t+=p.who+" says: "+p.dlg+" "});
+  return t;
+}
+function renderIssue(rec){
+  var cast=rec.chars.map(function(c){
+    return '<div class="c"><b>'+esc(c.code)+'</b> — '+esc(c.name)+
+     ' <span style="color:var(--mut)">· power: '+esc(c.power)+"</span></div>"}).join("");
+  var pages=rec.pages.map(function(p,i){
+    return '<div class="page">'+panelSVG(p,rec.chars,rec.skey,rec.id+"p"+i)+
+     '<div class="pbody"><div class="pnum">PAGE '+(i+1)+" · "+esc(p.beat.toUpperCase())+'</div>'+
+     '<div class="cap">'+esc(p.cap)+"</div>"+
+     (p.dlg?'<div class="dlg"><b>'+esc(p.who)+":</b> "+esc(p.dlg)+"</div>":"")+"</div></div>"}).join("");
+  $("issueview").innerHTML=
+   '<div class="issueview"><p><a href="#">← Back to the racks</a></p>'+
+   '<div class="iv-top"><div class="iv-cover">'+coverSVG({id:rec.id,t:rec.title,sk:rec.skey,n:rec.num})+"</div>"+
+   '<div class="iv-info"><h1>'+esc(rec.title)+"</h1>"+
+   '<div class="byline">'+esc(rec.series)+" #"+rec.num+" · "+esc(rec.id)+' · by '+esc("Justin Addam Higgins")+"</div>"+
+   '<div class="chips"><span class="chip">'+esc(rec.series)+'</span><span class="chip">Issue #'+rec.num+'</span><span class="chip">'+rec.pages.length+' pages</span><span class="chip">'+rec.words+' words</span><span class="chip">Signature original</span></div>'+
+   '<div class="actions"><button class="btn red" id="rdbtn">🔊 Read aloud</button>'+
+   '<button class="btn ghost" id="copybtn">⧉ Copy story</button>'+
+   '<button class="btn ghost" id="dlbtn">⬇ Download .txt</button>'+
+   '<button class="btn ghost" id="dljson">⬇ .json</button></div>'+
+   '<div class="desc">'+esc(rec.desc)+"</div>"+
+   '<div class="cast"><h3>⭐ Cast</h3>'+cast+"</div>"+
+   '<div class="honest">✦ '+esc(rec.note)+"</div>"+
+   "</div></div>"+
+   '<div class="qa"><h2>💬 Ask about this issue</h2>'+
+   '<div class="qlog" id="qlog" aria-live="polite"><div class="msg a">I know this issue cover to cover — ask me about the heroes, the story, the villain, or the series.</div></div>'+
+   '<div class="qrow"><input id="qin" maxlength="200" placeholder="Ask about this issue…" aria-label="Ask about this issue"><button class="btn" id="qask">ASK</button></div>'+
+   '<div class="qsugs" id="qsugs"></div></div>'+
+   '<div class="pages"><h2>Full issue — page by page</h2>'+pages+"</div>"+
+   '<p><a href="#">← Back to the racks</a></p></div>';
+  $("rdbtn").onclick=function(){rdSpeak(CURTEXT)};
+  $("copybtn").onclick=function(){copyText(CURTEXT,"copybtn")};
+  $("dlbtn").onclick=function(){download(rec.id+".txt",CURTEXT,"text/plain")};
+  $("dljson").onclick=function(){download(rec.id+".json",JSON.stringify(rec,null,1),"application/json")};
+  var sug=["Who are the heroes?","What happens in this issue?","Who is the villain?","What series is this?","What powers do they have?"];
+  $("qsugs").innerHTML=sug.map(function(s){return '<button data-q="'+esc(s)+'">'+esc(s)+"</button>"}).join("");
+  $("qsugs").querySelectorAll("button").forEach(function(b){b.onclick=function(){$("qin").value=b.dataset.q;qaAsk()}});
+  $("qask").onclick=qaAsk;
+  $("qin").addEventListener("keydown",function(e){if(e.key==="Enter")qaAsk()});
+}
+function copyText(t,btnId){
+  function done(ok){var b=$(btnId);if(b)b.textContent=ok?"✓ Copied":"Copy failed";setTimeout(function(){if(b)b.textContent="⧉ Copy story"},1800)}
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){done(true)},function(){done(false)});
+  else{var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done(true)}catch(e){done(false)}ta.remove()}
+}
+function download(name,text,mime){
+  var b=new Blob([text],{type:mime}),u=URL.createObjectURL(b),a=document.createElement("a");
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);
+}
+
+/* ============ per-issue Q&A AI (data-grounded; never invents) ============ */
+var VILLAINS=["the Quiet","the Hollow King","Madame Static","the Rust Choir","Captain Undertow","the Pale Cartographer","the Gear Thief","Old Murk","the Signal Eater","the Brass Widow"];
+function qaSay(who,text){
+  var log=$("qlog"),d=document.createElement("div");
+  d.className="msg "+who;d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;
+}
+function qaAsk(){
+  var q=$("qin").value.trim();if(!q||!CUR)return;$("qin").value="";
+  qaSay("u",q);qaSay("a",qaAnswer(q,CUR));
+}
+function qaAnswer(q,rec){
+  var ql=q.toLowerCase();
+  var named=null;
+  rec.chars.forEach(function(c){if(ql.indexOf(c.code.toLowerCase())>=0||ql.indexOf(c.name.toLowerCase())>=0)named=c});
+  if(named)return named.code+" is "+named.name+", one of this issue's heroes — power: "+named.power+". They appear in \""+rec.title+"\" ("+rec.series+" #"+rec.num+").";
+  if(/who|character|hero|heroes|cast|star/.test(ql)){
+    return "This issue stars "+rec.chars.map(function(c){return c.code+" ("+c.name+", power: "+c.power+")"}).join("; ")+".";
+  }
+  if(/villain|enemy|bad guy|foe|antagonist/.test(ql)){
+    var found=[];var blob=rec.pages.map(function(p){return p.cap+" "+p.dlg}).join(" ");
+    VILLAINS.forEach(function(v){if(blob.indexOf(v)>=0&&found.indexOf(v)<0)found.push(v)});
+    if(found.length)return "The trouble in this issue comes from "+found.join(" and ")+".";
+    return "No single villain is named in this issue — the conflict comes from the situation itself. Try asking what happens.";
+  }
+  if(/plot|story|happen|about|summary|synopsis/.test(ql)){
+    var caps=rec.pages.map(function(p){return p.cap});
+    return rec.title+": "+caps[0]+" … "+caps[caps.length-1]+" ("+rec.pages.length+" pages total.)";
+  }
+  if(/series|which series|what comic/.test(ql)){
+    return "This is "+rec.series+" #"+rec.num+". "+(SDESC[rec.skey]||"");
+  }
+  if(/power|abilit|can they do/.test(ql)){
+    return rec.chars.map(function(c){return c.code+": "+c.power}).join("; ")+".";
+  }
+  if(/page|long|length|how many/.test(ql)){
+    return "This issue has "+rec.pages.length+" story pages and about "+rec.words+" words of captions and dialogue.";
+  }
+  if(/who made|author|creator|made this|wrote|write/.test(ql)){
+    return "Written by Justin Addam Higgins — an original generated comic by/for the Signature system. All characters and events are invented.";
+  }
+  if(/read|aloud|listen/.test(ql)){
+    return "Hit the 🔊 Read aloud button above the story and I'll read the whole issue to you.";
+  }
+  return "I can answer from this issue's record: ask about the heroes (\"who\"), the story (\"what happens\"), the villain, the series, or their powers.";
+}
+
+/* ============ read aloud: tiered TTS (ResponsiveVoice en-US female first,
+   then two Google TTS failover hosts; per-chunk retry with fail-fast tier
+   rotation; direct audio-element playback) ============ */
+var RD={audio:null,queue:[],playing:false,stopped:true,timer:null,speed:1,total:0};
+var RD_TIERS=[
+ function(t){return "https://code.responsivevoice.org/getvoice.php?t="+encodeURIComponent(t)+"&tl=en-US&sv=g2&vn=&pitch=0.5&rate=0.95"},
+ function(t){return "https://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(t)+"&tl=en&client=tw-ob"},
+ function(t){return "https://translate.googleapis.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(t)+"&tl=en&client=tw-ob"}];
+function rdChunks(t,maxChunks){t=String(t).replace(/\s+/g," ").trim();var out=[],cur="";
+  t.split(/(?<=[.!?])\s+/).forEach(function(s){if((cur+" "+s).length>170){if(cur)out.push(cur);cur=s}else cur=(cur?cur+" ":"")+s});
+  if(cur)out.push(cur);return out.slice(0,maxChunks||400)}
+function rdStop(){RD.stopped=true;RD.playing=false;RD.queue=[];if(RD.timer){clearTimeout(RD.timer);RD.timer=null}
+  if(RD.audio){try{RD.audio.pause()}catch(e){}RD.audio=null}
+  var b=$("rdbtn");if(b)b.textContent="🔊 Read aloud";$("rdbar").classList.remove("show")}
+function rdPlayTier(chunk,tier,done){
+  if(tier>=RD_TIERS.length){done(false);return}
+  var url=RD_TIERS[tier](chunk),a=new Audio();RD.audio=a;a.playbackRate=RD.speed;
+  var finished=false;
+  function next(ok){if(finished)return;finished=true;try{a.pause()}catch(e){}done(ok)}
+  a.onended=function(){next(true)};a.onerror=function(){next(false)};
+  RD.timer=setTimeout(function(){rdPlayTier(chunk,tier+1,done)},12000);
+  a.src=url;var p=a.play();if(p&&p.catch)p.catch(function(){next(false)});
+  var iv=setInterval(function(){if(finished){clearInterval(iv);return}if(!RD.timer){clearInterval(iv);return}},500);
+  var oldNext=next;next=function(ok){if(RD.timer){clearTimeout(RD.timer);RD.timer=null}clearInterval(iv);oldNext(ok)};
+}
+function rdNext(){
+  if(RD.stopped||!RD.queue.length){rdStop();return}
+  RD.playing=true;var chunk=RD.queue.shift(),tier=0;
+  $("rdprog").textContent="Reading chunk "+(RD.total-RD.queue.length)+" of "+RD.total+"…";
+  (function attempt(){
+    if(RD.stopped)return;
+    rdPlayTier(chunk,tier,function(ok){
+      if(RD.stopped)return;
+      if(ok){setTimeout(rdNext,250)}else{tier++;if(tier<RD_TIERS.length)attempt();else setTimeout(rdNext,250)}
+    });
+  })();
+}
+function rdSpeak(text){
+  if(RD.playing&&!RD.stopped){rdStop();return}
+  rdStop();RD.queue=rdChunks(text,400);RD.total=RD.queue.length;
+  if(!RD.queue.length)return;RD.stopped=false;
+  var b=$("rdbtn");if(b)b.textContent="⏹ Stop";
+  $("rdbar").classList.add("show");rdNext();
+}
+$("rdstop").onclick=rdStop;
+init();
+</script>
+</body>
+</html>
