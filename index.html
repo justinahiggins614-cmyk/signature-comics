@@ -462,14 +462,17 @@ function qaAnswer(q,rec){
   var named=null;
   rec.chars.forEach(function(c){if(ql.indexOf(c.code.toLowerCase())>=0||ql.indexOf(c.name.toLowerCase())>=0)named=c});
   if(named)return named.code+" is "+named.name+", one of this issue's heroes — power: "+named.power+". They appear in \""+rec.title+"\" ("+rec.series+" #"+rec.num+").";
-  if(/who|character|hero|heroes|cast|star/.test(ql)){
-    return "This issue stars "+rec.chars.map(function(c){return c.code+" ("+c.name+", power: "+c.power+")"}).join("; ")+".";
-  }
   if(/villain|enemy|bad guy|foe|antagonist/.test(ql)){
     var found=[];var blob=rec.pages.map(function(p){return p.cap+" "+p.dlg}).join(" ");
     VILLAINS.forEach(function(v){if(blob.indexOf(v)>=0&&found.indexOf(v)<0)found.push(v)});
     if(found.length)return "The trouble in this issue comes from "+found.join(" and ")+".";
     return "No single villain is named in this issue — the conflict comes from the situation itself. Try asking what happens.";
+  }
+  if(/who made|who wrote|author|creator|made this|wrote this|written by/.test(ql)){
+    return "Written by Justin Addam Higgins — an original generated comic by/for the Signature system. All characters and events are invented.";
+  }
+  if(/who|character|hero|heroes|cast|star/.test(ql)){
+    return "This issue stars "+rec.chars.map(function(c){return c.code+" ("+c.name+", power: "+c.power+")"}).join("; ")+".";
   }
   if(/plot|story|happen|about|summary|synopsis/.test(ql)){
     var caps=rec.pages.map(function(p){return p.cap});
@@ -483,9 +486,6 @@ function qaAnswer(q,rec){
   }
   if(/page|long|length|how many/.test(ql)){
     return "This issue has "+rec.pages.length+" story pages and about "+rec.words+" words of captions and dialogue.";
-  }
-  if(/who made|author|creator|made this|wrote|write/.test(ql)){
-    return "Written by Justin Addam Higgins — an original generated comic by/for the Signature system. All characters and events are invented.";
   }
   if(/read|aloud|listen/.test(ql)){
     return "Hit the 🔊 Read aloud button above the story and I'll read the whole issue to you.";
