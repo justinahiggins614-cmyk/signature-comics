@@ -96,8 +96,40 @@ function heroQaAnswer(q, h, rp) {
   }
   return heroFact(q, h);
 }
+/* ---- JAHtalk voice (js/jah-talk-fallback.js): shared human-talk layer.
+   The deterministic hero Q&A below stays primary and data-grounded.
+   JAHtalk.reply handles conversational turns (hello/duties/who are you/
+   thanks/bye); JAHtalk.guard scrubs every final reply into human words.
+   NOTE: heroes are site-canon Signature originals (JAH-HERO-* IDs), NOT
+   phone-book canon AIs — profiles keep their Comic Store identities
+   exactly, and claim no JAH-AI ID. ---- */
+function heroAIProfile(h, rp) {
+  return {
+    name: h.code,
+    id: h.id,
+    description: h.code + " is a " + h.archetype + " of the " + h.series +
+      " series. Secret identity: " + h.name + ". " + h.backstory,
+    abilities: ["answer questions about my powers", "tell my origin story",
+      "talk about my series and the issues I appear in",
+      rp ? "stay in character while we talk" : "answer as me when roleplay mode is on"],
+    domain: "comics", kind: "persona",
+    personaNote: "Original Signature comic hero, identity exactly as the " +
+      "Comic Store defines it; not a phone-book canon AI." +
+      (rp ? " Speaking in character right now." : "")
+  };
+}
+function heroConversational(ql) {
+  return /^(hi|hey|hello|yo|howdy|greetings|good (morning|afternoon|evening))\b/.test(ql)
+    || /(what (are|is) your (duties|job|role)|your duties|^duties|what can you do)/.test(ql)
+    || /who are you|your name|introduce yourself/.test(ql)
+    || /\b(thank|thanks|thx)\b/.test(ql)
+    || /^(bye|goodbye|good ?night|see you|later)\b/.test(ql)
+    || /how are you|how('| i)s it going|how do you feel/.test(ql);
+}
 function renderHero(h) {
   var my = h.custom ? true : false;
+  var heroGreet = (typeof JAHtalk !== "undefined") ?
+    esc(JAHtalk.greet(heroAIProfile(h, false))) : "";
   $("heroview").innerHTML =
    '<div class="issueview"><p><a href="#">' + "&larr;" + ' Back to the racks</a></p>' +
    '<div class="iv-top"><div class="iv-cover">' + heroPortraitSVG(h, 1) + '</div>' +
@@ -125,7 +157,9 @@ function renderHero(h) {
    '<div class="qa"><h2>&#128172; Ask about ' + esc(h.code) + '</h2>' +
    '<div class="rpbar" id="hrpbar">&#127917; <b>Roleplay mode ON</b> — I answer AS ' + esc(h.code) +
      '. <button class="btn ghost" id="hrpoff">Turn off</button></div>' +
-   '<div class="qlog" id="hqlog" aria-live="polite"><div class="msg a">I know ' + esc(h.code) +
+   '<div class="qlog" id="hqlog" aria-live="polite">' +
+   (heroGreet ? '<div class="msg a">' + heroGreet + '</div>' : '') +
+   '<div class="msg a">I know ' + esc(h.code) +
      '&rsquo;s whole file — ask about their powers, their story, or their series. ' +
      'Or hit the roleplay button and I&rsquo;ll answer in character.</div></div>' +
    '<div class="qrow"><input id="hqin" maxlength="200" placeholder="Ask about ' + esc(h.code) +
@@ -149,7 +183,14 @@ function renderHero(h) {
   }
   function hqAsk() {
     var q = $("hqin").value.trim(); if (!q) return;
-    $("hqin").value = ""; hqSay("u", q); hqSay("a", heroQaAnswer(q, h, RP));
+    $("hqin").value = ""; hqSay("u", q);
+    var P = heroAIProfile(h, RP), ans;
+    if (heroConversational(q.toLowerCase()) && typeof JAHtalk !== "undefined")
+      ans = JAHtalk.reply(P, q);
+    else
+      ans = heroQaAnswer(q, h, RP);
+    if (typeof JAHtalk !== "undefined") ans = JAHtalk.guard(ans, P);
+    hqSay("a", ans);
   }
   var hsug = ["What are their powers?", "What is their origin?",
               "What series are they in?", "What do they look like?"];

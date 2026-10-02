@@ -264,6 +264,7 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 <p>Free. No login. Machine-readable: <a href="data/index/api.json">api.json</a> · <a href="data/index/comics.idx.json.gz">comic index</a> · <a href="sitemap.xml">sitemap</a></p>
 </div>
 </footer>
+<script src="js/jah-talk-fallback.js"></script>
 <script src="hero-catalog.js"></script>
 <script>
 "use strict";
@@ -540,7 +541,7 @@ function renderIssue(rec){
    '<a class="btn" href="https://justinahiggins614-cmyk.github.io/jah-ai-models/" target="_blank" rel="noopener">🤖 Character AIs (AI Phone Book)</a></div>'+
    "</div></div>"+
    '<div class="qa"><h2>💬 Ask about this issue</h2>'+
-   '<div class="qlog" id="qlog" aria-live="polite"><div class="msg a">I know this issue cover to cover — ask me about the heroes, the story, the villain, or the series.</div></div>'+
+   '<div class="qlog" id="qlog" aria-live="polite"><div class="msg a">'+esc(issueGreet(rec))+'</div><div class="msg a">I know this issue cover to cover — ask me about the heroes, the story, the villain, or the series.</div></div>'+
    '<div class="qrow"><input id="qin" maxlength="200" placeholder="Ask about this issue…" aria-label="Ask about this issue"><button class="btn" id="qask">ASK</button></div>'+
    '<div class="qsugs" id="qsugs"></div></div>'+
    '<div class="pages"><h2>Full issue — page by page</h2>'+pages+"</div>"+
@@ -593,13 +594,54 @@ function download(name,text,mime){
 
 /* ============ per-issue Q&A AI (data-grounded; never invents) ============ */
 var VILLAINS=["the Quiet","the Hollow King","Madame Static","the Rust Choir","Captain Undertow","the Pale Cartographer","the Gear Thief","Old Murk","the Signal Eater","the Brass Widow"];
+/* ---- JAHtalk voice (js/jah-talk-fallback.js): shared human-talk layer.
+   The deterministic grounded answers stay primary; JAHtalk.reply handles
+   conversational turns (hello/duties/who are you/thanks/bye), JAHtalk.greet
+   opens the chat, JAHtalk.guard scrubs every final reply. Roleplay mode
+   answers AS the hero, whose identity is site-canon (JAH-HERO-*) — never a
+   phone-book canon AI; plain mode is a helper and claims no canon ID. ---- */
+function issueAIProfile(rec,rp){
+  if(rp&&rec.chars&&rec.chars.length){
+    var h=rec.chars[0];
+    return {name:h.code,id:h.id,
+      description:h.code+" is a "+h.archetype+" of the "+rec.series+" series. "+
+        "Speaking in character about \""+rec.title+"\" ("+rec.series+" #"+rec.num+").",
+      abilities:["talk about this issue's heroes","recount what happens in the story",
+        "name the villain","talk about my powers"],
+      domain:"comics",kind:"persona",
+      personaNote:"Original Signature comic hero, identity exactly as the Comic Store defines it; not a phone-book canon AI. Speaking in character right now."};
+  }
+  return {name:"Issue Guide",
+    description:"A helper AI that answers questions from this comic issue's own record — the heroes, the story, the villain and the series — and says plainly when something is not covered.",
+    abilities:["name the heroes and their powers","recount the story","name the villain","tell you the series"],
+    domain:"comics",kind:"helper"};
+}
+function issueConversational(ql){
+  return /^(hi|hey|hello|yo|howdy|greetings|good (morning|afternoon|evening))\b/.test(ql)
+    || /(what (are|is) your (duties|job|role)|your duties|^duties|what can you do)/.test(ql)
+    || /who are you|your name|introduce yourself/.test(ql)
+    || /\b(thank|thanks|thx)\b/.test(ql)
+    || /^(bye|goodbye|good ?night|see you|later)\b/.test(ql)
+    || /how are you|how('| i)s it going|how do you feel/.test(ql);
+}
+function issueGreet(rec){
+  if(typeof JAHtalk==="undefined")return "Hi!";
+  return JAHtalk.greet(issueAIProfile(rec,false));
+}
 function qaSay(who,text){
   var log=$("qlog"),d=document.createElement("div");
   d.className="msg "+who;d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;
 }
 function qaAsk(){
   var q=$("qin").value.trim();if(!q||!CUR)return;$("qin").value="";
-  qaSay("u",q);qaSay("a",QA_RP?qaRoleplay(q,CUR):qaAnswer(q,CUR));
+  qaSay("u",q);
+  var P=issueAIProfile(CUR,QA_RP),ans;
+  if(issueConversational(q.toLowerCase())&&typeof JAHtalk!=="undefined")
+    ans=JAHtalk.reply(P,q);
+  else
+    ans=QA_RP?qaRoleplay(q,CUR):qaAnswer(q,CUR);
+  if(typeof JAHtalk!=="undefined")ans=JAHtalk.guard(ans,P);
+  qaSay("a",ans);
 }
 function qaAnswer(q,rec){
   var ql=q.toLowerCase();
