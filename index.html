@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- SITE TITLE PROVISIONAL — awaiting Manon's confirmation; safe to rename everywhere -->
 <title>The Signature Comic Store</title>
-<meta name="description" content="The Signature Comic Store: original Signature comics — 8 original series, original heroes, full story text with panel art, read-aloud, copy, download. Marching to 1,000,000 issues. Free, no login.">
+<meta name="description" content="The Signature Comic Store: original Signature comics — 9 original series, original heroes, full story text with panel art, read-aloud, copy, download. Marching to 1,000,000 issues. Free, no login.">
 <link rel="canonical" href="https://justinahiggins614-cmyk.github.io/signature-comics/">
 <meta property="og:title" content="The Signature Comic Store">
 <meta property="og:description" content="Original Signature comics with panel art, full stories, and read-aloud. Marching to 1,000,000 issues.">
 <meta property="og:url" content="https://justinahiggins614-cmyk.github.io/signature-comics/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Signature Comic Store","url":"https://justinahiggins614-cmyk.github.io/signature-comics/","creator":{"@type":"Person","name":"Justin Addam Higgins"},"description":"Original generated comic books by/for the Signature system: 8 original series, original heroes, panel art, full story text."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Signature Comic Store","url":"https://justinahiggins614-cmyk.github.io/signature-comics/","creator":{"@type":"Person","name":"Justin Addam Higgins"},"description":"Original generated comic books by/for the Signature system: 9 original series, original heroes, panel art, full story text."}</script>
 <style>
 :root{--ink:#0d0a12;--ink2:#171221;--paper:#f7f2e4;--yel:#ffd23f;--red:#e63946;--blu:#3a86ff;--org:#fb8500;--line:#3a2c5a;--mut:#b9aed6;--card:#1c1528}
 *{box-sizing:border-box}
@@ -119,14 +119,37 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 .note-provisional{font-size:.8em;color:var(--mut);font-style:italic}
 .loading{text-align:center;padding:40px;color:var(--mut)}
 .badge-new{display:inline-block;background:var(--red);color:#fff;font-size:.68em;font-weight:900;padding:2px 8px;border-radius:4px;vertical-align:middle;margin-left:8px;letter-spacing:.08em}
+.jahnet .soon,.sites .soon{color:#5a6a85;font-style:italic}
+/* hero archetype catalog */
+.heroband{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:14px 0}
+.hcard{background:#101726;border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:10px;padding:10px;cursor:pointer;text-align:center}
+.hcard:hover{border-color:var(--yel)}
+.hcard h3{margin:.4em 0 .1em;color:var(--yel);font-size:1em}
+.hcard .arch{font-size:.78em;color:#9fc2ff}
+.hcard svg{width:100%;height:auto;border-radius:6px}
+.secttl{margin:30px 0 6px;color:#ffd23f;font-size:1.3em}
+.sectsub{color:var(--mut);font-size:.9em;margin:0 0 6px}
+.collect{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;padding:12px;background:#0d1526;border:2px dashed #2a3a5f;border-radius:10px}
+.rpbar{margin:10px 0;padding:10px;background:#141024;border:2px solid #6a4fd0;border-radius:10px;display:none}
+.rpbar.show{display:block}
+/* hero creator popup */
+#creatorModal{position:fixed;inset:0;z-index:100;display:none;background:rgba(0,0,0,.78);align-items:center;justify-content:center;padding:14px}
+#creatorModal.show{display:flex}
+#creatorBox{background:#101726;border:4px solid var(--yel);border-radius:14px;max-width:640px;width:100%;max-height:92vh;overflow-y:auto;padding:20px;color:#e8ecf5}
+#creatorBox h2{color:var(--yel);margin-top:0}
+#creatorBox label{display:block;font-size:.85em;color:#9fc2ff;margin:10px 0 3px}
+#creatorBox input,#creatorBox textarea,#creatorBox select{width:100%;padding:8px;border-radius:8px;border:2px solid #2a3a5f;background:#0a0f1e;color:#fff;font-size:.95em}
+#creatorBox textarea{min-height:70px}
+#creatorPrev{margin:12px 0;text-align:center}
+.myhero{border:2px solid #2a3a5f;border-radius:8px;padding:8px;margin:8px 0;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 </style>
 </head>
 <body>
-<div class="jahnet"><span class="jahnet-t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">Telephone Book</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">Spec Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">PC Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">Mega-Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">University</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">Book Depository</a><span class="cur" aria-current="page">YOU ARE HERE: COMIC STORE</span><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">3D Print Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">Backend</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">Generator Archive</a></div>
+<div class="jahnet"><span class="jahnet-t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">AI Phone Book</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">Spec Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">PC Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">Mega-Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">University</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">Book Depository</a><span class="cur" aria-current="page">YOU ARE HERE: COMIC STORE</span><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">3D Print Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">Backend</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">Generator Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">AI Mix Lab</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">AI Olypics</a><a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">Chip Maker</a><a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">App Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">Robot Matcher</a><span class="soon">Experiment Solver (soon)</span><span class="soon">Image+Video Maker (soon)</span></div>
 
 <div id="home">
 <header class="hero wrap">
-<div class="kicker">SITE 13 OF 17 · GRAND OPENING</div>
+<div class="kicker">SITE 13 OF 24 · GRAND OPENING</div>
 <h1>THE SIGNATURE <span class="y">COMIC STORE</span></h1>
 <div class="sub">Original Signature comics — original series, original heroes, original stories. Cover first, then the pages.</div>
 <div class="stats" id="stats"><div class="stat"><b>…</b><span>loading</span></div></div>
@@ -134,6 +157,12 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 </header>
 
 <div class="wrap"><div class="seriesband" id="seriesband"></div></div>
+
+<div class="wrap">
+<h2 class="secttl">🦸 THE HERO ARCHETYPE CATALOG</h2>
+<p class="sectsub">Signature-original heroes covering every classic archetype — the powerhouse, the speedster, the dark vigilante, the web-slinger type, the extraordinary team, the cosmic guardian, and more. All original names, looks, and backstories. Tap a hero for their full file.</p>
+<div class="heroband" id="heroband"><div class="loading">Summoning heroes…</div></div>
+</div>
 
 <div class="controls"><div class="wrap">
 <div class="row">
@@ -147,9 +176,59 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 </div></div>
 
 <div class="wrap"><div id="results"><div class="loading">Opening the long boxes…</div></div></div>
+
+<div class="wrap" style="text-align:center;margin:36px auto;max-width:700px">
+<h2 class="secttl" style="margin-top:0">🦸✨ THE HERO CREATOR</h2>
+<p class="sectsub">Make your OWN comic hero — name, powers, look, origin — and even your OWN series, with your name on it. Saved on your device, downloadable to keep.</p>
+<button class="btn big" id="creatorBtn">🦸 OPEN THE HERO CREATOR</button>
+<div id="myHeroes" style="text-align:left;margin-top:14px"></div>
+</div>
+</div>
+
+<div id="creatorModal" role="dialog" aria-label="Hero creator">
+<div id="creatorBox">
+<h2>🦸✨ HERO CREATOR</h2>
+<p class="sectsub">Design a Signature-original hero. Nothing here uses anyone else's characters — this one is <b>yours</b>.</p>
+<label for="chCodename">Hero codename</label>
+<input id="chCodename" maxlength="60" placeholder="e.g. LANTERNHAWK">
+<label for="chName">Secret identity (real name)</label>
+<input id="chName" maxlength="60" placeholder="e.g. Dana Reyes">
+<label for="chArch">Archetype</label>
+<select id="chArch">
+<option>The Powerhouse</option><option>The Speedster</option><option>The Dark Vigilante</option>
+<option>The Web-Slinger Type</option><option>The Extraordinary Team</option><option>The Cosmic Guardian</option>
+<option>The Armored Tinkerer</option><option>The Mystic</option><option>The Mythic Warrior</option>
+<option>The Spectrum Oathkeeper</option><option>The Elastic Detective</option><option>The Size-Changer</option>
+<option>The Ocean Warden</option><option>The Storm Heir</option><option>The Shadow Teleporter</option>
+<option>The Feral Guardian</option><option>The Cosmic Herald</option><option>The Gentle Giant</option>
+<option>The Gadget Kid</option><option>The Peak Tactician</option><option>Something Brand New</option>
+</select>
+<label for="chPowers">Powers (comma-separated)</label>
+<input id="chPowers" maxlength="200" placeholder="e.g. flight, light-warping, courage">
+<label for="chSuit">Suit color</label>
+<input id="chSuit" type="color" value="#1d4fd6" style="height:40px">
+<label for="chCape">Cape/accent color</label>
+<input id="chCape" type="color" value="#c8d4f2" style="height:40px">
+<label for="chLook">Look (describe the costume)</label>
+<textarea id="chLook" maxlength="400" placeholder="What does your hero wear?"></textarea>
+<label for="chOrigin">Origin story</label>
+<textarea id="chOrigin" maxlength="800" placeholder="How did they become a hero?"></textarea>
+<label for="chSeries">Their series (name your own!)</label>
+<input id="chSeries" maxlength="80" placeholder="e.g. THE DAWNBREAK CHRONICLES">
+<label for="chBy">Created by (your name)</label>
+<input id="chBy" maxlength="60" placeholder="Your name here">
+<div id="creatorPrev"></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+<button class="btn" id="chPreview">👁 Preview</button>
+<button class="btn big" id="chSave">💾 Save hero</button>
+<button class="btn" id="chClose">Close</button>
+</div>
+</div>
 </div>
 
 <div id="issueview" class="wrap" style="display:none"></div>
+
+<div id="heroview" class="wrap" style="display:none"></div>
 
 <div id="rdbar"><span>🔊 <span class="prog" id="rdprog">Reading…</span></span><button class="btn" id="rdstop">⏹ Stop</button></div>
 
@@ -158,7 +237,7 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 <p><b style="color:var(--yel)">The Signature Comic Store</b> — every issue an original generated comic by/for the Signature system, by <b>Justin Addam Higgins</b>. Original heroes and stories only: no real publishers' characters, titles, or likenesses. Generated material is labeled as generated.</p>
 <p class="note-provisional">Site title provisional — Manon to confirm.</p>
 <div class="sites">THE JAH NETWORK ·
-<a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">Telephone Book</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">AI Phone Book</a> ·
 <a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">Calculator</a> ·
 <a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">Dictionary</a> ·
 <a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">JAH Wiki</a> ·
@@ -173,10 +252,18 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 <a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">Newspaper Archive</a> ·
 <a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">3D Print Depository</a> ·
 <a href="https://justinahiggins614-cmyk.github.io/signature-backend/">Backend</a> ·
-<a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">Boundless Generators</a></div>
+<a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">Boundless Generators</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">AI Mix Lab</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">AI Olypics</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">Chip Maker</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">App Archive</a> ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">Robot Matcher</a> ·
+<span class="soon">Experiment Solver (soon)</span> ·
+<span class="soon">Image+Video Maker (soon)</span></div>
 <p>Free. No login. Machine-readable: <a href="data/index/api.json">api.json</a> · <a href="data/index/comics.idx.json.gz">comic index</a> · <a href="sitemap.xml">sitemap</a></p>
 </div>
 </footer>
+<script src="hero-catalog.js"></script>
 <script>
 "use strict";
 /* ============ config & utils ============ */
@@ -201,7 +288,8 @@ var PALS={
  gloam:{bg:["#221c33","#100d1a"],acc:"#ffd23f",ink:"#f4eefc"},
  starlog:{bg:["#0a1030","#1a1440"],acc:"#ffd23f",ink:"#eef2ff"},
  clockwork:{bg:["#2e1d0e","#171006"],acc:"#e8b64c",ink:"#f7ecd4"},
- junior:{bg:["#123a6b","#0a1f3d"],acc:"#ff9f1c",ink:"#ffffff"}};
+ junior:{bg:["#123a6b","#0a1f3d"],acc:"#ff9f1c",ink:"#ffffff"},
+ event:{bg:["#2b0a3d","#0d0518"],acc:"#ff4fd8",ink:"#ffeefc"}};
 var SDESC={
  signal:"A team of cosmic guardians keeps the beacon-network of the far colonies lit — and something out in the dark keeps trying to snuff it.",
  ember:"In a valley of ash and frost, young wardens carry living ember-flames between the last warm holds of the Vale.",
@@ -210,8 +298,9 @@ var SDESC={
  gloam:"Lantern-keepers patrol the fog city after dark, solving the small strange mysteries the daylight misses.",
  starlog:"An anthology of voyages: the survey ship Wayfarer charts the far dark, one strange world per issue.",
  clockwork:"Tinkerers and their brass automatons keep the gear-city wound — and someone keeps loosening the springs.",
- junior:"The Maple Street kids and their treehouse club: small heroes, big heart, everyday wonders."};
-var SNAME={signal:"THE SIGNALBEARERS",ember:"EMBERFALL",circuit:"THE HOLLOW CIRCUIT",tide:"TIDEBOUND",gloam:"THE GLOAMING WATCH",starlog:"STARFARER'S LOG",clockwork:"THE CLOCKWORK MENAGERIE",junior:"JUNIOR SIGNALS"};
+ junior:"The Maple Street kids and their treehouse club: small heroes, big heart, everyday wonders.",
+ event:"Universe-shaking crossovers: the united heroes face apocalypse-level threats on Jupiter's first moon, in the dinosaur era, in the far future, and across collapsing timelines."};
+var SNAME={signal:"THE SIGNALBEARERS",ember:"EMBERFALL",circuit:"THE HOLLOW CIRCUIT",tide:"TIDEBOUND",gloam:"THE GLOAMING WATCH",starlog:"STARFARER'S LOG",clockwork:"THE CLOCKWORK MENAGERIE",junior:"JUNIOR SIGNALS",event:"COSMIC CROSSOVER EVENTS"};
 
 /* ============ deterministic comic art ============ */
 function rnd2(h,n){h=(h*1103515245+12345)>>>0;return{h:h,v:h%n}}
@@ -314,6 +403,7 @@ function coverSVG(row){
 
 /* ============ loading, stats, series band ============ */
 function init(){
+  renderHeroBand();wireCreator();
   fetch(API_URL).then(function(r){return r.json()}).then(function(api){
     var nb=api.total_issues||0, nw=api.total_words||0;
     $("stats").innerHTML=
@@ -384,16 +474,29 @@ var _chome=null;
 function cHome(){if(!_chome){var md=document.querySelector('meta[name="description"]'),cl=document.querySelector('link[rel="canonical"]');_chome={d:md?md.getAttribute("content"):"",c:cl?cl.getAttribute("href"):"https://justinahiggins614-cmyk.github.io/signature-comics/"}}return _chome}
 function setIssueHead(rec){var h=cHome();var md=document.querySelector('meta[name="description"]');var cl=document.querySelector('link[rel="canonical"]');if(rec){if(md)md.setAttribute("content",String(rec.desc||"").slice(0,300));if(cl)cl.setAttribute("href","https://justinahiggins614-cmyk.github.io/signature-comics/?issue="+rec.id)}else{if(md)md.setAttribute("content",h.d);if(cl)cl.setAttribute("href",h.c)}}
 function route(){
+  var hm=/^#hero=([A-Za-z0-9-]+)/.exec(location.hash||"");
+  if(hm){openHero(hm[1]);return}
   var m=/^#issue=(JAH-COMIC-\d{6})/.exec(location.hash||"");
   if(!m){var qb=null;try{qb=new URLSearchParams(location.search).get("issue")}catch(e){}
     if(qb&&/^JAH-COMIC-\d{6}$/.test(qb)){try{history.replaceState(null,"","./")}catch(e2){}location.hash="#issue="+qb;return;}
+    var hb=null;try{hb=new URLSearchParams(location.search).get("hero")}catch(eh){}
+    if(hb&&/^[A-Za-z0-9-]+$/.test(hb)){try{history.replaceState(null,"","./")}catch(e2){}location.hash="#hero="+hb;return;}
     var sq=null;try{sq=new URLSearchParams(location.search).get("series")}catch(e3){}
     if(sq&&SNAME[sq]){try{history.replaceState(null,"","./")}catch(e4){}$("series").value=SNAME[sq];applyFilters();return;}}
   else{openIssue(m[1]);return}
-  rdStop();$("issueview").style.display="none";$("home").style.display="block";document.title="The Signature Comic Store";setIssueHead(null);
+  rdStop();$("issueview").style.display="none";$("heroview").style.display="none";$("home").style.display="block";document.title="The Signature Comic Store";setIssueHead(null);
+}
+function openHero(id){
+  rdStop();$("home").style.display="none";$("issueview").style.display="none";
+  var hv=$("heroview");hv.style.display="block";window.scrollTo(0,0);
+  loadHeroes().then(function(){
+    var h=heroById(id);
+    if(!h){hv.innerHTML='<div class="loading">Hero '+esc(id)+' not found. <a href="#">Back to the racks</a></div>';return}
+    renderHero(h);
+  }).catch(function(){hv.innerHTML='<div class="loading">Could not open hero '+esc(id)+'. <a href="#">Back to the racks</a></div>'});
 }
 function openIssue(id){
-  rdStop();$("home").style.display="none";var iv=$("issueview");iv.style.display="block";
+  rdStop();$("home").style.display="none";$("heroview").style.display="none";var iv=$("issueview");iv.style.display="block";
   iv.innerHTML='<div class="loading">Opening '+esc(id)+'…</div>';
   window.scrollTo(0,0);
   fetchJSONgz(chunkPath(id)).then(function(recs){
@@ -426,10 +529,14 @@ function renderIssue(rec){
    '<div class="actions"><button class="btn red" id="rdbtn">🔊 Read aloud</button>'+
    '<button class="btn ghost" id="copybtn">⧉ Copy story</button>'+
    '<button class="btn ghost" id="dlbtn">⬇ Download .txt</button>'+
-   '<button class="btn ghost" id="dljson">⬇ .json</button></div>'+
+   '<button class="btn ghost" id="dljson">⬇ .json</button>'+
+   '<button class="btn ghost" id="rpbtn">🎭 Roleplay: '+esc(rec.chars[0].code)+'</button></div>'+
    '<div class="desc">'+esc(rec.desc)+"</div>"+
    '<div class="cast"><h3>⭐ Cast</h3>'+cast+"</div>"+
    '<div class="honest">✦ '+esc(rec.note)+"</div>"+
+   '<div class="collect"><b style="width:100%;color:var(--yel)">⭐ COLLECT &amp; CONNECT</b>'+
+   '<a class="btn" href="https://justinahiggins614-cmyk.github.io/signature-3d-print/" target="_blank" rel="noopener">🧸 Action figures (3D Print Depository)</a>'+
+   '<a class="btn" href="https://justinahiggins614-cmyk.github.io/jah-ai-models/" target="_blank" rel="noopener">🤖 Character AIs (AI Phone Book)</a></div>'+
    "</div></div>"+
    '<div class="qa"><h2>💬 Ask about this issue</h2>'+
    '<div class="qlog" id="qlog" aria-live="polite"><div class="msg a">I know this issue cover to cover — ask me about the heroes, the story, the villain, or the series.</div></div>'+
@@ -446,6 +553,32 @@ function renderIssue(rec){
   $("qsugs").querySelectorAll("button").forEach(function(b){b.onclick=function(){$("qin").value=b.dataset.q;qaAsk()}});
   $("qask").onclick=qaAsk;
   $("qin").addEventListener("keydown",function(e){if(e.key==="Enter")qaAsk()});
+  QA_RP=false;
+  $("rpbtn").onclick=function(){
+    QA_RP=!QA_RP;
+    $("rpbtn").textContent=QA_RP?("🎭 Roleplay ON: "+rec.chars[0].code):("🎭 Roleplay: "+rec.chars[0].code);
+    if(QA_RP)qaSay("a","Roleplay mode ON — I now answer AS "+rec.chars[0].code+" ("+rec.chars[0].name+"). Ask me anything about this issue.");
+  };
+}
+var QA_RP=false;
+function qaRoleplay(q,rec){
+  var h=rec.chars[0],ql=q.toLowerCase();
+  var me="\""+h.code+": ";
+  if(/who are you|your name/.test(ql))return me+"I'm "+h.code+" — "+h.name+" when the mask comes off. Power: "+h.power+".\"";
+  if(/villain|enemy|foe|fight/.test(ql))return me+"This issue I faced "+villainOf(rec)+". "+h.power+" and a stubborn streak — that's what I brought.\"";
+  if(/what happens|story|plot/.test(ql))return me+"Here's how it went down: "+rec.pages[0].cap+" By the end — "+rec.pages[rec.pages.length-1].cap+"\"";
+  if(/power|strong|ability/.test(ql))return me+"My power is "+h.power+". In \""+rec.title+"\" I used every bit of it.\"";
+  return me+heroFactLite(q,rec,h)+"\"";
+}
+function heroFactLite(q,rec,h){
+  var ql=q.toLowerCase(),a=qaAnswer(q,rec);
+  return "Straight answer, in my voice: "+a;
+}
+function villainOf(rec){
+  var blob=rec.pages.map(function(p){return p.cap+" "+p.dlg}).join(" ");
+  var vs=["the Quiet","the Hollow King","Madame Static","the Rust Choir","Captain Undertow","the Pale Cartographer","the Gear Thief","Old Murk","the Signal Eater","the Brass Widow","THE UNMAKING","THE MAW OF EONS","THE PALE EXTINCTION","THE NULL-KING"];
+  for(var i=0;i<vs.length;i++)if(blob.indexOf(vs[i])>=0)return vs[i];
+  return "whoever was dumb enough to show up";
 }
 function copyText(t,btnId){
   function done(ok){var b=$(btnId);if(b)b.textContent=ok?"✓ Copied":"Copy failed";setTimeout(function(){if(b)b.textContent="⧉ Copy story"},1800)}
@@ -465,7 +598,7 @@ function qaSay(who,text){
 }
 function qaAsk(){
   var q=$("qin").value.trim();if(!q||!CUR)return;$("qin").value="";
-  qaSay("u",q);qaSay("a",qaAnswer(q,CUR));
+  qaSay("u",q);qaSay("a",QA_RP?qaRoleplay(q,CUR):qaAnswer(q,CUR));
 }
 function qaAnswer(q,rec){
   var ql=q.toLowerCase();

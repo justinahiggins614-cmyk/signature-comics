@@ -82,6 +82,16 @@ TM_PHRASES += [
     "alan moore", "neil gaiman", "grant morrison", "geoff johns",
     "scott snyder", "jonathan hickman", "robert kirkman",
     "todd mcfarlane", "jim lee", "mike mignola", "alex ross",
+    "watchmen", "dr manhattan", "rorschach", "the comedian",
+    "hellboy", "sin city", "spawn", "witchblade", "invincible",
+    "the boys", "homelander", "the walking dead", "saga",
+    "paper girls", "black science", "east of west",
+    "jupiter's legacy", "kick-ass", "kingsman", "wanted",
+    "superior", "starlight", "huck", "prodigy", "empress",
+    "super crooks", "nemesis", "hellblazer",
+    "sandman", "preacher", "transmetropolitan", "fables",
+    "locke and key", "astro city", "planetary", "the authority",
+    "stormwatch", "gen13", "wildcats", "youngblood",
 ]
 
 # Single distinctive words (matched on word boundaries, case-insensitively).

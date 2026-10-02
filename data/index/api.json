@@ -1,8 +1,8 @@
 {
  "site": "The Signature Comic Store",
  "site_note": "SITE TITLE PROVISIONAL \u2014 awaiting Manon's confirmation",
- "total_issues": 1500,
- "total_words": 144347,
+ "total_issues": 1524,
+ "total_words": 146712,
  "series": {
   "THE SIGNALBEARERS": 188,
   "EMBERFALL": 188,
@@ -11,8 +11,16 @@
   "THE GLOAMING WATCH": 187,
   "STARFARER'S LOG": 187,
   "THE CLOCKWORK MENAGERIE": 187,
-  "JUNIOR SIGNALS": 187
+  "JUNIOR SIGNALS": 187,
+  "COSMIC CROSSOVER EVENTS": 24
  },
  "goal": 1000000,
- "updated": "2026-10-02T18:23:18Z"
+ "updated": "2026-10-02T19:08:46Z",
+ "heroes": 20,
+ "events": [
+  "SIEGE OF AMALTHEA",
+  "WAR IN THE SAURIAN DAWN",
+  "THE FARFALLEN CENTURY",
+  "WHEN TIMELINES COLLAPSE"
+ ]
 }

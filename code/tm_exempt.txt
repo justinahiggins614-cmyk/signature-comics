@@ -71,6 +71,7 @@ adapa
 adapts
 adays
 adcraft
+addam
 addax
 addaxes
 addda
@@ -541,6 +542,7 @@ argon
 argos
 argue
 argus
+arial
 arian
 ariana
 arias
@@ -1460,6 +1462,7 @@ blamer
 blanco
 bland
 blanda
+blank
 blanky
 blarina
 blazed
@@ -2078,6 +2081,7 @@ casus
 catan
 cataria
 catasta
+catch
 catcher
 catel
 cater
@@ -2856,6 +2860,7 @@ crout
 croute
 crouth
 crowd
+crowe
 crower
 crowl
 crown
@@ -3570,6 +3575,7 @@ dopped
 dopper
 doppler
 dorados
+doran
 doray
 dorbie
 dorey
@@ -5369,6 +5375,7 @@ grogs
 groin
 groma
 gromet
+gromm
 grond
 gront
 groof
@@ -6659,6 +6666,7 @@ kella
 kelleg
 kellet
 kellies
+kells
 kelly
 kelper
 kelpie
@@ -7217,6 +7225,7 @@ lifer
 lifey
 ligas
 liger
+lightning
 ligulas
 liker
 likes
@@ -7845,6 +7854,7 @@ marline
 marling
 marlins
 marlite
+marlow
 marlpit
 marls
 marly
@@ -8263,6 +8273,7 @@ minces
 mincy
 mindly
 minds
+mine's
 mined
 miner
 miners

@@ -33,6 +33,10 @@ GUARD_MB = 800
 
 SNAME = {k: n for k, n, _ in SERIES}
 
+# Extra series not produced by make_comics.make_issue (built by other scripts,
+# e.g. code/make_events.py). Included in sitemap ?series= links + api counts.
+EXTRA_SERIES = [("event", "COSMIC CROSSOVER EVENTS")]
+
 
 def load_state():
     if os.path.exists(STATE_F):
@@ -96,6 +100,14 @@ def build_sitemap(idx):
     urls = [SITE]
     for k, n, _ in SERIES:
         urls.append(SITE + "?series=" + k)
+    for k, n in EXTRA_SERIES:
+        urls.append(SITE + "?series=" + k)
+    # hero archetype catalog deep links
+    hp = os.path.join(DATA, "heroes.json")
+    if os.path.exists(hp):
+        with open(hp, encoding="utf-8") as f:
+            for h in json.load(f):
+                urls.append(SITE + "?hero=" + h["id"])
     for r in idx:
         urls.append(SITE + "?issue=" + r["id"])
     xml = ['<?xml version="1.0" encoding="UTF-8"?>',
