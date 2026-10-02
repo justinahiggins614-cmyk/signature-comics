@@ -56,6 +56,14 @@ button{cursor:pointer}
 .az{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:8px}
 .az button{background:var(--card);border:2px solid var(--line);color:var(--mut);border-radius:6px;min-width:30px;padding:4px 6px;font-family:inherit;font-weight:700}
 .az button.on{background:var(--red);color:#fff;border-color:#000}
+.finderbar{display:flex;gap:8px;justify-content:center;margin:10px 0 2px;flex-wrap:wrap}
+.finderbar input[type=text]{min-width:min(400px,88vw);background:#0a0714;color:var(--paper);border:2px solid var(--line);border-radius:8px;padding:9px 12px;font-size:1em;font-family:inherit}
+.fresults{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0 2px}
+.fcard{background:var(--card);border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:8px;padding:10px 14px;max-width:270px;font-size:.9em;text-align:left}
+.fcard .fs{color:var(--yel);font-size:.8em;margin:.25em 0 .6em}
+.fcard .btn{padding:5px 12px;font-size:.82em}
+.fmsg{color:var(--mut);font-size:.92em}
+
 #results{padding:18px 0 40px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px}
 .card{background:var(--card);border:3px solid #000;box-shadow:5px 5px 0 #000;border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .15s}
@@ -114,7 +122,7 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 </style>
 </head>
 <body>
-<div class="jahnet"><span class="jahnet-t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">The Signature AI Telephone Book</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">Signature Universal Paradox Immune Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">The Signature Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">Globally Rejustered Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">Signature Spec Catalog Pending Patents</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">The Signature PC System Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">Signature Cyber Mega Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">Signature University</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">Signature Book Depository</a><span class="cur">YOU ARE HERE: THE SIGNATURE COMIC STORE</span><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">Signature Global Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">Signature 3D Print Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">Signature Backend</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">Signature Boundless Generator Archive</a></div>
+<div class="jahnet"><span class="jahnet-t">THE JAH NETWORK</span><a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">Telephone Book</a><a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">Calculator</a><a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">Dictionary</a><a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">JAH Wiki</a><a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">JAH-N Wiki</a><a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">Patent Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">Spec Catalog</a><a href="https://justinahiggins614-cmyk.github.io/signature-llama/">Signature Llama</a><a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">PC Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">Mega-Mall</a><a href="https://justinahiggins614-cmyk.github.io/signature-university/">University</a><a href="https://justinahiggins614-cmyk.github.io/signature-books/">Book Depository</a><span class="cur" aria-current="page">YOU ARE HERE: COMIC STORE</span><a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">Newspaper Archive</a><a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">3D Print Depository</a><a href="https://justinahiggins614-cmyk.github.io/signature-backend/">Backend</a><a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">Generator Archive</a></div>
 
 <div id="home">
 <header class="hero wrap">
@@ -133,6 +141,8 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 <select id="series" aria-label="Series filter"><option value="">All series</option></select>
 <select id="sort" aria-label="Sort"><option value="new">Newest first</option><option value="title">Title A–Z</option><option value="series">Series order</option></select>
 </div>
+<div class="finderbar" style="margin-top:10px"><input type="text" id="fq" maxlength="140" placeholder="Describe what you're looking for…" aria-label="Describe what you're looking for"><button class="btn" id="fgo">Find it</button></div>
+<div id="fresults" class="fresults"></div>
 <div class="az" id="az"></div>
 </div></div>
 
@@ -538,6 +548,25 @@ function rdSpeak(text){
   $("rdbar").classList.add("show");rdNext();
 }
 $("rdstop").onclick=rdStop;
+/* ============ FINDER AI (pinned above A–Z; deterministic, data-grounded) ============ */
+var FSTOP=new Set("the,a,an,and,or,for,to,of,in,on,with,is,it,this,that,what,does,which,how,are,be,was,were,at,by,from,as,so,but,if,not,no,yes,up,out,about,into,over,after,than,then,there,their,them,they,me,my,i,you,your,we,our,do,does,want,need,needs,looking,look,find,finds,get,something,anything,some,any,please,like,just,really,very,would,could,should,can,will,have,has,show,tell,give,kind,thing,things,describe,comic,issue,issues,series".split(","));
+function fKeywords(t){return String(t||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(function(w){return w.length>=3&&!FSTOP.has(w)})}
+function fScore(b,kws){var hay=(b.t+" "+b.s+" "+b.id+" "+(b.c||[]).join(" ")).toLowerCase();var s=0;
+ kws.forEach(function(k){if(b.id.toLowerCase()===k)s+=10;else if(b.id.toLowerCase().indexOf(k)>=0)s+=6;
+  if(hay.indexOf(k)>=0)s+=k.length>5?3:2});return s}
+function fAsk(){
+ var q=$("fq").value.trim();if(!q)return;
+ var kws=fKeywords(q),box=$("fresults");
+ if(!kws.length){box.innerHTML='<div class="fmsg">Give me one more word to go on — a hero, a series, a mood… 🔎</div>';return}
+ if(!IDX.length){box.innerHTML='<div class="fmsg">The catalog index is still loading — give it a moment, then hit Find it. 🔎</div>';return}
+ var hits=IDX.map(function(b){return{b:b,s:fScore(b,kws)}}).filter(function(x){return x.s>0})
+  .sort(function(a,b){return b.s-a.s||(b.b.id<a.b.id?-1:1)}).slice(0,5);
+ if(!hits.length){box.innerHTML='<div class="fmsg">No issues match "<b>'+esc(kws.join(" "))+'</b>" — try different words. 🔎</div>';return}
+ box.innerHTML=hits.map(function(h){var b=h.b;
+  return '<div class="fcard"><b>'+esc(b.t)+'</b><div class="fs">'+esc(b.s)+' #'+b.n+' · '+esc(b.id)+'</div><a class="btn" href="#issue='+b.id+'">Take me there →</a></div>'}).join("");
+}
+$("fgo").onclick=fAsk;
+$("fq").addEventListener("keydown",function(e){if(e.key==="Enter")fAsk()});
 init();
 </script>
 </body>
