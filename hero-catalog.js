@@ -110,7 +110,31 @@ function heroById(id) {
     if (mine[j].id === id) return mine[j];
   return null;
 }
+/* Painted hero portraits (2026-10-03): original Signature heroes, painted
+   comic-book portrait style. Falls back to the classic SVG silhouette for
+   user-created heroes or if the art fails to load (offline). */
+var HEROPORTRAIT={"BASTION":"portrait-bastion.jpg","SWIFTSURE":"portrait-swiftsure.jpg","NIGHTWARDEN":"portrait-nightwarden.jpg","STRANDLINE":"portrait-strandline.jpg","THE KINDRED":"portrait-kindred.jpg","STARWARDEN":"portrait-starwarden.jpg","PLATEFORGE":"portrait-plateforge.jpg","RUNESAYER":"portrait-runesayer.jpg","SHIELDMAIDEN SABLE":"portrait-sable.jpg","PRISMWARD":"portrait-prismward.jpg","PLIANT":"portrait-pliant.jpg","MAGNITUDE":"portrait-magnitude.jpg","TIDECROWN":"portrait-tidecrown.jpg","GALEFORGE":"portrait-galeforge.jpg","UMBRASTEP":"portrait-umbrastep.jpg","BRIARCLAW":"portrait-briarclaw.jpg","VOIDHERALD":"portrait-voidherald.jpg","MOUNTAINHEART":"portrait-mountainheart.jpg","SPROCKET":"portrait-sprocket.jpg","KINGSWARD":"portrait-kingsward.jpg"};
 function heroPortraitSVG(h, size) {
+  var s = size || 1, seed = 0, i;
+  for (i = 0; i < h.id.length; i++) seed += h.id.charCodeAt(i);
+  var pf = HEROPORTRAIT[h.code];
+  if (pf) {
+    var pid = "hp" + seed + "_" + Math.floor(s * 100);
+    HEROPORTRAITROWS[pid] = {h:{id:h.id,code:h.code,look:h.look},size:s};
+    return '<span class="hport" id="' + pid + '" style="display:block;width:' + (300 * s) + 'px;max-width:100%">' +
+     '<img src="assets/covers/' + pf + '" alt="Painted portrait of ' + esc(h.code) + '" loading="lazy" style="width:100%;height:auto;display:block;border-radius:8px" ' +
+     'onerror="heroPortraitFallback(\'' + pid + '\')">' +
+     '</span>';
+  }
+  return heroPortraitSVGClassic(h, size);
+}
+function heroPortraitFallback(pid){
+  var r = HEROPORTRAITROWS[pid]; if (!r) return;
+  var el = document.getElementById(pid); if (el) el.innerHTML = heroPortraitSVGClassic(r.h, r.size);
+}
+var HEROPORTRAITROWS = {};
+function heroPortraitSVGClassic(h, size) {
+  if (typeof h === "string") { try { h = JSON.parse(h); } catch (e) { return ""; } }
   var s = size || 1, seed = 0, i;
   for (i = 0; i < h.id.length; i++) seed += h.id.charCodeAt(i);
   return '<svg viewBox="0 0 300 380" width="' + (300 * s) + '" height="' + (380 * s) +

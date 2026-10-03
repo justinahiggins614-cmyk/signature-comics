@@ -164,6 +164,25 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 /* diagnostic pass: aspect-ratio CLS guards, reader, search feedback */
 .card .cover{aspect-ratio:400/600;background:#0a0714}
 .card .cover svg{width:100%;height:100%;display:block}
+.pcover{position:relative;width:100%;aspect-ratio:400/600;overflow:hidden;background:#0a0d1c}
+.pcover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pcover svg{width:100%;height:100%;display:block}
+.pc-top{position:absolute;top:0;left:0;right:0;background:#000;text-align:center;padding:6px 0}
+.pc-top span{font-family:Arial,sans-serif;font-weight:900;letter-spacing:.3em;font-size:13px;color:#ffd23f}
+.pc-series{position:absolute;top:11%;left:0;right:0;text-align:center;font-family:Arial,sans-serif;font-weight:900;letter-spacing:.1em;font-size:11px;color:#000;padding:5px 0}
+.pc-titles{position:absolute;top:24%;left:0;right:0;text-align:center;padding:0 8%}
+.pc-titles .pct{font-family:"Trebuchet MS",Arial,sans-serif;font-weight:900;font-size:17px;line-height:1.15;color:#fff;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000,0 4px 8px rgba(0,0,0,.7);margin-bottom:4px}
+.pc-badge{position:absolute;top:22%;right:4%;width:23%;aspect-ratio:1;border-radius:50%;background:#ffd23f;border:3px solid #000;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pc-badge b{font-family:Arial,sans-serif;font-weight:900;font-size:8px;color:#000}
+.pc-badge span{font-family:Arial,sans-serif;font-weight:900;font-size:15px;color:#000}
+.pc-foot{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.82);display:flex;justify-content:space-between;padding:7px 10px;font-family:Arial,sans-serif;font-size:10px}
+.pc-foot span:first-child{color:#9fb2d8}.pc-foot span:last-child{color:#ffd23f;font-weight:900;letter-spacing:.1em}
+.iv-cover .pc-top{padding:10px 0}.iv-cover .pc-top span{font-size:21px}
+.iv-cover .pc-series{font-size:17px;padding:8px 0}
+.iv-cover .pc-titles .pct{font-size:29px}
+.iv-cover .pc-badge b{font-size:12px}.iv-cover .pc-badge span{font-size:26px}
+.iv-cover .pc-foot{font-size:14px;padding:10px 14px}
+.iv-cover .pcover img{border:3px solid #000;box-shadow:6px 6px 0 #000;border-radius:4px}
 .iv-cover{aspect-ratio:400/600}
 .iv-cover svg{width:100%;height:100%}
 .page .panwrap{aspect-ratio:640/400;background:#000}
@@ -499,7 +518,33 @@ function panelSVG(page,chars,skey,seedTag){
 function wrapTitle(t,maxw){var words=String(t).split(/\s+/),lines=[],cur="";
   words.forEach(function(w){if((cur+" "+w).trim().length>maxw){if(cur)lines.push(cur);cur=w}else cur=(cur+" "+w).trim()});
   if(cur)lines.push(cur);return lines.slice(0,4)}
+/* Painted cover system (2026-10-03): per-issue covers composite the painted
+   series base art (assets/covers/cover-<skey>.jpg, original Signature heroes,
+   painted comic-book style) with the issue number + title in bold comic
+   typography. Deterministic per issue: same issue always shows the same cover.
+   If the painted art fails to load (offline), coverFallback swaps in the
+   classic SVG cover. The classic generator is kept as coverSVGClassic. */
+var COVERROWS={};
+function coverFallback(id){
+  var row=COVERROWS[id];if(!row)return;
+  var el=document.getElementById(id);if(el)el.innerHTML=coverSVGClassic(row);
+}
 function coverSVG(row){
+  var skey=row.sk||"signal",id="cv"+hashStr(row.id||"x");
+  COVERROWS[id]={id:row.id,t:row.t,sk:skey,n:row.n};
+  var pal=PALS[skey]||PALS.signal;
+  var lines=wrapTitle(row.t||"",16),t="";
+  lines.forEach(function(ln){t+='<div class="pct">'+esc(ln)+"</div>"});
+  return '<div class="pcover" id="'+id+'">'+
+   '<img src="assets/covers/cover-'+skey+'.jpg" alt="Painted cover art: '+esc(SNAME[skey]||"")+ '" loading="lazy" onerror="coverFallback(\''+id+'\')">'+
+   '<div class="pc-top"><span>SIGNATURE</span></div>'+
+   '<div class="pc-series" style="background:'+pal.acc+'">'+esc(SNAME[skey]||"")+'</div>'+
+   '<div class="pc-titles">'+t+'</div>'+
+   '<div class="pc-badge"><b>ISSUE</b><span>'+(row.n||"?")+'</span></div>'+
+   '<div class="pc-foot"><span>'+esc(row.id||"")+'</span><span>ORIGINAL</span></div>'+
+   "</div>";
+}
+function coverSVGClassic(row){
   var skey=row.sk||"signal",pal=PALS[skey]||PALS.signal,h=hashStr(row.id),W=400,H=600,r;
   var out='<svg viewBox="0 0 '+W+" "+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cover of '+esc(row.t)+'">';
   out+='<defs><linearGradient id="cbg'+(h%99991)+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+pal.bg[0]+'"/><stop offset="1" stop-color="'+pal.bg[1]+'"/></linearGradient></defs>';
