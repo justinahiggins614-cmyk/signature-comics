@@ -1,0 +1,69 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://justinahiggins614-cmyk.github.io/signature-comics/data/index/hero-schema.json",
+ "title": "JAH Hero Record",
+ "description": "Signature-original hero. Heroes are site canon; they are NOT phone-book canon AIs and claim no JAH-AI ID.",
+ "type": "object",
+ "required": [
+  "id",
+  "code",
+  "name",
+  "archetype",
+  "powers",
+  "look",
+  "backstory",
+  "series",
+  "note"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^JAH-HERO-[0-9]{6}$"
+  },
+  "code": {
+   "type": "string"
+  },
+  "name": {
+   "type": "string"
+  },
+  "archetype": {
+   "type": "string"
+  },
+  "powers": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "look": {
+   "type": "object",
+   "required": [
+    "desc",
+    "suit",
+    "cape"
+   ]
+  },
+  "backstory": {
+   "type": "string"
+  },
+  "series": {
+   "type": "string"
+  },
+  "by": {
+   "type": "string"
+  },
+  "note": {
+   "type": "string"
+  },
+  "custom": {
+   "type": "boolean"
+  },
+  "creation_mode": {
+   "type": "string",
+   "enum": [
+    "GENERATED",
+    "USER-CREATED"
+   ]
+  }
+ }
+}

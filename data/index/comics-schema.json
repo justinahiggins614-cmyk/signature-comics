@@ -1,0 +1,118 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://justinahiggins614-cmyk.github.io/signature-comics/data/index/comics-schema.json",
+ "title": "JAH Comic Issue Record",
+ "description": "One finished original generated comic issue. Records are immutable: corrections create a new record version, never an in-place rewrite.",
+ "type": "object",
+ "required": [
+  "id",
+  "series",
+  "skey",
+  "num",
+  "title",
+  "chars",
+  "desc",
+  "words",
+  "pages",
+  "note"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^JAH-COMIC-[0-9]{6}$",
+   "description": "Permanent immutable issue ID. Never reused."
+  },
+  "series": {
+   "type": "string"
+  },
+  "skey": {
+   "type": "string"
+  },
+  "num": {
+   "type": "integer",
+   "minimum": 1,
+   "description": "Issue number within its series. Never renumbered."
+  },
+  "title": {
+   "type": "string"
+  },
+  "chars": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "code",
+     "name",
+     "power"
+    ],
+    "properties": {
+     "code": {
+      "type": "string",
+      "description": "Hero codename — the stable character identity."
+     },
+     "name": {
+      "type": "string",
+      "description": "Secret identity name (may vary by issue)."
+     },
+     "power": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "desc": {
+   "type": "string"
+  },
+  "words": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "pages": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": [
+     "cap",
+     "beat",
+     "scene"
+    ],
+    "properties": {
+     "cap": {
+      "type": "string"
+     },
+     "dlg": {
+      "type": "string"
+     },
+     "who": {
+      "type": "string"
+     },
+     "scene": {
+      "type": "string"
+     },
+     "beat": {
+      "type": "string",
+      "enum": [
+       "hook",
+       "complication",
+       "escalation",
+       "turn",
+       "climax",
+       "resolution"
+      ]
+     }
+    }
+   }
+  },
+  "note": {
+   "type": "string"
+  },
+  "creation_mode": {
+   "type": "string",
+   "enum": [
+    "GENERATED"
+   ],
+   "description": "All catalog issues are generated originals."
+  }
+ }
+}

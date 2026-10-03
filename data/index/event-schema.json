@@ -1,0 +1,69 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://justinahiggins614-cmyk.github.io/signature-comics/data/index/event-schema.json",
+ "title": "JAH Crossover Event Record",
+ "type": "object",
+ "required": [
+  "event_id",
+  "name",
+  "issues",
+  "issue_count"
+ ],
+ "properties": {
+  "event_id": {
+   "type": "string",
+   "pattern": "^JAH-COMIC-EVENT-[0-9]{8}$"
+  },
+  "name": {
+   "type": "string"
+  },
+  "description": {
+   "type": "string"
+  },
+  "villain": {
+   "type": "string"
+  },
+  "status": {
+   "type": "string",
+   "enum": [
+    "COMPLETE",
+    "ONGOING"
+   ]
+  },
+  "creation_mode": {
+   "type": "string"
+  },
+  "participating_series": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "participating_heroes": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "issues": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "^JAH-COMIC-[0-9]{6}$"
+   }
+  },
+  "issue_count": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "reading_order": {
+   "type": "string"
+  },
+  "canonical_url": {
+   "type": "string"
+  },
+  "version": {
+   "type": "string"
+  }
+ }
+}

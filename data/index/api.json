@@ -1,19 +1,25 @@
 {
  "site": "The Signature Comic Store",
- "site_note": "SITE TITLE PROVISIONAL \u2014 awaiting Manon's confirmation",
+ "site_note": "SITE TITLE PROVISIONAL — awaiting Manon's confirmation",
  "total_issues": 6024,
  "total_words": 577803,
  "series": {
-  "THE SIGNALBEARERS": 750,
+  "COSMIC CROSSOVER EVENTS": 24,
   "EMBERFALL": 750,
-  "THE HOLLOW CIRCUIT": 750,
-  "TIDEBOUND": 750,
-  "THE GLOAMING WATCH": 750,
+  "JUNIOR SIGNALS": 750,
   "STARFARER'S LOG": 750,
   "THE CLOCKWORK MENAGERIE": 750,
-  "JUNIOR SIGNALS": 750,
-  "COSMIC CROSSOVER EVENTS": 24
+  "THE GLOAMING WATCH": 750,
+  "THE HOLLOW CIRCUIT": 750,
+  "THE SIGNALBEARERS": 750,
+  "TIDEBOUND": 750
  },
  "goal": 1000000,
- "updated": "2026-10-03T12:23:21Z"
+ "updated": "2026-10-03T14:09:09Z",
+ "schema_version": "1.0",
+ "catalog_version": "1.0",
+ "index_sha256": "7292c1f1c8df7b3823455511452892f454bb9c9b12a1f9611a9b4c1428ec280f",
+ "total_heroes": 20,
+ "total_events": 4,
+ "chunk_count": 60
 }

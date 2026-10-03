@@ -1,0 +1,74 @@
+{
+ "schema": "https://justinahiggins614-cmyk.github.io/signature-comics/data/index/comics-schema.json",
+ "schema_version": "1.0",
+ "hash_algorithm": "SHA-256",
+ "canonical_serialization": "json.dumps(record, sort_keys=True, separators=(\",\",\":\"), ensure_ascii=False) as UTF-8",
+ "record": {
+  "id": "JAH-COMIC-000001",
+  "series": "THE SIGNALBEARERS",
+  "skey": "signal",
+  "num": 1,
+  "title": "Relay of Signals",
+  "chars": [
+   {
+    "name": "Tamere Ohal",
+    "code": "Illmir",
+    "power": "star charting"
+   },
+   {
+    "name": "Galbex Setine",
+    "code": "Vavix",
+    "power": "star charting"
+   }
+  ],
+  "desc": "The Signalbearers #1 — Relay of Signals A new chapter in the Signature heroes universe: The call comes at shift change: deep orbit needs Illmir.. Starring Illmir (Tamere Ohal), Vavix (Galbex Setine). A team of cosmic guardians keeps the beacon-network of the far colonies lit — and something out in the dark keeps trying to snuff it.",
+  "pages": [
+   {
+    "cap": "The call comes at shift change: deep orbit needs Illmir.",
+    "dlg": "\"the Rust Choir can't have gone far. Look for frost on the inside of glass.\"",
+    "who": "Vavix",
+    "scene": "deep orbit",
+    "beat": "hook"
+   },
+   {
+    "cap": "But the Shattered Relay holds a surprise: a hollow signal wearing a person's voice.",
+    "dlg": "",
+    "who": "",
+    "scene": "the Shattered Relay",
+    "beat": "complication"
+   },
+   {
+    "cap": "The ghost tuner dims — time is running out.",
+    "dlg": "\"Then we do it the loud way.\"",
+    "who": "Vavix",
+    "scene": "the Shattered Relay",
+    "beat": "escalation"
+   },
+   {
+    "cap": "\"We were the storm all Tavane\" — the Rust Choir's words land like a dropped anchor.",
+    "dlg": "\"I brought the loud one.\"",
+    "who": "Illmir",
+    "scene": "the Shattered Relay",
+    "beat": "turn"
+   },
+   {
+    "cap": "Illmir leaps — for Velnara Prime, for Vavix, for everything.",
+    "dlg": "",
+    "who": "",
+    "scene": "the Shattered Relay",
+    "beat": "climax"
+   },
+   {
+    "cap": "Quiet, after. deep orbit glows in the aftermath.",
+    "dlg": "\"I brought the loud one.\"",
+    "who": "Vavix",
+    "scene": "deep orbit",
+    "beat": "denouement"
+   }
+  ],
+  "words": 99,
+  "note": "An original generated comic created by the Signature system. All characters, places, and events are invented.",
+  "content_hash": "a24a0ad4c24e6fce71d0b1ece9a4267b6ab38485ef6567b6afd5956ca424d7e5",
+  "canonical_url": "https://justinahiggins614-cmyk.github.io/signature-comics/?issue=JAH-COMIC-000001"
+ }
+}

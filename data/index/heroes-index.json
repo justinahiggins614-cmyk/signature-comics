@@ -1,0 +1,407 @@
+{
+ "generated": "2026-10-03T14:09:09Z",
+ "schema_version": "1.0",
+ "count": 20,
+ "heroes": [
+  {
+   "id": "JAH-HERO-000001",
+   "code": "BASTION",
+   "name": "Doran Kells",
+   "archetype": "The Powerhouse",
+   "powers": [
+    "flight",
+    "near-invulnerability",
+    "thunderclap strength",
+    "deep-space survival"
+   ],
+   "look": {
+    "desc": "A broad-shouldered guardian in cobalt plate with a silver sunburst crest.",
+    "suit": "#1d4fd6",
+    "cape": "#c8d4f2"
+   },
+   "backstory": "Doran Kells was a harbor salvage diver when a fallen star-core fused with his diving bell. Now, as Bastion, he holds up collapsing bridges, tows stranded ships home, and stands between the city and anything that falls out of the sky.",
+   "series": "THE SIGNALBEARERS",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000002",
+   "code": "SWIFTSURE",
+   "name": "Pip Marlow",
+   "archetype": "The Speedster",
+   "powers": [
+    "supersonic running",
+    "vibration phasing",
+    "lightning reflexes",
+    "time-slip sprints"
+   ],
+   "look": {
+    "desc": "A lean runner in scarlet and gold, motion-lines stitched into the suit.",
+    "suit": "#d62e1d",
+    "cape": "#ffd23f"
+   },
+   "backstory": "Pip Marlow was the fastest bicycle courier on Neon Row until a ghost-frequency storm rewrote their nerves. As Swiftsure they outrun weather, deliver hope on deadline, and never, ever stand still.",
+   "series": "THE HOLLOW CIRCUIT",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000003",
+   "code": "NIGHTWARDEN",
+   "name": "Silas Crowe",
+   "archetype": "The Dark Vigilante",
+   "powers": [
+    "peak human conditioning",
+    "fear tactics",
+    "gadget mastery",
+    "criminal psychology"
+   ],
+   "look": {
+    "desc": "A tall figure in charcoal armor and a tattered midnight cape, white lenses.",
+    "suit": "#23232e",
+    "cape": "#0c0c14"
+   },
+   "backstory": "Silas Crowe watched his family's lantern-shop burn and decided the fog city needed someone the dark was afraid of. As the Nightwarden he patrols the rooftops with no powers but preparation — and a promise.",
+   "series": "THE GLOAMING WATCH",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000004",
+   "code": "STRANDLINE",
+   "name": "Jess Amara",
+   "archetype": "The Web-Slinger Type",
+   "powers": [
+    "grapple-line swinging",
+    "wall-crawling",
+    "tensile web-nets",
+    "acrobatics"
+   ],
+   "look": {
+    "desc": "A teen hero in teal and copper with a climbing harness woven into the costume.",
+    "suit": "#0f8b8d",
+    "cape": "#b87333"
+   },
+   "backstory": "Jess Amara built her first grapple-gun from a harbor crane winch for a school science fair. As Strandline she swings between the docks and the rooftops, catching falling cargo — and falling people — with homemade tensile lines.",
+   "series": "TIDEBOUND",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000005",
+   "code": "THE KINDRED",
+   "name": "The Kindred Five",
+   "archetype": "The Extraordinary Team",
+   "powers": [
+    "elemental fusion",
+    "empathic link",
+    "combined-form titan",
+    "danger-sense web"
+   ],
+   "look": {
+    "desc": "Five young heroes in matching indigo jackets, each with a different elemental sigil.",
+    "suit": "#3b2f7a",
+    "cape": "#7a6ff0"
+   },
+   "backstory": "Five strangers struck by the same falling signal woke up changed — and linked. As the Kindred they are stronger together than apart, a found family learning that extraordinary is just ordinary with practice.",
+   "series": "JUNIOR SIGNALS",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000006",
+   "code": "STARWARDEN",
+   "name": "Ilya Voss",
+   "archetype": "The Cosmic Guardian",
+   "powers": [
+    "prism-light projection",
+    "gravity anchoring",
+    "beacon-speech",
+    "void navigation"
+   ],
+   "look": {
+    "desc": "A serene guardian in white and deep blue, a living constellation on the cloak.",
+    "suit": "#eef2ff",
+    "cape": "#1b2456"
+   },
+   "backstory": "Ilya Voss was the last keeper of a dead beacon-station until the light chose them back. As Starwarden they keep the lanes between colonies lit and answer every distress call the dark tries to swallow.",
+   "series": "STARFARER'S LOG",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000007",
+   "code": "PLATEFORGE",
+   "name": "Rosa Delgado",
+   "archetype": "The Armored Tinkerer",
+   "powers": [
+    "modular power armor",
+    "forge-drones",
+    "overcharge blast",
+    "field repairs"
+   ],
+   "look": {
+    "desc": "A stocky engineer in brass-and-rust plate armor that reconfigures mid-battle.",
+    "suit": "#8a5a1e",
+    "cape": "#3a2a12"
+   },
+   "backstory": "Rosa Delgado built her first suit from a decommissioned furnace-bot to save her gear-city block. As Plateforge she never stops iterating — every fight ends with a better suit than it started with.",
+   "series": "THE CLOCKWORK MENAGERIE",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000008",
+   "code": "RUNESAYER",
+   "name": "Tam Okafor",
+   "archetype": "The Mystic",
+   "powers": [
+    "rune-casting",
+    "ward weaving",
+    "spirit parley",
+    "ley-line sight"
+   ],
+   "look": {
+    "desc": "A calm figure in deep green robes traced with glowing copper runes.",
+    "suit": "#14532d",
+    "cape": "#b87333"
+   },
+   "backstory": "Tam Okafor read the old signs the city paved over. As the Runesayer they speak with what lingers — warding doors, bargaining with echoes, and keeping the balance between the seen and the unseen.",
+   "series": "THE GLOAMING WATCH",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000009",
+   "code": "SHIELDMAIDEN SABLE",
+   "name": "Sable Venn",
+   "archetype": "The Mythic Warrior",
+   "powers": [
+    "century-honed combat",
+    "blessed arms",
+    "battle-cry rally",
+    "oath-binding"
+   ],
+   "look": {
+    "desc": "A towering warrior in bronze scale-mail with a crimson plume crest.",
+    "suit": "#a06a2c",
+    "cape": "#8e1f2f"
+   },
+   "backstory": "Sable Venn swore her oath on a battlefield a hundred years gone and simply never stopped keeping it. She fights for the small holds and the forgotten valleys, and her war-cry has ended sieges before the first arrow.",
+   "series": "EMBERFALL",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000010",
+   "code": "PRISMWARD",
+   "name": "Noor Haddad",
+   "archetype": "The Prismatic Warden",
+   "powers": [
+    "prism-blade",
+    "rainbow-bridge",
+    "color-shift camouflage",
+    "light-lattice"
+   ],
+   "look": {
+    "desc": "A shining sentinel in white with a prismatic sash that shifts through every color.",
+    "suit": "#f5f5f5",
+    "cape": "#7ad0ff"
+   },
+   "backstory": "Noor Haddad grew up in a lighthouse and learned to split light into ladders. As Prismward they bend the spectrum into blades, bridges, and second chances — a warden of every color the eye can hold.",
+   "series": "THE SIGNALBEARERS",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000011",
+   "code": "PLIANT",
+   "name": "Detective Bram Flex",
+   "archetype": "The Elastic Detective",
+   "powers": [
+    "elastic body",
+    "contortion infiltration",
+    "rebound strikes",
+    "master deduction"
+   ],
+   "look": {
+    "desc": "A lanky detective in a mustard trench coat that stretches with him.",
+    "suit": "#c9a227",
+    "cape": "#5a4a1a"
+   },
+   "backstory": "Detective Bram Flex bent the rules long before his body learned to bend. As Pliant he squeezes through keyholes, bounces back from betrayals, and always follows the case to its elastic end.",
+   "series": "THE GLOAMING WATCH",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000012",
+   "code": "MAGNITUDE",
+   "name": "June Park",
+   "archetype": "The Size-Changer",
+   "powers": [
+    "giant growth",
+    "pocket shrinking",
+    "density shifting",
+    "stomp-quake control"
+   ],
+   "look": {
+    "desc": "A cheerful hero in orange and navy whose silhouette never stays the same size.",
+    "suit": "#e8762c",
+    "cape": "#1d3a6b"
+   },
+   "backstory": "June Park was a harbor crane operator who always wished she could reach a little further. As Magnitude she can stand tall as a lighthouse or small as a minnow — and she uses both to keep the sea-roads safe.",
+   "series": "TIDEBOUND",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000013",
+   "code": "TIDECROWN",
+   "name": "Marisol Reyes",
+   "archetype": "The Ocean Warden",
+   "powers": [
+    "tide command",
+    "pressure immunity",
+    "storm calming",
+    "sea-speech"
+   ],
+   "look": {
+    "desc": "A regal figure in deep teal scale-armor crowned with living coral.",
+    "suit": "#0e5f6b",
+    "cape": "#4fe3c1"
+   },
+   "backstory": "Marisol Reyes was chosen by the drowned places to speak for the sea. As Tidecrown she keeps the oaths between harbor folk and the deep — and when the storms forget their manners, she reminds them.",
+   "series": "TIDEBOUND",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000014",
+   "code": "GALEFORGE",
+   "name": "Torvald Ashe",
+   "archetype": "The Storm Heir",
+   "powers": [
+    "storm-summoning",
+    "lightning riding",
+    "wind-forged weapons",
+    "sky-sight"
+   ],
+   "look": {
+    "desc": "A broad warrior in storm-grey with crackling blue-white energy braided in the beard.",
+    "suit": "#4a5568",
+    "cape": "#9fd0ff"
+   },
+   "backstory": "Torvald Ashe inherited the sky-anvil of his grandmother, the last storm-smith. As Galeforge he hammers weather into weapons and shields, and his thunder only ever strikes what deserves it.",
+   "series": "EMBERFALL",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000015",
+   "code": "UMBRASTEP",
+   "name": "Vesper Lane",
+   "archetype": "The Shadow Teleporter",
+   "powers": [
+    "shadow-stepping",
+    "darkness veil",
+    "umbral blades",
+    "night-sight"
+   ],
+   "look": {
+    "desc": "A slight figure in smoke-grey and violet who is never quite where you look.",
+    "suit": "#3d3350",
+    "cape": "#1a1426"
+   },
+   "backstory": "Vesper Lane fell through a crack in the evening and learned to walk the dark between places. As Umbrastep they arrive before trouble starts — usually.",
+   "series": "THE HOLLOW CIRCUIT",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000016",
+   "code": "BRIARCLAW",
+   "name": "Rowan Thicket",
+   "archetype": "The Feral Guardian",
+   "powers": [
+    "retractable thorn-claws",
+    "beast senses",
+    "regeneration",
+    "pack rally"
+   ],
+   "look": {
+    "desc": "A wild guardian in bark-brown leathers with thorn-claws and moss-green markings.",
+    "suit": "#5a4632",
+    "cape": "#2e4a2e"
+   },
+   "backstory": "Rowan Thicket grew up in the deep fen and never quite left it. As Briarclaw they guard the wild places with tooth and claw — and a heart bigger than the forest.",
+   "series": "EMBERFALL",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000017",
+   "code": "VOIDHERALD",
+   "name": "Cassiop Lark",
+   "archetype": "The Cosmic Herald",
+   "powers": [
+    "faster-than-light flight",
+    "cosmic awareness",
+    "nova-flare bolts",
+    "omen-sense"
+   ],
+   "look": {
+    "desc": "A silver herald wreathed in comet-light, trailing stardust.",
+    "suit": "#c0c8e8",
+    "cape": "#39406b"
+   },
+   "backstory": "Cassiop Lark was a survey pilot who flew too far and came back changed — now they carry warnings between the stars. As the Voidherald they arrive ahead of disaster, which is almost as good as preventing it.",
+   "series": "STARFARER'S LOG",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000018",
+   "code": "MOUNTAINHEART",
+   "name": "Gromm",
+   "archetype": "The Gentle Giant",
+   "powers": [
+    "colossal strength",
+    "stone skin",
+    "earth-healing touch",
+    "avalanche calm"
+   ],
+   "look": {
+    "desc": "A mountain of a being with granite skin and kind lantern-eyes.",
+    "suit": "#6b6259",
+    "cape": "#3f3a33"
+   },
+   "backstory": "Gromm is older than the valley and gentler than its rain. As Mountainheart he lifts fallen barns, shelters villages in his shadow, and has never once raised a hand in anger — only in rescue.",
+   "series": "EMBERFALL",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000019",
+   "code": "SPROCKET",
+   "name": "Tilda Nack",
+   "archetype": "The Gadget Kid",
+   "powers": [
+    "junk-tech invention",
+    "drone swarm",
+    "gadget improvisation",
+    "mechanical empathy"
+   ],
+   "look": {
+    "desc": "A small whirlwind in patched overalls with a backpack of buzzing contraptions.",
+    "suit": "#7a4fa3",
+    "cape": "#2e1d3e"
+   },
+   "backstory": "Tilda Nack can fix anything with wire, hope, and a paperclip. As Sprocket she fights entropy itself — one jerry-rigged miracle at a time.",
+   "series": "THE CLOCKWORK MENAGERIE",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  },
+  {
+   "id": "JAH-HERO-000020",
+   "code": "KINGSWARD",
+   "name": "General Adaeze Obi",
+   "archetype": "The Peak Tactician",
+   "powers": [
+    "master strategy",
+    "peak conditioning",
+    "unbreakable will",
+    "allied rally"
+   ],
+   "look": {
+    "desc": "A commanding figure in midnight blue and gold with a chess-knight sigil.",
+    "suit": "#1d2a6b",
+    "cape": "#c9a227"
+   },
+   "backstory": "General Adaeze Obi has never lost a battle she chose to fight. As Kingsward she needs no powers — only a plan, a team, and the absolute refusal to lose anyone under her command.",
+   "series": "THE SIGNALBEARERS",
+   "note": "Signature-original character, not affiliated with any publisher. Created by the Signature system for Justin Addam Higgins."
+  }
+ ]
+}

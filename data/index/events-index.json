@@ -1,0 +1,166 @@
+{
+ "generated": "2026-10-03T14:09:09Z",
+ "schema_version": "1.0",
+ "count": 4,
+ "events": [
+  {
+   "event_id": "JAH-COMIC-EVENT-00000001",
+   "name": "SIEGE OF AMALTHEA",
+   "description": "The Unmaking comes for Jupiter's first moon — and every hero answers.",
+   "villain": "THE UNMAKING",
+   "status": "COMPLETE",
+   "creation_mode": "GENERATED",
+   "participating_series": [
+    "COSMIC CROSSOVER EVENTS"
+   ],
+   "participating_heroes": [
+    "BASTION",
+    "BRIARCLAW",
+    "MAGNITUDE",
+    "MOUNTAINHEART",
+    "NIGHTWARDEN",
+    "PLIANT",
+    "PRISMWARD",
+    "RUNESAYER",
+    "SHIELDMAIDEN SABLE",
+    "SPROCKET",
+    "STARWARDEN",
+    "STRANDLINE",
+    "SWIFTSURE",
+    "THE KINDRED",
+    "UMBRASTEP"
+   ],
+   "issues": [
+    "JAH-COMIC-001501",
+    "JAH-COMIC-001502",
+    "JAH-COMIC-001503",
+    "JAH-COMIC-001504",
+    "JAH-COMIC-001505",
+    "JAH-COMIC-001506"
+   ],
+   "issue_count": 6,
+   "reading_order": "by issue number within the event",
+   "canonical_url": "https://justinahiggins614-cmyk.github.io/signature-comics/?series=event",
+   "version": "1.0",
+   "derivation_note": "Event membership from the issue description pattern '{EVNAME} — Part N of {EVNAME}.' (code/make_events.py); event issues carry skey 'event'."
+  },
+  {
+   "event_id": "JAH-COMIC-EVENT-00000002",
+   "name": "WAR IN THE SAURIAN DAWN",
+   "description": "The Maw of Eons hunts through deep time — the heroes follow it down.",
+   "villain": "THE MAW OF EONS",
+   "status": "COMPLETE",
+   "creation_mode": "GENERATED",
+   "participating_series": [
+    "COSMIC CROSSOVER EVENTS"
+   ],
+   "participating_heroes": [
+    "BRIARCLAW",
+    "GALEFORGE",
+    "MAGNITUDE",
+    "MOUNTAINHEART",
+    "PLIANT",
+    "RUNESAYER",
+    "SHIELDMAIDEN SABLE",
+    "SPROCKET",
+    "STARWARDEN",
+    "THE KINDRED",
+    "TIDECROWN",
+    "VOIDHERALD"
+   ],
+   "issues": [
+    "JAH-COMIC-001507",
+    "JAH-COMIC-001508",
+    "JAH-COMIC-001509",
+    "JAH-COMIC-001510",
+    "JAH-COMIC-001511",
+    "JAH-COMIC-001512"
+   ],
+   "issue_count": 6,
+   "reading_order": "by issue number within the event",
+   "canonical_url": "https://justinahiggins614-cmyk.github.io/signature-comics/?series=event",
+   "version": "1.0",
+   "derivation_note": "Event membership from the issue description pattern '{EVNAME} — Part N of {EVNAME}.' (code/make_events.py); event issues carry skey 'event'."
+  },
+  {
+   "event_id": "JAH-COMIC-EVENT-00000003",
+   "name": "THE FARFALLEN CENTURY",
+   "description": "In the 31st century, the Pale Extinction returns — and legends wake.",
+   "villain": "THE PALE EXTINCTION",
+   "status": "COMPLETE",
+   "creation_mode": "GENERATED",
+   "participating_series": [
+    "COSMIC CROSSOVER EVENTS"
+   ],
+   "participating_heroes": [
+    "BRIARCLAW",
+    "GALEFORGE",
+    "KINGSWARD",
+    "MAGNITUDE",
+    "PLATEFORGE",
+    "PLIANT",
+    "PRISMWARD",
+    "RUNESAYER",
+    "SHIELDMAIDEN SABLE",
+    "STRANDLINE",
+    "THE KINDRED",
+    "TIDECROWN",
+    "UMBRASTEP",
+    "VOIDHERALD"
+   ],
+   "issues": [
+    "JAH-COMIC-001513",
+    "JAH-COMIC-001514",
+    "JAH-COMIC-001515",
+    "JAH-COMIC-001516",
+    "JAH-COMIC-001517",
+    "JAH-COMIC-001518"
+   ],
+   "issue_count": 6,
+   "reading_order": "by issue number within the event",
+   "canonical_url": "https://justinahiggins614-cmyk.github.io/signature-comics/?series=event",
+   "version": "1.0",
+   "derivation_note": "Event membership from the issue description pattern '{EVNAME} — Part N of {EVNAME}.' (code/make_events.py); event issues carry skey 'event'."
+  },
+  {
+   "event_id": "JAH-COMIC-EVENT-00000004",
+   "name": "WHEN TIMELINES COLLAPSE",
+   "description": "Every when is falling into every other when — the Null-King reigns the wreckage.",
+   "villain": "THE NULL-KING",
+   "status": "COMPLETE",
+   "creation_mode": "GENERATED",
+   "participating_series": [
+    "COSMIC CROSSOVER EVENTS"
+   ],
+   "participating_heroes": [
+    "BASTION",
+    "BRIARCLAW",
+    "GALEFORGE",
+    "MAGNITUDE",
+    "PLIANT",
+    "PRISMWARD",
+    "RUNESAYER",
+    "SHIELDMAIDEN SABLE",
+    "STARWARDEN",
+    "STRANDLINE",
+    "THE KINDRED",
+    "TIDECROWN",
+    "UMBRASTEP",
+    "VOIDHERALD"
+   ],
+   "issues": [
+    "JAH-COMIC-001519",
+    "JAH-COMIC-001520",
+    "JAH-COMIC-001521",
+    "JAH-COMIC-001522",
+    "JAH-COMIC-001523",
+    "JAH-COMIC-001524"
+   ],
+   "issue_count": 6,
+   "reading_order": "by issue number within the event",
+   "canonical_url": "https://justinahiggins614-cmyk.github.io/signature-comics/?series=event",
+   "version": "1.0",
+   "derivation_note": "Event membership from the issue description pattern '{EVNAME} — Part N of {EVNAME}.' (code/make_events.py); event issues carry skey 'event'."
+  }
+ ]
+}

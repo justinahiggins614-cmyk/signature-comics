@@ -1,0 +1,66 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://justinahiggins614-cmyk.github.io/signature-comics/data/index/character-schema.json",
+ "title": "JAH Character Record",
+ "description": "Recurring character mined from issue records, grouped by codename.",
+ "type": "object",
+ "required": [
+  "character_id",
+  "code",
+  "appearances",
+  "first_appearance"
+ ],
+ "properties": {
+  "character_id": {
+   "type": "string",
+   "pattern": "^JAH-CHARACTER-[0-9]{8}$"
+  },
+  "code": {
+   "type": "string"
+  },
+  "name": {
+   "type": "string"
+  },
+  "aliases": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "powers": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "series": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "first_appearance": {
+   "type": "string"
+  },
+  "appearances": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "^JAH-COMIC-[0-9]{6}$"
+   }
+  },
+  "appearance_count": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "creation_mode": {
+   "type": "string"
+  },
+  "canonical_url": {
+   "type": "string"
+  },
+  "version": {
+   "type": "string"
+  }
+ }
+}

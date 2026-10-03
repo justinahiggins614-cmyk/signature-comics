@@ -1,0 +1,63 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://justinahiggins614-cmyk.github.io/signature-comics/data/index/series-schema.json",
+ "title": "JAH Comic Series Record",
+ "type": "object",
+ "required": [
+  "series_id",
+  "skey",
+  "name",
+  "issue_count",
+  "first_issue",
+  "last_issue",
+  "canonical_url"
+ ],
+ "properties": {
+  "series_id": {
+   "type": "string",
+   "pattern": "^JAH-COMIC-SERIES-[0-9]{8}$"
+  },
+  "skey": {
+   "type": "string"
+  },
+  "name": {
+   "type": "string"
+  },
+  "description": {
+   "type": "string"
+  },
+  "genre": {
+   "type": "string"
+  },
+  "audience": {
+   "type": "string"
+  },
+  "creation_mode": {
+   "type": "string"
+  },
+  "creator": {
+   "type": "string"
+  },
+  "issue_count": {
+   "type": "integer",
+   "minimum": 0
+  },
+  "first_issue": {
+   "type": "string"
+  },
+  "last_issue": {
+   "type": "string"
+  },
+  "canonical_url": {
+   "type": "string",
+   "format": "uri"
+  },
+  "version": {
+   "type": "string"
+  },
+  "content_hash": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{64}$"
+  }
+ }
+}
