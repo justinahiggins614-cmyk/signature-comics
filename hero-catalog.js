@@ -11,7 +11,7 @@ function unlockScroll(){_scrollLocks=Math.max(0,_scrollLocks-1);if(!_scrollLocks
    Used by hero-catalog.js AND index.html's inline script. */
 var JN_ENGINE_LINE="<b>Engine:</b> Signature Llama (live where available) with the built-in JAHtalk on-device fallback — it always answers.";
 function jnBadgeHTML(label){return '<div style="margin:6px 0"><span class="stbadge">'+esc(label)+'</span></div>'}
-function jnPanelHTML(id,ver){return '<div class="recpanel" role="group" aria-label="Record actions"><span class="rpid">'+esc(id)+'</span><span class="rpver">'+esc(ver||"v1.0")+'</span>'+
+function jnPanelHTML(id,ver){return '<div class="recpanel" role="group" aria-label="Record actions"><span class="rpid">ID: '+esc(id)+'</span><span class="rpver">VERSION '+esc(ver||"v1.0")+'</span>'+
  '<button data-rp="open">OPEN</button><button data-rp="src">SOURCE</button><button data-rp="share">SHARE</button>'+
  '<button data-rp="copy">COPY</button><button data-rp="dl">DOWNLOAD</button><button data-rp="read">READ ALOUD</button></div>'}
 function jnProvHTML(text){return '<div class="prov">Provenance: '+esc(text)+'</div>'}
