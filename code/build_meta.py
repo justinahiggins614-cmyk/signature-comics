@@ -581,7 +581,7 @@ def build_all():
     })
     write_json("api.json", api)
 
-    stamp_static_counts(total, words, api["updated"])
+    stamp_static_counts(total, words, api["updated"], len(series_idx))
     return {"total": total, "words": words, "series": len(series_idx),
             "heroes": len(heroes), "characters": len(chars_idx),
             "events": len(events_idx), "hashes": len(hashes)}
@@ -593,7 +593,7 @@ MARCH_MARK = "<!-- STATIC-MARCH -->"
 MARCH_END = "<!-- /STATIC-MARCH -->"
 
 
-def stamp_static_counts(total, words, updated):
+def stamp_static_counts(total, words, updated, n_series):
     """Replace the STATIC-COUNTS / STATIC-MARCH blocks in index.html with a
     crawlable, no-JS snapshot. The live JS replaces #stats content and the
     march text on load, so the stamp is only ever a fallback."""
@@ -605,7 +605,7 @@ def stamp_static_counts(total, words, updated):
         STATIC_MARK + "\n"
         '<div class="stats" id="stats">'
         '<div class="stat"><b>' + f"{total:,}" + "</b><span>finished issues</span></div>"
-        '<div class="stat"><b>9</b><span>original series</span></div>'
+        '<div class="stat"><b>' + f"{n_series}" + "</b><span>original series</span></div>"
         '<div class="stat"><b>' + f"{words/1000:.0f}K" + "</b><span>words of story</span></div>"
         '<div class="stat"><b>1M</b><span>issue goal</span></div></div>\n'
         '<p class="matchline" id="staticsnap">Catalog snapshot ' + date + " · "

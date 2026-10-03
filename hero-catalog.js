@@ -81,7 +81,7 @@ function suggestNames(seed) {
       C = ["ON","IX","ARA","EUS","OR","IA"], out = [];
   for (i = 0; i < 3; i++) {
     h = ((h * 1103515245) + 12345) >>> 0;
-    out.push(A[h % 10] + B[(h >> 4) % 6] + C[(h >> 8) % 6]);
+    out.push(A[h % 10] + B[(h >>> 4) % 6] + C[(h >>> 8) % 6]);
   }
   return out;
 }
