@@ -176,7 +176,12 @@ def main():
         assert rec["id"] not in have, "duplicate id " + rec["id"]
         rec["_i"] = i
         recs.append(rec)
-        new_rows.append(idx_row(rec))
+        row = idx_row(rec)
+        # stamp the ACTUAL chunk number: chunk 16 absorbed the 24 event
+        # issues (124 records), so the (i-1)//100+1 formula is wrong for
+        # sealed history — always record the chunk at write time.
+        row["chunk"] = (i - 1) // CHUNK + 1
+        new_rows.append(row)
         have.add(rec["id"])
         # flush full chunks as we go
         if len(recs) == CHUNK:
@@ -193,6 +198,18 @@ def main():
     # + static page urls in the sitemap (kept in lockstep with the drip)
     from build_web_extras import build_all as build_web_extras_all
     build_web_extras_all()
+
+    # catalog metadata: series/character/event indexes, JSON schemas,
+    # per-issue hashes, master manifest, api.json authority fields,
+    # static count stamp in index.html (kept in lockstep with the drip)
+    from build_meta import build_all as build_meta_all
+    meta = build_meta_all()
+
+    # count-integrity gate: the published counts must agree with the
+    # sealed volumes before anything is committed
+    assert meta["total"] == len(idx), "count mismatch: meta vs idx"
+    assert sum(api["series"].values()) == meta["total"], \
+        "count mismatch: series sum vs total"
 
     st["next_index"] = start + args.n
     save_state(st)

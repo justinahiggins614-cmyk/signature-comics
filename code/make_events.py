@@ -213,7 +213,9 @@ def main():
     have = {r["id"] for r in idx}
     for r in recs:
         if r["id"] not in have:
-            idx.append(idx_row({k: v for k, v in r.items() if k != "_i"}))
+            row = idx_row({k: v for k, v in r.items() if k != "_i"})
+            row["chunk"] = (r["_i"] - 1) // CHUNK + 1
+            idx.append(row)
     with gzip.open(idxp, "wt", encoding="utf-8") as f:
         json.dump(idx, f)
     # state

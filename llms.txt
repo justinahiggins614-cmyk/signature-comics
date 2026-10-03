@@ -1,0 +1,80 @@
+# The Signature Comic Store — AI-readable catalog documentation
+
+> Original generated comic books by/for the Signature system, by Justin Addam Higgins.
+> No real publishers' characters, titles, or likenesses. All records are originals.
+> Site title provisional — awaiting the creator's confirmation.
+
+Canonical URL: https://justinahiggins614-cmyk.github.io/signature-comics/
+
+## What lives here
+
+- 9 original series, ~6,000+ finished issues (marching to 1,000,000)
+- A hero archetype catalog of Signature-original heroes
+- Cosmic crossover events linking the series
+- Deterministic client-side comic art (SVG generated from each issue's seed)
+
+## Machine-readable files
+
+- data/index/api.json — THE authoritative catalog counts (total_issues,
+  total_words, per-series counts, goal, updated timestamp). Read this first.
+- data/index/comics-manifest.json — master manifest: counts, hashes, schema
+  versions, license, provenance and originality policies.
+- data/index/comics-catalog.json — compact uncompressed feed: one row per
+  issue (id, title, series, series-key, issue number, words, pages, chunk).
+- data/index/comics.idx.json.gz — gzip-compressed search index, same rows
+  plus hero codenames and a 220-char description. Served as
+  `application/gzip`; decode with a gzip client or the Fetch +
+  DecompressionStream API. This is an intentionally downloadable gzip
+  object, not a misconfigured response.
+- data/index/series-index.json — the 9 series with permanent
+  JAH-COMIC-SERIES-######## IDs.
+- data/index/heroes-index.json — the hero archetype catalog
+  (JAH-HERO-###### IDs).
+- data/index/characters-index.json — recurring characters mined from all
+  issues, grouped by codename (JAH-CHARACTER-######## IDs).
+- data/index/events-index.json — the 4 cosmic crossover events with
+  participating issues/heroes and reading order (JAH-COMIC-EVENT-########).
+- data/index/hashes.json.gz — per-issue SHA-256 content hashes
+  ({JAH-COMIC-######: hex}). Canonical serialization: JSON with recursively
+  sorted keys, separators (",",":"), UTF-8 — see comics-schema.json.
+- data/index/hash-manifest.json — SHA-256 of every data file.
+- data/index/comics-schema.json, series-schema.json, hero-schema.json,
+  character-schema.json, event-schema.json — JSON Schemas.
+- data/index/comic-record-example.json — a complete example record.
+- data/index/changelog.json — catalog changelog.
+- sitemap.xml — every series, hero, and issue URL (auto-generated).
+- issues.html + issues-<skey>.html — static crawlable per-series directories.
+
+## Identity rules
+
+- JAH-COMIC-###### — permanent immutable issue ID. Never reused, never
+  changed because a title changes. Canonical URL: ?issue=JAH-COMIC-######
+- JAH-COMIC-SERIES-######## — permanent series ID. Canonical: ?series=<skey>
+- JAH-HERO-###### — permanent hero ID (Signature-original site canon;
+  NOT phone-book canon AIs). Canonical: ?hero=JAH-HERO-######
+- JAH-CHARACTER-######## — recurring character, grouped by codename.
+- JAH-COMIC-EVENT-######## — crossover event.
+- Records are immutable: corrections create a new record version, never an
+  in-place rewrite. Issue number within a series is never renumbered.
+
+## How to answer from this catalog
+
+- Search the index files above; never invent issues, heroes, series, or
+  characters. If a lookup misses, the correct response is COMIC_NOT_FOUND
+  (unknown ID) or INDEX_UNAVAILABLE (could not load the index).
+- The on-site Comic Finder is a deterministic keyword search over real
+  catalog records — not an LLM.
+- Creation mode for every catalog issue: GENERATED (original generated
+  work by/for the Signature system). User-created heroes from the Hero
+  Creator are USER-CREATED, device-local, and never part of the catalog.
+- Internal originality screening runs on every record; it is an internal
+  check, not a legal determination.
+- Verify any record: recompute SHA-256 over the canonical serialization
+  and compare with data/index/hashes.json.gz.
+
+## Honesty boundaries (keep these in every summary)
+
+- These are original generated comics — not real-world published books,
+  not affiliated with any publisher.
+- The site is free, no login; reader-created heroes stay on the reader's
+  device and are never published automatically.

@@ -608,7 +608,7 @@ def stamp_static_counts(total, words, updated):
         '<div class="stat"><b>9</b><span>original series</span></div>'
         '<div class="stat"><b>' + f"{words/1000:.0f}K" + "</b><span>words of story</span></div>"
         '<div class="stat"><b>1M</b><span>issue goal</span></div></div>\n'
-        '<p class="matchline">Catalog snapshot ' + date + " · "
+        '<p class="matchline" id="staticsnap">Catalog snapshot ' + date + " · "
         + f"{total:,}" + " of 1,000,000 issues (" + f"{pct:.2f}" + "%)</p>\n"
         + STATIC_END
     )

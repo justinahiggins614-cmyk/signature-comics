@@ -478,4 +478,46 @@ function wireCreator() {
   };
   renderMyHeroes();
   renderMySeries();
+  /* export / import / delete-all for device-local heroes */
+  var exB=$("expHeroes");
+  if(exB)exB.onclick=function(){
+    var mine=myHeroes();
+    download("my-signature-heroes.json",JSON.stringify({exported:new Date().toISOString(),count:mine.length,heroes:mine},null,1),"application/json");
+  };
+  var imB=$("impHeroes"),imF=$("impFile");
+  if(imB&&imF){
+    imB.onclick=function(){imF.click()};
+    imF.addEventListener("change",function(){
+      var f=imF.files&&imF.files[0];if(!f)return;
+      var rd=new FileReader();
+      rd.onload=function(){
+        try{
+          var obj=JSON.parse(rd.result);
+          var arr=Array.isArray(obj)?obj:obj.heroes;
+          if(!Array.isArray(arr))throw new Error("bad file");
+          var mine=myHeroes(),have={},added=0,skipped=0;
+          mine.forEach(function(h){have[h.id]=1});
+          arr.forEach(function(h){
+            if(!h||typeof h!=="object"||!h.id||!h.code){skipped++;return}
+            if(have[h.id]){skipped++;return}
+            h.custom=true;
+            if(!h.note)h.note="Signature-original character imported by a reader in the Hero Creator, not affiliated with any publisher.";
+            mine.push(h);have[h.id]=1;added++;
+          });
+          saveMyHeroes(mine);renderMyHeroes();
+          alert("Imported "+added+" hero"+(added===1?"":"s")+(skipped?" ("+skipped+" skipped: invalid or duplicate)":"")+".");
+        }catch(e){alert("Could not import: that file is not a valid heroes export.")}
+        imF.value="";
+      };
+      rd.readAsText(f);
+    });
+  }
+  var delB=$("delHeroes");
+  if(delB)delB.onclick=function(){
+    var mine=myHeroes();
+    if(!mine.length){alert("No saved heroes to delete.");return}
+    if(confirm("Delete all "+mine.length+" of your saved heroes from this device? This cannot be undone.")){
+      saveMyHeroes([]);renderMyHeroes();alert("All saved heroes deleted from this device.");
+    }
+  };
 }
