@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03T21:02:02Z",
+ "generated": "2026-10-03T22:23:28Z",
  "schema_version": "1.0",
  "files": [
   {
@@ -414,13 +414,38 @@
   },
   {
    "file": "data/volumes/comics-c00081.json.gz",
-   "sha256": "45839f02b1c3b996318161b2b86e225ca9e623b6850a788e8e8271c312465cb8",
-   "bytes": 7652
+   "sha256": "c108ac339fb27c436b35cedd5d5be0bb4edd7ec0a09e864a1a1c54730d6d8a4f",
+   "bytes": 25898
+  },
+  {
+   "file": "data/volumes/comics-c00082.json.gz",
+   "sha256": "4cac3cee596302ac9838a2fc648992f720c6f64317aa8fcebd6e49291d1ca32c",
+   "bytes": 25632
+  },
+  {
+   "file": "data/volumes/comics-c00083.json.gz",
+   "sha256": "a2f4fd4afb38c308a08aadab2bf3ffb4bde9a6369a7f628fe6a3fa63450bccd6",
+   "bytes": 26112
+  },
+  {
+   "file": "data/volumes/comics-c00084.json.gz",
+   "sha256": "198903ace14ee41d6c265ffe50ca8d90497aee6234758b51dce23de12a23f001",
+   "bytes": 25976
+  },
+  {
+   "file": "data/volumes/comics-c00085.json.gz",
+   "sha256": "10a92228f333574fbfd44e7db0d3113f070aab87327cb5483ab39b62fa743eb7",
+   "bytes": 25856
+  },
+  {
+   "file": "data/volumes/comics-c00086.json.gz",
+   "sha256": "6a5dc11a31e3de59054976da4cac7719b17eaf4d830904ede30a4ace0ee8c412",
+   "bytes": 7737
   },
   {
    "file": "data/index/api.json",
-   "sha256": "b61c666dc2e8c9639f161806d5c9c8f56575cd6a376a0c2cd58519d3fe3a1978",
-   "bytes": 683
+   "sha256": "674e16cd0839155372e0a6ea75071a973db34b7fc2112dd1042933f358b48369",
+   "bytes": 486
   },
   {
    "file": "data/index/changelog.json",
@@ -434,8 +459,8 @@
   },
   {
    "file": "data/index/characters-index.json",
-   "sha256": "da0714a438f7f7634c8c3e1ce8debefbd6045a0799a83087e0ab8e6f7c66e27c",
-   "bytes": 2938428
+   "sha256": "bf805f7b887637affcaf834f9c80746d73747002c832d53707258f8cfdbbe97a",
+   "bytes": 3037062
   },
   {
    "file": "data/index/comic-record-example.json",
@@ -444,8 +469,8 @@
   },
   {
    "file": "data/index/comics-catalog.json",
-   "sha256": "3740385b7f6d3d012c993404ca6f61872fb58cbc34508da934e89098b50890f1",
-   "bytes": 965501
+   "sha256": "9604ec97f264bda6475a1e982614e7c56a32eeb22f28bc3ab01172da8807cfef",
+   "bytes": 1026296
   },
   {
    "file": "data/index/comics-manifest.json",
@@ -459,8 +484,8 @@
   },
   {
    "file": "data/index/comics.idx.json.gz",
-   "sha256": "240a140831aa5bfd51bccd6a9fc8d1ac35aac5b5abcd710477263dea9cc53665",
-   "bytes": 548682
+   "sha256": "943e5445bc23245c261d3a07bef3172382610d4e190f20f0d1985c556e16dc39",
+   "bytes": 582576
   },
   {
    "file": "data/index/event-schema.json",
@@ -469,18 +494,18 @@
   },
   {
    "file": "data/index/events-index.json",
-   "sha256": "c2c2bf32cab2cdf5c8230add8b254a9f518aa9063838b09e53f3fc4219eef9ac",
+   "sha256": "999c0f357ed8b43f7d5350af5e02ecbfe9dc7aa823575ab57ede4aada20c4636",
    "bytes": 4665
   },
   {
    "file": "data/index/hash-manifest.json",
-   "sha256": "a82c7c7d943837a6577a8330ec2fafe3e687f8f3d724da20d8ddd55f1bf1977b",
-   "bytes": 15484
+   "sha256": "fc7d786bd42e7361fdf49709dff7b6222d52239e6ea0175464dc2ed823bc36d2",
+   "bytes": 15640
   },
   {
    "file": "data/index/hashes.json.gz",
-   "sha256": "9304d5c3e663bfa1f66ab30650361f9ad070939a17b45d895bb2ff43b5bdda24",
-   "bytes": 335105
+   "sha256": "d00f50af8155aa9f5002b17c9cfa589fcf656069bdd070ed7afe8bd09afce153",
+   "bytes": 355932
   },
   {
    "file": "data/index/hero-schema.json",
@@ -489,12 +514,12 @@
   },
   {
    "file": "data/index/heroes-index.json",
-   "sha256": "c6de6c7c9502d0798a864fbf472cbb03c2486f697ff29e01b400844a001f1e39",
+   "sha256": "676fcbeccf6440d3ef14d94995b8fbd3310453d35492c9ab15f1da1cf4a2ea66",
    "bytes": 16262
   },
   {
    "file": "data/index/series-index.json",
-   "sha256": "1cffabc3935de436bff0ede09f8df2660e2fba7faa03b4345ee4075781acfe22",
+   "sha256": "63b2f0f496ec347b5a177806ef39c04055509e6e3c512114ad78d8fa67c8f93c",
    "bytes": 6012
   },
   {
