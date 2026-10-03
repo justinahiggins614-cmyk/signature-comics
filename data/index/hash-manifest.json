@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03T18:23:20Z",
+ "generated": "2026-10-03T20:23:29Z",
  "schema_version": "1.0",
  "files": [
   {
@@ -9,7 +9,7 @@
   },
   {
    "file": "data/state.json",
-   "sha256": "68ca15ebf322085a6d59a37b8212f7ad408d6fefef5c611d5a22b4c289ac8746",
+   "sha256": "f692cf9da4b5c1d1461ebda93183c9cb77919f3025e412ffaf55dbd2f1839635",
    "bytes": 20
   },
   {
@@ -388,9 +388,34 @@
    "bytes": 26468
   },
   {
+   "file": "data/volumes/comics-c00076.json.gz",
+   "sha256": "5a211d569e08723fda20aaacd13c62c46131fbf86ee57cca478cc6977aeb6365",
+   "bytes": 25492
+  },
+  {
+   "file": "data/volumes/comics-c00077.json.gz",
+   "sha256": "3cb4869b86dc5e2e125d8e3a1bb47815671c6ec16a7491cda4cd863534a749e6",
+   "bytes": 26122
+  },
+  {
+   "file": "data/volumes/comics-c00078.json.gz",
+   "sha256": "adea1b59d3f0e03c2a827af753b6820525b4150f9955dab3ce72bc3d600011a1",
+   "bytes": 25868
+  },
+  {
+   "file": "data/volumes/comics-c00079.json.gz",
+   "sha256": "c14cf877109eea10683044834bf97245292af4f49229508491d70495d99b8701",
+   "bytes": 25958
+  },
+  {
+   "file": "data/volumes/comics-c00080.json.gz",
+   "sha256": "b211dcedd24d3568326ea81593312aba6350e28e7805d746e66a45046de9e7c5",
+   "bytes": 25629
+  },
+  {
    "file": "data/index/api.json",
-   "sha256": "3f12ea06968acaab1c8239cd0a6735cffbf7757efaad7bc5f61a1dd23e43cb8d",
-   "bytes": 478
+   "sha256": "eb993c37d26b63cf7f85b4f6117487e39b63f566fbce2dfe1070fbe3bb579b61",
+   "bytes": 486
   },
   {
    "file": "data/index/changelog.json",
@@ -404,8 +429,8 @@
   },
   {
    "file": "data/index/characters-index.json",
-   "sha256": "be4507da7cc7407fcc7361f8943c3eab762c4d990a3177313b4e531876cbc84b",
-   "bytes": 2838742
+   "sha256": "da0714a438f7f7634c8c3e1ce8debefbd6045a0799a83087e0ab8e6f7c66e27c",
+   "bytes": 2938428
   },
   {
    "file": "data/index/comic-record-example.json",
@@ -414,12 +439,12 @@
   },
   {
    "file": "data/index/comics-catalog.json",
-   "sha256": "f8ccce378b5cdccc0b6ccb106e68fdfe3b4473091583038c9ac5f52cad0557a8",
-   "bytes": 905141
+   "sha256": "3740385b7f6d3d012c993404ca6f61872fb58cbc34508da934e89098b50890f1",
+   "bytes": 965501
   },
   {
    "file": "data/index/comics-manifest.json",
-   "sha256": "9dd000ae7f3208a83fce6764f2fa79adf4ef66982c0acd09d03de24889ff586f",
+   "sha256": "8c4d97381e1ab3c88bb80709ba7291d96ed936d894325a46ad06fced88dc9908",
    "bytes": 2226
   },
   {
@@ -429,8 +454,8 @@
   },
   {
    "file": "data/index/comics.idx.json.gz",
-   "sha256": "4390fd1827fd1d5ae1f35c547b484cf1f075e048709ef391a426327320843aee",
-   "bytes": 515247
+   "sha256": "f720e91aef05396b488b21862112b2acdcc8032deaedc16a19f2641fb09bac5e",
+   "bytes": 549168
   },
   {
    "file": "data/index/event-schema.json",
@@ -439,18 +464,18 @@
   },
   {
    "file": "data/index/events-index.json",
-   "sha256": "f86f4d19ad9c702417a6807ff5d6c3dd6c1b161ce97ee3176b4905dd0edfc3fc",
+   "sha256": "c2c2bf32cab2cdf5c8230add8b254a9f518aa9063838b09e53f3fc4219eef9ac",
    "bytes": 4665
   },
   {
    "file": "data/index/hash-manifest.json",
-   "sha256": "645eb5ed50bb6e7d0fc3eafbc7b64b2f6da624025ecac0afaed9221302d3919b",
-   "bytes": 13914
+   "sha256": "7423ccb031a0871820c68ed71fba964fe4f511c84b1c476c818e04357ce8af64",
+   "bytes": 14699
   },
   {
    "file": "data/index/hashes.json.gz",
-   "sha256": "3734dbed81f857e219fe7e25ce2715c4b88617b43e226cdc70d573d4da2e563e",
-   "bytes": 314225
+   "sha256": "9304d5c3e663bfa1f66ab30650361f9ad070939a17b45d895bb2ff43b5bdda24",
+   "bytes": 335105
   },
   {
    "file": "data/index/hero-schema.json",
@@ -459,13 +484,13 @@
   },
   {
    "file": "data/index/heroes-index.json",
-   "sha256": "e5eaf3a1ed0ff5f3c090ca200f32ed3402c11d17912ae12893a803713110e5a6",
+   "sha256": "c6de6c7c9502d0798a864fbf472cbb03c2486f697ff29e01b400844a001f1e39",
    "bytes": 16262
   },
   {
    "file": "data/index/series-index.json",
-   "sha256": "826417208d206467621dc798de871b66f8da20b0af32c607c8c6373183879576",
-   "bytes": 6004
+   "sha256": "1cffabc3935de436bff0ede09f8df2660e2fba7faa03b4345ee4075781acfe22",
+   "bytes": 6012
   },
   {
    "file": "data/index/series-schema.json",
