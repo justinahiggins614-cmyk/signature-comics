@@ -3,6 +3,10 @@
    the main inline script. Uses globals from index.html: $, esc,
    figureSVG, rdSpeak, copyText, download, rdStop. */
 var HEROES = null, HEROES_P = null;
+var _scrollLocks=0;
+function lockScroll(){_scrollLocks++;document.body.style.overflow="hidden"}
+function unlockScroll(){_scrollLocks=Math.max(0,_scrollLocks-1);if(!_scrollLocks)document.body.style.overflow=""}
+
 
 function loadHeroes() {
   if (HEROES) return Promise.resolve(HEROES);
@@ -259,10 +263,10 @@ function renderMyHeroes() {
     var m = myHeroes(); m.splice(+b.dataset.del, 1); saveMyHeroes(m); renderMyHeroes(); }; });
 }
 function wireCreator() {
-  $("creatorBtn").onclick = function () { $("creatorModal").classList.add("show"); creatorPreview(); };
-  $("chClose").onclick = function () { $("creatorModal").classList.remove("show"); };
+  $("creatorBtn").onclick = function () { $("creatorModal").classList.add("show"); lockScroll(); creatorPreview(); };
+  $("chClose").onclick = function () { $("creatorModal").classList.remove("show"); unlockScroll(); };
   $("creatorModal").addEventListener("click", function (e) {
-    if (e.target === $("creatorModal")) $("creatorModal").classList.remove("show");
+    if (e.target === $("creatorModal")) { $("creatorModal").classList.remove("show"); unlockScroll(); }
   });
   $("chPreview").onclick = creatorPreview;
   var prev = ["chCodename", "chSuit", "chCape"];
@@ -272,7 +276,7 @@ function wireCreator() {
   $("chSave").onclick = function () {
     var h = creatorRecord(), mine = myHeroes();
     mine.push(h); saveMyHeroes(mine); renderMyHeroes();
-    $("creatorModal").classList.remove("show");
+    $("creatorModal").classList.remove("show"); unlockScroll();
     download(h.id + ".txt", heroText(h), "text/plain");
     location.hash = "#hero=" + h.id;
   };
