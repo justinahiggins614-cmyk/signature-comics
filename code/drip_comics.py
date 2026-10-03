@@ -159,6 +159,10 @@ def main():
     have = {r["id"] for r in idx}
 
     recs, new_rows = [], []
+    # Flush on CHUNK BOUNDARIES, not every CHUNK records: if next_index is not
+    # chunk-aligned, a fixed-size flush writes records into the wrong chunk
+    # file while the index stamps (i-1)//CHUNK+1 (2026-10-03: this exact bug
+    # misfiled 480 issues across chunks 61-80 and dropped chunk 81).
     for i in range(start, start + args.n):
         rec = make_issue(i)
         g = G(SALT + i + 777000)  # separate stream for sanitizer draws
@@ -183,12 +187,20 @@ def main():
         row["chunk"] = (i - 1) // CHUNK + 1
         new_rows.append(row)
         have.add(rec["id"])
-        # flush full chunks as we go
-        if len(recs) == CHUNK:
+        # flush when the next issue crosses into a new chunk
+        if (i // CHUNK) != ((i - 1) // CHUNK):
             write_chunk(recs)
             recs = []
     if recs:
         write_chunk(recs)
+
+    # chunk-integrity gate: every new row's chunk file must contain its ID
+    _chk = {}
+    for row in new_rows:
+        c = row["chunk"]
+        if c not in _chk:
+            _chk[c] = {r["id"] for r in json.load(gzip.open(chunk_path((c - 1) * CHUNK + 1), "rt", encoding="utf-8"))}
+        assert row["id"] in _chk[c], "chunk misfile: %s not in chunk %d" % (row["id"], c)
 
     idx.extend(new_rows)
     save_idx(idx)
