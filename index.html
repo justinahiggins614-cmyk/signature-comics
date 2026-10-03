@@ -180,6 +180,21 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 #rdDrawer.show{display:flex}
 #rdDrawer button{background:var(--card);border:2px solid var(--line);color:var(--mut);border-radius:6px;min-width:40px;padding:6px;font-weight:700}
 #rdDrawer button.on{background:var(--red);color:#fff;border-color:#000}
+/* creator workflow + search-type extras + permanent IDs */
+.creatorsteps{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin:10px 0;font-size:.78em;font-weight:700}
+.creatorsteps span{padding:4px 10px;border-radius:14px;background:#0a0f1e;border:2px solid #2a3a5f;color:#9fc2ff}
+.creatorsteps span.on{background:var(--yel);color:#1a1206;border-color:#000}
+.creatorsteps span.done{background:#1c4d2a;color:#bff0c9;border-color:#2a6a3f}
+.origbadge{display:inline-block;background:var(--yel);color:#1a1206;font-weight:900;font-size:.72em;padding:3px 10px;border-radius:4px;letter-spacing:.06em;border:2px solid #000;margin-bottom:6px}
+.creatorwarn{background:#3a0f0a;border:3px solid var(--red);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:.9em;color:#ffeedd;text-align:left}
+.permid{font-size:.82em;color:var(--mut);margin:8px 0}
+.permid b{color:var(--yel)}
+.permid span{color:#9fc2ff;word-break:break-all}
+#searchextras{padding:2px 0 4px}
+.exsect{margin:8px 0;text-align:center}
+.exsect b{color:var(--yel);font-size:.82em;letter-spacing:.08em;margin-right:6px}
+.exbtn{background:var(--card);border:2px solid var(--line);color:var(--paper);border-radius:16px;padding:5px 12px;margin:3px;font-family:inherit;font-weight:700;font-size:.8em;cursor:pointer}
+.exbtn:hover{border-color:var(--yel)}
 </style>
 </head>
 <body>
@@ -189,7 +204,7 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 
 <div id="home">
 <header class="hero wrap">
-<div class="kicker">SITE 13 OF 24 · GRAND OPENING</div>
+<div class="kicker">SITE 13 OF 25 · GRAND OPENING</div>
 <h1>THE SIGNATURE <span class="y">COMIC STORE</span></h1>
 <div class="sub">Original Signature comics — original series, original heroes, original stories. Cover first, then the pages.</div>
 <details class="statdrop" open><summary class="statsum">📊 Shelf counts — tap to hide</summary>
@@ -219,19 +234,22 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 <div class="az" id="az"></div>
 </div></div>
 
-<div class="wrap"><div id="results"><div class="loading">Opening the long boxes…</div></div></div>
+<div class="wrap"><div id="searchextras"></div><div id="results"><div class="loading">Opening the long boxes…</div></div></div>
 
 <div class="wrap" style="text-align:center;margin:36px auto;max-width:700px">
 <h2 class="secttl" style="margin-top:0">🦸✨ THE HERO CREATOR</h2>
 <p class="sectsub">Make your OWN comic hero — name, powers, look, origin — and even your OWN series, with your name on it. Saved on your device, downloadable to keep.</p>
 <button class="btn big" id="creatorBtn">🦸 OPEN THE HERO CREATOR</button>
 <div id="myHeroes" style="text-align:left;margin-top:14px"></div>
+<div id="seriesMsg" class="matchline" aria-live="polite"></div>
+<div id="mySeries" style="text-align:left;margin-top:14px"></div>
 </div>
 </div>
 
 <div id="creatorModal" role="dialog" aria-label="Hero creator">
 <div id="creatorBox">
 <h2>🦸✨ HERO CREATOR</h2>
+<div id="creatorSteps" class="creatorsteps" aria-label="Creator workflow steps"></div>
 <p class="sectsub">Design a Signature-original hero. Nothing here uses anyone else's characters — this one is <b>yours</b>.</p>
 <label for="chCodename">Hero codename</label>
 <input id="chCodename" maxlength="60" placeholder="e.g. LANTERNHAWK">
@@ -262,10 +280,14 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 <label for="chBy">Created by (your name)</label>
 <input id="chBy" maxlength="60" placeholder="Your name here">
 <div id="creatorPrev"></div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center">
 <button class="btn" id="chPreview">👁 Preview</button>
-<button class="btn big" id="chSave">💾 Save hero</button>
+<button class="btn" id="chEdit">✎ Edit</button>
+<button class="btn big" id="chSave">💾 Save</button>
+<button class="btn" id="chDownload">⬇ Download</button>
+<button class="btn" id="chStartSeries">🚀 Start series</button>
 <button class="btn" id="chClose">Close</button>
+<span id="saveMsg" class="matchline" aria-live="polite"></span>
 </div>
 </div>
 </div>
@@ -502,7 +524,7 @@ function titleKey(t){return String(t).replace(/^(The|A|An)\s+/i,"")}
 function applyFilters(){
   var q=$("q").value.trim().toLowerCase(), s=$("series").value,
       so=$("sort").value, az=azVal();
-  syncPills();
+  syncPills();updateSearchExtras();
   FILTERED=IDX.filter(function(b){
     if(s&&b.s!==s)return false;
     if(az){var k=titleKey(b.t).charAt(0).toUpperCase();if(az==="#"){if(!/[0-9]/.test(k))return false}else if(k!==az)return false}
@@ -512,6 +534,43 @@ function applyFilters(){
   else if(so==="series")FILTERED.sort(function(a,b){return (a.sk<b.sk?-1:1)||(a.n-b.n)});
   else FILTERED.sort(function(a,b){return b.id<a.id?-1:1});
   SHOWN=0;render();
+}
+/* search distinguishes ISSUE vs HERO vs SERIES hits */
+function updateSearchExtras(){
+  var box=$("searchextras");if(!box)return;
+  var q=$("q").value.trim().toLowerCase();
+  if(q.length<2){box.innerHTML="";return}
+  var out="";
+  var sm=Object.keys(SNAME).filter(function(k){
+    return SNAME[k].toLowerCase().indexOf(q)>=0||(SDESC[k]||"").toLowerCase().indexOf(q)>=0});
+  if(sm.length)out+='<div class="exsect"><b>SERIES</b> '+sm.map(function(k){
+    return '<button class="exbtn" data-series="'+esc(SNAME[k])+'">SERIES &middot; '+esc(SNAME[k])+'</button>'}).join("")+'</div>';
+  var cs=(typeof mySeries==="function"?mySeries():[]).filter(function(s){
+    return String(s.name).toLowerCase().indexOf(q)>=0});
+  if(cs.length)out+='<div class="exsect"><b>YOUR SERIES</b> '+cs.map(function(s){
+    return '<button class="exbtn" data-cseries="'+esc(s.name)+'">YOUR SERIES &middot; '+esc(s.name)+'</button>'}).join("")+'</div>';
+  box.innerHTML=out;
+  if(typeof loadHeroes!=="function")return;
+  loadHeroes().then(function(hs){
+    var cur=$("q").value.trim().toLowerCase();
+    if(cur!==q)return; /* query moved on */
+    var hm=hs.filter(function(h){
+      return h.code.toLowerCase().indexOf(cur)>=0||h.name.toLowerCase().indexOf(cur)>=0}).slice(0,6);
+    var mine=(typeof myHeroes==="function"?myHeroes():[]).filter(function(h){
+      return h.code.toLowerCase().indexOf(cur)>=0}).slice(0,4);
+    var hh="";
+    if(hm.length)hh+='<div class="exsect"><b>HEROES</b> '+hm.map(function(h){
+      return '<button class="exbtn" data-hero="'+esc(h.id)+'">HERO &middot; '+esc(h.code)+'</button>'}).join("")+'</div>';
+    if(mine.length)hh+='<div class="exsect"><b>YOUR HEROES</b> '+mine.map(function(h){
+      return '<button class="exbtn" data-hero="'+esc(h.id)+'">YOUR HERO &middot; '+esc(h.code)+'</button>'}).join("")+'</div>';
+    box.innerHTML=out+hh;
+    box.querySelectorAll("[data-hero]").forEach(function(b){
+      b.onclick=function(){location.hash="#hero="+b.dataset.hero}});
+    box.querySelectorAll("[data-series]").forEach(function(b){
+      b.onclick=function(){$("series").value=b.dataset.series;applyFilters()}});
+    box.querySelectorAll("[data-cseries]").forEach(function(b){
+      b.onclick=function(){var el=document.getElementById("mySeries");if(el)el.scrollIntoView()}});
+  }).catch(function(){});
 }
 function render(){
   var box=$("results");
@@ -595,9 +654,11 @@ function renderIssue(rec){
    '<div class="iv-top"><div class="iv-cover">'+coverSVG({id:rec.id,t:rec.title,sk:rec.skey,n:rec.num})+"</div>"+
    '<div class="iv-info"><h1>'+esc(rec.title)+"</h1>"+
    '<div class="byline">'+esc(rec.series)+" #"+rec.num+" · "+esc(rec.id)+' · by '+esc("Justin Addam Higgins")+"</div>"+
+   '<div class="permid">🆔 Permanent ID: <b>'+esc(rec.id)+'</b> · 🔗 Shareable link: <span>'+esc("https://justinahiggins614-cmyk.github.io/signature-comics/?issue="+rec.id)+"</span></div>"+
    '<div class="chips"><span class="chip">'+esc(rec.series)+'</span><span class="chip">Issue #'+rec.num+'</span><span class="chip">'+rec.pages.length+' pages</span><span class="chip">'+rec.words+' words</span><span class="chip">Signature original</span></div>'+
    '<div class="actions"><button class="btn red" id="rdbtn">🔊 Read aloud</button>'+
    '<button class="btn" id="readbtn">📖 Reader</button>'+
+   '<button class="btn ghost" id="sharebtn">🔗 Share</button>'+
    '<button class="btn ghost" id="copybtn">⧉ Copy story</button>'+
    '<button class="btn ghost" id="dlbtn">⬇ Download .txt</button>'+
    '<button class="btn ghost" id="dljson">⬇ .json</button>'+
@@ -617,6 +678,14 @@ function renderIssue(rec){
    '<p><a href="#">← Back to the racks</a></p></div>';
   $("rdbtn").onclick=function(){rdSpeak(CURTEXT)};
   $("readbtn").onclick=openReader;
+  $("sharebtn").onclick=function(){
+    var u="https://justinahiggins614-cmyk.github.io/signature-comics/?issue="+rec.id;
+    var done=function(ok){$("sharebtn").textContent=ok?"✓ Link copied":"Copy failed";
+      setTimeout(function(){$("sharebtn").textContent="🔗 Share"},1800)};
+    if(navigator.clipboard&&navigator.clipboard.writeText)
+      navigator.clipboard.writeText(u).then(function(){done(true)},function(){done(false)});
+    else done(false);
+  };
   $("copybtn").onclick=function(){copyText(CURTEXT,"copybtn")};
   $("dlbtn").onclick=function(){download(rec.id+".txt",CURTEXT,"text/plain")};
   $("dljson").onclick=function(){download(rec.id+".json",JSON.stringify(rec,null,1),"application/json")};

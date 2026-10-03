@@ -23,6 +23,52 @@ function saveMyHeroes(a) {
   try { localStorage.setItem("sigcomics_myheroes", JSON.stringify(a)); }
   catch (e) {}
 }
+/* Famous-character guard: the store only publishes ORIGINAL Signature
+   characters. If a user types a famous name we EXPLAIN what happens and
+   offer original alternatives — never silently alter it. */
+var FAMOUS = ("superman,batman,spiderman,wonderwoman,ironman,captainamerica,hulk,thor," +
+ "flash,aquaman,greenlantern,wolverine,deadpool,xmen,avengers,justiceleague,joker,thanos," +
+ "darthvader,lukeskywalker,harrypotter,goku,naruto,pikachu,mario,sonic,zelda,kratos," +
+ "masterchief,geralt,optimusprime,bumblebee,godzilla,dracula,frankenstein,sherlockholmes," +
+ "jamesbond,indianajones,terminator,robocop,predator,spongebob,shrek,elsa,moana,mulan," +
+ "cinderella,peterpan,scoobydoo,garfield,snoopy,hellokitty,mickeymouse,transformers," +
+ "powerrangers,tmnt,ghostbusters,heman,thundercats,gijoe,sephiroth,cloudstrife").split(",");
+function normName(s) { return String(s || "").toLowerCase().replace(/[^a-z]/g, ""); }
+function famousHit(name) {
+  var n = normName(name);
+  if (!n) return null;
+  for (var i = 0; i < FAMOUS.length; i++) if (n === FAMOUS[i]) return FAMOUS[i];
+  return null;
+}
+function suggestNames(seed) {
+  var h = 0, i;
+  for (i = 0; i < seed.length; i++) h = ((h * 31) + seed.charCodeAt(i)) >>> 0;
+  var A = ["AE","VO","KY","ZE","THA","MI","SO","RA","LU","KA"],
+      B = ["RI","LO","NA","THE","DA","RO"],
+      C = ["ON","IX","ARA","EUS","OR","IA"], out = [];
+  for (i = 0; i < 3; i++) {
+    h = ((h * 1103515245) + 12345) >>> 0;
+    out.push(A[h % 10] + B[(h >> 4) % 6] + C[(h >> 8) % 6]);
+  }
+  return out;
+}
+/* My Series: reader-started series, stored on-device. */
+function mySeries() {
+  try { return JSON.parse(localStorage.getItem("sigcomics_myseries") || "[]"); }
+  catch (e) { return []; }
+}
+function saveMySeries(a) {
+  try { localStorage.setItem("sigcomics_myseries", JSON.stringify(a)); }
+  catch (e) {}
+}
+function upsertSeries(h) {
+  var all = mySeries(), s = null, i;
+  for (i = 0; i < all.length; i++) if (all[i].name === h.series) s = all[i];
+  if (!s) { s = { name: h.series, heroIds: [], by: h.by }; all.push(s); }
+  if (s.heroIds.indexOf(h.id) < 0) s.heroIds.push(h.id);
+  saveMySeries(all);
+  return s;
+}
 function heroById(id) {
   if (HEROES) for (var i = 0; i < HEROES.length; i++)
     if (HEROES[i].id === id) return HEROES[i];
@@ -47,7 +93,7 @@ function heroPortraitSVG(h, size) {
    'font-weight="900" font-family="Arial Black,sans-serif">' + esc(h.code) + '</text></svg>';
 }
 function heroText(h) {
-  return h.code + " — " + h.archetype + ". Real name: " + h.name +
+  return "\u2726 ORIGINAL SIGNATURE CHARACTER \u2726\n" + h.code + " — " + h.archetype + ". Real name: " + h.name +
    ". Powers: " + h.powers.join(", ") + ". Look: " + h.look.desc +
    " Backstory: " + h.backstory + " Series: " + h.series + ". " + h.note +
    (h.by ? " Created by " + h.by + "." : "");
@@ -143,7 +189,7 @@ function renderHero(h) {
    '<div class="chips"><span class="chip">' + esc(h.archetype) + '</span>' +
      '<span class="chip">' + esc(h.series) + '</span>' +
      '<span class="chip">Signature original</span>' +
-     (my ? '<span class="chip">Fan-made</span>' : '') + '</div>' +
+     (my ? '<span class="chip">Fan-made</span><span class="chip">\u2726 Original Signature character</span>' : '') + '</div>' +
    '<div class="actions"><button class="btn red" id="hrdbtn">&#128266; Read aloud</button>' +
    '<button class="btn ghost" id="hcopybtn">&#10697; Copy file</button>' +
    '<button class="btn ghost" id="hdlbtn">&#11015; Download .txt</button>' +
@@ -221,7 +267,8 @@ function creatorRecord() {
   var lookTxt = $("chLook").value.trim() ||
     ("A hero in a " + $("chSuit").value + " suit with " + $("chCape").value + " accents.");
   return {
-    id: "JAH-HERO-CUSTOM-" + Date.now().toString(36).toUpperCase(),
+    id: "JAH-HERO-CUSTOM-" + Date.now().toString(36).toUpperCase() +
+        Math.floor(Math.random() * 46656).toString(36).toUpperCase(),
     code: code, name: $("chName").value.trim() || "Unknown",
     archetype: $("chArch").value, powers: powers,
     look: { desc: lookTxt, suit: $("chSuit").value, cape: $("chCape").value },
@@ -233,11 +280,78 @@ function creatorRecord() {
   };
 }
 function creatorPreview() {
-  var h = creatorRecord();
-  $("creatorPrev").innerHTML = heroPortraitSVG(h, 0.7) +
-   '<div style="margin-top:6px"><b style="color:var(--yel)">' + esc(h.code) + '</b>' +
+  setStep(2);
+  var h = creatorRecord(), warn = "";
+  var hit = famousHit(h.code) || famousHit(h.name);
+  if (hit) {
+    var sug = suggestNames(h.code + h.name);
+    warn = '<div class="creatorwarn"><b>\u26a0 That name is taken.</b> &ldquo;' + esc(h.code) +
+     '&rdquo; matches a famous character from another publisher. The Comic Store only publishes ' +
+     '<b>original Signature characters</b> \u2014 your idea is safe (powers, look, and origin are untouched), ' +
+     'but the name has to be original. Pick a suggestion, or type a new name above and preview again:' +
+     '<div style="margin-top:8px">' + sug.map(function (s) {
+       return '<button class="btn ghost" data-sug="' + s + '">' + s + '</button>';
+     }).join(" ") + '</div></div>';
+  }
+  $("creatorPrev").innerHTML = warn + heroPortraitSVG(h, 0.7) +
+   '<div style="margin-top:6px"><span class="origbadge">\u2726 ORIGINAL SIGNATURE CHARACTER</span><br>' +
+   '<b style="color:var(--yel)">' + esc(h.code) + '</b>' +
    '<div class="arch">' + esc(h.archetype) + '</div>' +
    (h.by ? '<div class="arch">Created by ' + esc(h.by) + '</div>' : '') + '</div>';
+  var bs = $("creatorPrev").querySelectorAll("[data-sug]");
+  for (var i = 0; i < bs.length; i++) (function (b) {
+    b.onclick = function () { $("chCodename").value = b.dataset.sug; creatorPreview(); };
+  })(bs[i]);
+}
+/* Creator workflow steps: Create -> Preview -> Edit -> Save -> Download -> Start series */
+var CSTEPS = ["Create", "Preview", "Edit", "Save", "Download", "Start series"];
+function setStep(n) {
+  var box = $("creatorSteps");
+  if (!box) return;
+  box.innerHTML = CSTEPS.map(function (s, i) {
+    return '<span class="' + (i + 1 === n ? "on" : (i + 1 < n ? "done" : "")) + '">' +
+      (i + 1) + ". " + s + "</span>";
+  }).join(" \u2192 ");
+}
+function renderMySeries() {
+  var box = $("mySeries");
+  if (!box) return;
+  var all = mySeries();
+  if (!all.length) {
+    box.innerHTML = '<p class="sectsub">No series yet \u2014 start one from the Hero Creator.</p>';
+    return;
+  }
+  box.innerHTML = '<h3 style="color:var(--yel)">\uD83D\uDCDA Your series (' + all.length + ')</h3>' +
+   all.map(function (s, i) {
+    var heroesHtml = s.heroIds.map(function (id) {
+      var h = heroById(id);
+      return h ? '<button class="btn ghost" data-sh="' + esc(id) + '">' + esc(h.code) + '</button>' : "";
+    }).join(" ");
+    return '<div class="myhero"><div><b>' + esc(s.name) + '</b><br>' +
+     '<span style="color:var(--mut);font-size:.85em">' + s.heroIds.length +
+     ' hero' + (s.heroIds.length === 1 ? "" : "es") + '</span>' +
+     '<div class="sheros" style="margin-top:6px;display:none">' + heroesHtml + '</div></div>' +
+     '<div><button class="btn ghost" data-sopen="' + i + '">Open</button> ' +
+     '<button class="btn ghost" data-sdel="' + i + '">\u2715</button></div></div>';
+   }).join("");
+  function each(sel, fn) {
+    var qs = box.querySelectorAll(sel);
+    for (var k = 0; k < qs.length; k++) (function (b) { fn(b); })(qs[k]);
+  }
+  each("[data-sopen]", function (b) {
+    b.onclick = function () {
+      var card = b.parentNode.parentNode, d = card.querySelector(".sheros");
+      if (d) d.style.display = (d.style.display === "none" ? "block" : "none");
+    };
+  });
+  each("[data-sh]", function (b) {
+    b.onclick = function () { var h = heroById(b.dataset.sh); if (h) openCustomHero(h); };
+  });
+  each("[data-sdel]", function (b) {
+    b.onclick = function () {
+      var a = mySeries(); a.splice(+b.dataset.sdel, 1); saveMySeries(a); renderMySeries();
+    };
+  });
 }
 function renderMyHeroes() {
   var mine = myHeroes(), box = $("myHeroes");
@@ -263,7 +377,9 @@ function renderMyHeroes() {
     var m = myHeroes(); m.splice(+b.dataset.del, 1); saveMyHeroes(m); renderMyHeroes(); }; });
 }
 function wireCreator() {
-  $("creatorBtn").onclick = function () { $("creatorModal").classList.add("show"); lockScroll(); creatorPreview(); };
+  $("creatorBtn").onclick = function () {
+    $("creatorModal").classList.add("show"); lockScroll(); setStep(1); creatorPreview();
+  };
   $("chClose").onclick = function () { $("creatorModal").classList.remove("show"); unlockScroll(); };
   $("creatorModal").addEventListener("click", function (e) {
     if (e.target === $("creatorModal")) { $("creatorModal").classList.remove("show"); unlockScroll(); }
@@ -273,12 +389,53 @@ function wireCreator() {
   for (var i = 0; i < prev.length; i++) (function (id) {
     $(id).addEventListener("input", creatorPreview);
   })(prev[i]);
+  $("chEdit").onclick = function () {
+    setStep(3);
+    $("creatorBox").scrollTop = 0;
+    var f = $("chCodename");
+    if (f) f.focus();
+  };
   $("chSave").onclick = function () {
-    var h = creatorRecord(), mine = myHeroes();
+    var h = creatorRecord();
+    if (famousHit(h.code) || famousHit(h.name)) {
+      creatorPreview(); /* shows the taken-name explainer; nothing saved silently */
+      var w = $("creatorPrev");
+      if (w && w.scrollIntoView) w.scrollIntoView();
+      return;
+    }
+    setStep(4);
+    var mine = myHeroes();
     mine.push(h); saveMyHeroes(mine); renderMyHeroes();
-    $("creatorModal").classList.remove("show"); unlockScroll();
+    upsertSeries(h); renderMySeries();
+    var m = $("saveMsg");
+    if (m) { m.textContent = "\u2713 Saved to My Heroes."; setTimeout(function () { m.textContent = ""; }, 2500); }
+  };
+  $("chDownload").onclick = function () {
+    setStep(5);
+    var h = creatorRecord();
     download(h.id + ".txt", heroText(h), "text/plain");
-    location.hash = "#hero=" + h.id;
+  };
+  $("chStartSeries").onclick = function () {
+    var h = creatorRecord();
+    if (famousHit(h.code) || famousHit(h.name)) {
+      creatorPreview(); setStep(2);
+      return;
+    }
+    setStep(6);
+    var mine = myHeroes(), found = false, j;
+    for (j = 0; j < mine.length; j++) if (mine[j].id === h.id) found = true;
+    if (!found) { mine.push(h); saveMyHeroes(mine); renderMyHeroes(); }
+    var s = upsertSeries(h); renderMySeries();
+    $("creatorModal").classList.remove("show"); unlockScroll();
+    var el = document.getElementById("mySeries");
+    if (el && el.scrollIntoView) el.scrollIntoView();
+    var msg = $("seriesMsg");
+    if (msg) {
+      msg.textContent = "\uD83D\uDE80 Series \u201c" + s.name + "\u201d started \u2014 " +
+        h.code + " stars in issue #1.";
+      setTimeout(function () { msg.textContent = ""; }, 5000);
+    }
   };
   renderMyHeroes();
+  renderMySeries();
 }
