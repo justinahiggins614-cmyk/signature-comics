@@ -7,6 +7,39 @@ var _scrollLocks=0;
 function lockScroll(){_scrollLocks++;document.body.style.overflow="hidden"}
 function unlockScroll(){_scrollLocks=Math.max(0,_scrollLocks-1);if(!_scrollLocks)document.body.style.overflow=""}
 
+/* ===== JAH NETWORK 10-FIX shared record helpers (additive) =====
+   Used by hero-catalog.js AND index.html's inline script. */
+var JN_ENGINE_LINE="<b>Engine:</b> Signature Llama (live where available) with the built-in JAHtalk on-device fallback — it always answers.";
+function jnBadgeHTML(label){return '<div style="margin:6px 0"><span class="stbadge">'+esc(label)+'</span></div>'}
+function jnPanelHTML(id,ver){return '<div class="recpanel" role="group" aria-label="Record actions"><span class="rpid">'+esc(id)+'</span><span class="rpver">'+esc(ver||"v1.0")+'</span>'+
+ '<button data-rp="open">OPEN</button><button data-rp="src">SOURCE</button><button data-rp="share">SHARE</button>'+
+ '<button data-rp="copy">COPY</button><button data-rp="dl">DOWNLOAD</button><button data-rp="read">READ ALOUD</button></div>'}
+function jnProvHTML(text){return '<div class="prov">Provenance: '+esc(text)+'</div>'}
+function jnAICardHTML(prof){
+  var duties=(prof.abilities||[]).map(function(x){return esc(x)}).join("; ");
+  return '<div class="jaicard"><b>🤖 AI IDENTITY</b><br><b>Name:</b> '+esc(prof.name||"AI assistant")+' — '+esc(prof.description||"")+
+   (duties?'<br><b>Duties:</b> '+duties:"")+'<br>'+JN_ENGINE_LINE+'</div>';
+}
+function jnShareLink(url){
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(function(){alert("Link copied.")},function(){prompt("Copy this link:",url)});}
+  else prompt("Copy this link:",url);
+}
+function jnWireHeroPanel(h){
+  var panel=document.querySelector("#heroview .recpanel");if(!panel)return;
+  var deep="https://justinahiggins614-cmyk.github.io/signature-comics/?hero="+encodeURIComponent(h.id);
+  panel.querySelectorAll("button").forEach(function(b){
+    var a=b.getAttribute("data-rp");
+    b.onclick=function(){
+      if(a==="open"){location.hash="#hero="+h.id;}
+      else if(a==="src"){if(!panel.querySelector(".srcnote")){var sn=document.createElement("span");sn.className="srcnote";sn.style.color="var(--mut)";sn.textContent="Source: "+(h.custom?"created in the on-site Hero Creator — saved on this device only":"Comic Store hero catalog · data/heroes.json");panel.appendChild(sn);}}
+      else if(a==="share"){jnShareLink(deep);}
+      else if(a==="copy"){copyText(heroText(h),"hcopybtn");}
+      else if(a==="dl"){$("hdlbtn").click();}
+      else if(a==="read"){$("hrdbtn").click();}
+    };
+  });
+}
+
 
 function loadHeroes() {
   if (HEROES) return Promise.resolve(HEROES);
@@ -190,6 +223,10 @@ function renderHero(h) {
      '<span class="chip">' + esc(h.series) + '</span>' +
      '<span class="chip">Signature original</span>' +
      (my ? '<span class="chip">Fan-made</span><span class="chip">\u2726 Original Signature character</span>' : '') + '</div>' +
+   jnBadgeHTML(my ? "USER CREATED" : "SIGNATURE ORIGINAL") +
+   jnPanelHTML(h.id) +
+   jnProvHTML(my ? "Created by a reader in the on-site Hero Creator — saved on this device only (localStorage)."
+                : "Made by the Comic Store hero catalog (code/make_heroes.py) — original Signature characters, curated by the Signature system.") +
    '<div class="actions"><button class="btn red" id="hrdbtn">&#128266; Read aloud</button>' +
    '<button class="btn ghost" id="hcopybtn">&#10697; Copy file</button>' +
    '<button class="btn ghost" id="hdlbtn">&#11015; Download .txt</button>' +
@@ -205,6 +242,7 @@ function renderHero(h) {
      '&#129302; Talk to ' + esc(h.code) + '&rsquo;s character AI (AI Phone Book)</a></div>' +
    '<div class="honest">&#10022; ' + esc(h.note) + '</div>' + '</div></div>' +
    '<div class="qa"><h2>&#128172; Ask about ' + esc(h.code) + '</h2>' +
+   '<div id="haiidcard">' + jnAICardHTML(heroAIProfile(h, false)) + '</div>' +
    '<div class="rpbar" id="hrpbar">&#127917; <b>Roleplay mode ON</b> — I answer AS ' + esc(h.code) +
      '. <button class="btn ghost" id="hrpoff">Turn off</button></div>' +
    '<div class="qlog" id="hqlog" aria-live="polite">' +
@@ -220,12 +258,14 @@ function renderHero(h) {
   $("hrdbtn").onclick = function () { rdSpeak(heroText(h)); };
   $("hcopybtn").onclick = function () { copyText(heroText(h), "hcopybtn"); };
   $("hdlbtn").onclick = function () { download(h.id + ".txt", heroText(h), "text/plain"); };
+  jnWireHeroPanel(h);
   $("hrpbtn").onclick = function () {
     RP = true; $("hrpbar").classList.add("show");
+    $("haiidcard").innerHTML = jnAICardHTML(heroAIProfile(h, true));
     hqSay("a", "Roleplay: " + h.code + ' steps forward. "I\'m ' + h.code +
       '. Ask me anything — I\'ll answer as me."');
   };
-  $("hrpoff").onclick = function () { RP = false; $("hrpbar").classList.remove("show"); };
+  $("hrpoff").onclick = function () { RP = false; $("hrpbar").classList.remove("show"); $("haiidcard").innerHTML = jnAICardHTML(heroAIProfile(h, false)); };
   function hqSay(who, t) {
     var log = $("hqlog"), d = document.createElement("div");
     d.className = "msg " + who; d.textContent = t;

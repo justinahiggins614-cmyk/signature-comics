@@ -118,6 +118,16 @@ button{cursor:pointer}
 #rdbar .prog{color:#9fc2ff;font-size:.85em}
 footer{border-top:3px solid #000;padding:26px 14px 60px;color:var(--mut);font-size:.88em;text-align:center}
 footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif;font-size:.85em}
+/* JAH NETWORK 10-FIX CONSISTENCY PASS (additive — no restyle of existing components) */
+.stbadge{display:inline-block;background:var(--yel);color:#1a1206;font-size:.68em;font-weight:900;letter-spacing:.12em;border-radius:6px;padding:3px 10px;text-transform:uppercase;white-space:nowrap;vertical-align:middle;border:2px solid #000}
+.recpanel{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0;padding:9px 12px;border:2px solid var(--line);border-radius:8px;background:#0a0714;font-size:.8em;font-family:Arial,Helvetica,sans-serif}
+.recpanel .rpid{font-family:monospace;color:var(--yel)}
+.recpanel .rpver{color:var(--mut)}
+.recpanel button{background:var(--card);border:2px solid var(--line);color:var(--paper);border-radius:6px;padding:4px 10px;font-size:.8em;cursor:pointer;font-weight:700;letter-spacing:.04em;font-family:inherit}
+.recpanel button:hover{border-color:var(--yel);color:var(--yel)}
+.prov{font-size:.78em;color:var(--mut);margin:8px 0;font-family:Arial,Helvetica,sans-serif}
+.jaicard{border:2px solid #2a3a5f;border-radius:10px;padding:10px 14px;margin:12px 0;font-size:.88em;background:#101726;font-family:Arial,Helvetica,sans-serif}
+.jaicard b{color:#9fc2ff}
 .note-provisional{font-size:.8em;color:var(--mut);font-style:italic}
 .loading{text-align:center;padding:40px;color:var(--mut)}
 .statsum{display:none}
@@ -580,7 +590,7 @@ function render(){
   var html='<p style="color:var(--mut)">'+FILTERED.length.toLocaleString()+' issues · showing '+slice.length+'</p><div class="grid">'+
     slice.map(function(b){
       return '<div class="card" data-id="'+b.id+'"><div class="cover">'+coverSVG(b)+'</div><div class="meta"><div class="t">'+esc(b.t)+
-       '</div><div class="s">'+esc(b.s)+" #"+b.n+'</div><div class="n">'+esc(b.id)+' · '+(b.c||[]).slice(0,2).join(", ")+'</div></div></div>'}).join("")+"</div>";
+       '</div><div class="s">'+esc(b.s)+" #"+b.n+'</div><div class="n">'+esc(b.id)+' · '+(b.c||[]).slice(0,2).join(", ")+'</div><div style="margin-top:4px"><span class="stbadge">SIGNATURE ORIGINAL</span></div></div></div>'}).join("")+"</div>";
   if(slice.length<FILTERED.length)html+='<button class="btn more" id="morebtn">Show more</button>';
   box.innerHTML=html;
   box.querySelectorAll("[data-id]").forEach(function(el){el.onclick=function(){location.hash="#issue="+el.dataset.id}});
@@ -624,6 +634,24 @@ function openHero(id){
     renderHero(h);
   }).catch(function(){hv.innerHTML='<div class="loading">Could not open hero '+esc(id)+'. <a href="#">Back to the racks</a></div>'});
 }
+/* ===== JAH NETWORK 10-FIX: issue record panel wiring (additive) ===== */
+function comicSeedNo(rec){return parseInt(String(rec.id).slice(-6),10)||0}
+function comicProvText(rec){return "Made by the Comic Store issue generator (code/make_comics.py) · deterministic record seed 20261002+"+comicSeedNo(rec)+" · record date not recorded per record (the same seed regenerates the same issue)"}
+function wireIssuePanel(rec){
+  var panel=document.querySelector(".issueview .recpanel");if(!panel)return;
+  var chunk=chunkPath(rec.id);
+  panel.querySelectorAll("button").forEach(function(b){
+    var a=b.getAttribute("data-rp");
+    b.onclick=function(){
+      if(a==="open"){location.hash="#issue="+rec.id;}
+      else if(a==="src"){if(!panel.querySelector(".srcnote")){var sn=document.createElement("span");sn.className="srcnote";sn.style.color="var(--mut)";sn.textContent="Source: Comic Store catalog · "+chunk;panel.appendChild(sn);}}
+      else if(a==="share"){$("sharebtn").click();}
+      else if(a==="copy"){$("copybtn").click();}
+      else if(a==="dl"){$("dljson").click();}
+      else if(a==="read"){$("rdbtn").click();}
+    };
+  });
+}
 function openIssue(id){
   rdStop();$("home").style.display="none";$("heroview").style.display="none";var iv=$("issueview");iv.style.display="block";
   iv.innerHTML='<div class="loading">Opening '+esc(id)+'…</div>';
@@ -654,6 +682,7 @@ function renderIssue(rec){
    '<div class="iv-top"><div class="iv-cover">'+coverSVG({id:rec.id,t:rec.title,sk:rec.skey,n:rec.num})+"</div>"+
    '<div class="iv-info"><h1>'+esc(rec.title)+"</h1>"+
    '<div class="byline">'+esc(rec.series)+" #"+rec.num+" · "+esc(rec.id)+' · by '+esc("Justin Addam Higgins")+"</div>"+
+   jnBadgeHTML("SIGNATURE ORIGINAL")+
    '<div class="permid">🆔 Permanent ID: <b>'+esc(rec.id)+'</b> · 🔗 Shareable link: <span>'+esc("https://justinahiggins614-cmyk.github.io/signature-comics/?issue="+rec.id)+"</span></div>"+
    '<div class="chips"><span class="chip">'+esc(rec.series)+'</span><span class="chip">Issue #'+rec.num+'</span><span class="chip">'+rec.pages.length+' pages</span><span class="chip">'+rec.words+' words</span><span class="chip">Signature original</span></div>'+
    '<div class="actions"><button class="btn red" id="rdbtn">🔊 Read aloud</button>'+
@@ -663,6 +692,7 @@ function renderIssue(rec){
    '<button class="btn ghost" id="dlbtn">⬇ Download .txt</button>'+
    '<button class="btn ghost" id="dljson">⬇ .json</button>'+
    '<button class="btn ghost" id="rpbtn">🎭 Roleplay: '+esc(rec.chars[0].code)+'</button></div>'+
+   jnPanelHTML(rec.id)+jnProvHTML(comicProvText(rec))+
    '<div class="desc">'+esc(rec.desc)+"</div>"+
    '<div class="cast"><h3>⭐ Cast</h3>'+cast+"</div>"+
    '<div class="honest">✦ '+esc(rec.note)+"</div>"+
@@ -671,6 +701,7 @@ function renderIssue(rec){
    '<a class="btn" href="https://justinahiggins614-cmyk.github.io/jah-ai-models/" target="_blank" rel="noopener">🤖 Character AIs (AI Phone Book)</a></div>'+
    "</div></div>"+
    '<div class="qa"><h2>💬 Ask about this issue</h2>'+
+   '<div id="aiidcard">'+jnAICardHTML(issueAIProfile(rec,false))+'</div>'+
    '<div class="qlog" id="qlog" aria-live="polite"><div class="msg a">'+esc(issueGreet(rec))+'</div><div class="msg a">I know this issue cover to cover — ask me about the heroes, the story, the villain, or the series.</div></div>'+
    '<div class="qrow"><input id="qin" maxlength="200" placeholder="Ask about this issue…" aria-label="Ask about this issue"><button class="btn" id="qask">ASK</button></div>'+
    '<div class="qsugs" id="qsugs"></div></div>'+
@@ -695,9 +726,11 @@ function renderIssue(rec){
   $("qask").onclick=qaAsk;
   $("qin").addEventListener("keydown",function(e){if(e.key==="Enter")qaAsk()});
   QA_RP=false;
+  wireIssuePanel(rec);
   $("rpbtn").onclick=function(){
     QA_RP=!QA_RP;
     $("rpbtn").textContent=QA_RP?("🎭 Roleplay ON: "+rec.chars[0].code):("🎭 Roleplay: "+rec.chars[0].code);
+    $("aiidcard").innerHTML=jnAICardHTML(issueAIProfile(rec,QA_RP));
     if(QA_RP)qaSay("a","Roleplay mode ON — I now answer AS "+rec.chars[0].code+" ("+rec.chars[0].name+"). Ask me anything about this issue.");
   };
 }
