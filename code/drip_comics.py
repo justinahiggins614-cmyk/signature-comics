@@ -56,9 +56,21 @@ def chunk_path(i):
 
 
 def write_chunk(recs):
+    """Write a full chunk. MERGE-writes: if the chunk file already exists
+    (e.g. event issues merged in by make_events.py), existing records are
+    preserved instead of being wiped — a truncate-write here once deleted
+    24 COSMIC CROSSOVER EVENTS issues from chunk 16 (2026-10-02)."""
     fn = chunk_path(recs[0]["_i"])
+    existing = []
+    if os.path.exists(fn):
+        with gzip.open(fn, "rt", encoding="utf-8") as f:
+            existing = json.load(f)
+    have = {r["id"] for r in existing}
+    merged = existing + [{k: v for k, v in r.items() if k != "_i"}
+                         for r in recs if r["id"] not in have]
+    merged.sort(key=lambda r: r["id"])
     with gzip.open(fn, "wt", encoding="utf-8") as f:
-        json.dump([{k: v for k, v in r.items() if k != "_i"} for r in recs], f)
+        json.dump(merged, f)
     return fn
 
 
@@ -102,6 +114,12 @@ def build_sitemap(idx):
         urls.append(SITE + "?series=" + k)
     for k, n in EXTRA_SERIES:
         urls.append(SITE + "?series=" + k)
+    # static per-series directory pages (pre-rendered issue fallbacks, series-tier)
+    urls.append(SITE + "issues.html")
+    for k, n, _ in SERIES:
+        urls.append(SITE + "issues-" + k + ".html")
+    for k, n in EXTRA_SERIES:
+        urls.append(SITE + "issues-" + k + ".html")
     # hero archetype catalog deep links
     hp = os.path.join(DATA, "heroes.json")
     if os.path.exists(hp):
@@ -171,6 +189,10 @@ def main():
     save_idx(idx)
     api = build_api(idx)
     n_urls = build_sitemap(idx)
+    # web extras: comics-catalog.json feed + static per-series directory pages
+    # + static page urls in the sitemap (kept in lockstep with the drip)
+    from build_web_extras import build_all as build_web_extras_all
+    build_web_extras_all()
 
     st["next_index"] = start + args.n
     save_state(st)

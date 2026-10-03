@@ -11,7 +11,8 @@
 <meta property="og:description" content="Original Signature comics with panel art, full stories, and read-aloud. Marching to 1,000,000 issues.">
 <meta property="og:url" content="https://justinahiggins614-cmyk.github.io/signature-comics/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Signature Comic Store","url":"https://justinahiggins614-cmyk.github.io/signature-comics/","creator":{"@type":"Person","name":"Justin Addam Higgins"},"description":"Original generated comic books by/for the Signature system: 9 original series, original heroes, panel art, full story text."}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"The Signature Comic Store","creator":{"@type":"Person","name":"Justin Addam Higgins"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"The Signature Comic Store","creator":{"@type":"Person","name":"Justin Addam Higgins"},"description":"Original generated comic books by/for the Signature system: 9 original series, original heroes, panel art, full story text.","distribution":{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://justinahiggins614-cmyk.github.io/signature-comics/data/index/comics-catalog.json"}}</script>
+<script type="application/ld+json" id="issueld"></script>
 <style>
 :root{--ink:#0d0a12;--ink2:#171221;--paper:#f7f2e4;--yel:#ffd23f;--red:#e63946;--blu:#3a86ff;--org:#fb8500;--line:#3a2c5a;--mut:#b9aed6;--card:#1c1528}
 *{box-sizing:border-box}
@@ -145,6 +146,40 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 #creatorBox textarea{min-height:70px}
 #creatorPrev{margin:12px 0;text-align:center}
 .myhero{border:2px solid #2a3a5f;border-radius:8px;padding:8px;margin:8px 0;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+/* diagnostic pass: aspect-ratio CLS guards, reader, search feedback */
+.card .cover{aspect-ratio:400/600;background:#0a0714}
+.card .cover svg{width:100%;height:100%;display:block}
+.iv-cover{aspect-ratio:400/600}
+.iv-cover svg{width:100%;height:100%}
+.page .panwrap{aspect-ratio:640/400;background:#000}
+.page .panwrap svg{width:100%;height:100%;display:block}
+.hcard svg{aspect-ratio:300/380}
+.seriespills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
+.seriespills button{background:var(--card);border:2px solid var(--line);color:var(--mut);border-radius:16px;padding:4px 12px;font-family:inherit;font-weight:700;font-size:.8em}
+.seriespills button.on{background:var(--yel);color:#1a1206;border-color:#000}
+.matchline{text-align:center;color:var(--mut);font-size:.85em;padding:4px 0 0;min-height:1.4em}
+/* full-screen comic reader */
+#readerModal{position:fixed;inset:0;z-index:120;display:none;background:#050308;flex-direction:column}
+#readerModal.show{display:flex}
+#readerTop{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px 12px;background:#0a0f1e;border-bottom:3px solid var(--yel)}
+#readerTop .rt{color:var(--yel);font-weight:900;font-size:.95em;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#readerStage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden}
+#rdArt{width:100%;height:100%;overflow:auto;touch-action:pan-x pan-y pinch-zoom;display:flex;align-items:flex-start;justify-content:center;padding:10px}
+#rdArt svg{width:100%;max-width:900px;height:auto;flex:none;transform-origin:top center}
+#rdPrev,#rdNext{position:absolute;top:0;bottom:0;width:28%;z-index:2;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#rdPrev{left:0}#rdNext{right:0}
+#rdPrev:hover{background:linear-gradient(90deg,rgba(255,210,63,.12),transparent)}
+#rdNext:hover{background:linear-gradient(270deg,rgba(255,210,63,.12),transparent)}
+#rdCap{padding:8px 14px 4px;color:var(--paper);font-size:.95em;max-height:22vh;overflow-y:auto}
+#rdCap .dlg{margin:.5em 0 0;padding:8px 12px;background:#1c1528;border-left:4px solid var(--yel);font-style:italic}
+#rdCap .dlg b{color:var(--yel);font-style:normal}
+#readerHint{text-align:center;color:var(--mut);font-size:.78em;padding:2px 0 6px}
+#readerZoom{display:flex;gap:8px;justify-content:center;padding:6px}
+#readerZoom button{background:var(--card);border:2px solid var(--line);color:var(--paper);border-radius:8px;padding:6px 16px;font-weight:900;font-size:1em}
+#rdDrawer{display:none;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px;background:#0a0f1e;border-top:2px solid var(--line);max-height:26vh;overflow-y:auto}
+#rdDrawer.show{display:flex}
+#rdDrawer button{background:var(--card);border:2px solid var(--line);color:var(--mut);border-radius:6px;min-width:40px;padding:6px;font-weight:700}
+#rdDrawer button.on{background:var(--red);color:#fff;border-color:#000}
 </style>
 </head>
 <body>
@@ -177,6 +212,8 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 <select id="series" aria-label="Series filter"><option value="">All series</option></select>
 <select id="sort" aria-label="Sort"><option value="new">Newest first</option><option value="title">Title A–Z</option><option value="series">Series order</option></select>
 </div>
+<div id="seriespills" class="seriespills" role="group" aria-label="Series quick filter"></div>
+<div id="matchline" class="matchline" aria-live="polite"></div>
 <div class="finderbar" style="margin-top:10px"><input type="text" id="fq" maxlength="140" placeholder="Describe what you're looking for…" aria-label="Describe what you're looking for"><button class="btn" id="fgo">Find it</button></div>
 <div id="fresults" class="fresults"></div>
 <div class="az" id="az"></div>
@@ -233,6 +270,15 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 </div>
 </div>
 
+<div id="readerModal" role="dialog" aria-label="Comic reader">
+<div id="readerTop"><button class="btn ghost" id="rdClose">✕ Close</button><div class="rt" id="readerTitle"></div><button class="btn ghost" id="rdPages">📄 Pages</button></div>
+<div id="readerStage"><div id="rdPrev" role="button" aria-label="Previous page" tabindex="0"></div><div id="rdArt"></div><div id="rdNext" role="button" aria-label="Next page" tabindex="0"></div></div>
+<div id="rdCap"></div>
+<div id="readerHint">Tap the left/right edges to turn pages · pinch to zoom · ← → keys work too</div>
+<div id="readerZoom"><button id="rdZout" aria-label="Zoom out">−</button><button id="rdZreset">100%</button><button id="rdZin" aria-label="Zoom in">+</button></div>
+<div id="rdDrawer" aria-label="Page picker"></div>
+</div>
+
 <div id="issueview" class="wrap" style="display:none"></div>
 
 <div id="heroview" class="wrap" style="display:none"></div>
@@ -270,7 +316,7 @@ footer .sites{margin:10px 0;line-height:2;font-family:Arial,Helvetica,sans-serif
 <a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">Signature AI Pixel</a> ·
 <a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">Signature Music Studio</a></div>
 </nav>
-<p>Free. No login. Machine-readable: <a href="data/index/api.json">api.json</a> · <a href="data/index/comics.idx.json.gz">comic index</a> · <a href="sitemap.xml">sitemap</a></p>
+<p>Free. No login. Machine-readable: <a href="data/index/api.json">api.json</a> · <a href="data/index/comics.idx.json.gz">comic index</a> · <a href="data/index/comics-catalog.json">comics-catalog.json</a> · <a href="sitemap.xml">sitemap</a> · <a href="issues.html">static issue directory</a></p>
 </div>
 </footer>
 <script src="js/jah-talk-fallback.js"></script>
@@ -434,6 +480,7 @@ function init(){
       return '<div class="scard" data-s="'+esc(s)+'"><h3 style="color:'+pal.acc+'">'+esc(s)+
        '</h3><p>'+esc(SDESC[k]||"")+'</p><div class="cnt">'+(api.series[s]).toLocaleString()+' issues</div></div>'}).join("");
     band.querySelectorAll(".scard").forEach(function(el){el.onclick=function(){$("series").value=el.dataset.s;applyFilters();document.querySelector(".controls").scrollIntoView()}});
+    buildSeriesPills(Object.keys(api.series||{}).sort());
   }).catch(function(){});
   fetchJSONgz(IDX_URL).then(function(idx){IDX=idx;buildAZ();applyFilters()})
     .catch(function(e){$("results").innerHTML='<div class="loading">Could not load the catalog index. Check your connection and reload.</div>'});
@@ -455,6 +502,7 @@ function titleKey(t){return String(t).replace(/^(The|A|An)\s+/i,"")}
 function applyFilters(){
   var q=$("q").value.trim().toLowerCase(), s=$("series").value,
       so=$("sort").value, az=azVal();
+  syncPills();
   FILTERED=IDX.filter(function(b){
     if(s&&b.s!==s)return false;
     if(az){var k=titleKey(b.t).charAt(0).toUpperCase();if(az==="#"){if(!/[0-9]/.test(k))return false}else if(k!==az)return false}
@@ -467,11 +515,12 @@ function applyFilters(){
 }
 function render(){
   var box=$("results");
+  $("matchline").textContent=FILTERED.length.toLocaleString()+" of "+IDX.length.toLocaleString()+" issues match";
   if(!FILTERED.length){box.innerHTML='<div class="loading">No issues match. Try another search.</div>';return}
   var slice=FILTERED.slice(0,SHOWN+PAGE);
   var html='<p style="color:var(--mut)">'+FILTERED.length.toLocaleString()+' issues · showing '+slice.length+'</p><div class="grid">'+
     slice.map(function(b){
-      return '<div class="card" data-id="'+b.id+'"><div>'+coverSVG(b)+'</div><div class="meta"><div class="t">'+esc(b.t)+
+      return '<div class="card" data-id="'+b.id+'"><div class="cover">'+coverSVG(b)+'</div><div class="meta"><div class="t">'+esc(b.t)+
        '</div><div class="s">'+esc(b.s)+" #"+b.n+'</div><div class="n">'+esc(b.id)+' · '+(b.c||[]).slice(0,2).join(", ")+'</div></div></div>'}).join("")+"</div>";
   if(slice.length<FILTERED.length)html+='<button class="btn more" id="morebtn">Show more</button>';
   box.innerHTML=html;
@@ -483,7 +532,17 @@ function render(){
 var CUR=null, CURTEXT="";
 var _chome=null;
 function cHome(){if(!_chome){var md=document.querySelector('meta[name="description"]'),cl=document.querySelector('link[rel="canonical"]');_chome={d:md?md.getAttribute("content"):"",c:cl?cl.getAttribute("href"):"https://justinahiggins614-cmyk.github.io/signature-comics/"}}return _chome}
-function setIssueHead(rec){var h=cHome();var md=document.querySelector('meta[name="description"]');var cl=document.querySelector('link[rel="canonical"]');if(rec){if(md)md.setAttribute("content",String(rec.desc||"").slice(0,300));if(cl)cl.setAttribute("href","https://justinahiggins614-cmyk.github.io/signature-comics/?issue="+rec.id)}else{if(md)md.setAttribute("content",h.d);if(cl)cl.setAttribute("href",h.c)}}
+function setIssueHead(rec){var h=cHome();var md=document.querySelector('meta[name="description"]');var cl=document.querySelector('link[rel="canonical"]');if(rec){if(md)md.setAttribute("content",String(rec.desc||"").slice(0,300));if(cl)cl.setAttribute("href","https://justinahiggins614-cmyk.github.io/signature-comics/?issue="+rec.id)}else{if(md)md.setAttribute("content",h.d);if(cl)cl.setAttribute("href",h.c)}updateIssueLD(rec)}
+function updateIssueLD(rec){var el=document.getElementById("issueld");if(!el)return;
+ if(!rec){el.textContent="";return}
+ var ld={"@context":"https://schema.org","@type":"ComicIssue",
+  "name":rec.title,"issueNumber":rec.num,"identifier":rec.id,
+  "isPartOf":{"@type":"ComicSeries","name":rec.series},
+  "author":{"@type":"Person","name":"Justin Addam Higgins"},
+  "description":String(rec.desc||"").slice(0,500),
+  "url":"https://justinahiggins614-cmyk.github.io/signature-comics/?issue="+rec.id,
+  "about":rec.chars.map(function(c){return c.code})};
+ el.textContent=JSON.stringify(ld)}
 function route(){
   var hm=/^#hero=([A-Za-z0-9-]+)/.exec(location.hash||"");
   if(hm){openHero(hm[1]);return}
@@ -527,7 +586,7 @@ function renderIssue(rec){
     return '<div class="c"><b>'+esc(c.code)+'</b> — '+esc(c.name)+
      ' <span style="color:var(--mut)">· power: '+esc(c.power)+"</span></div>"}).join("");
   var pages=rec.pages.map(function(p,i){
-    return '<div class="page">'+panelSVG(p,rec.chars,rec.skey,rec.id+"p"+i)+
+    return '<div class="page"><div class="panwrap">'+panelSVG(p,rec.chars,rec.skey,rec.id+"p"+i)+"</div>"+
      '<div class="pbody"><div class="pnum">PAGE '+(i+1)+" · "+esc(p.beat.toUpperCase())+'</div>'+
      '<div class="cap">'+esc(p.cap)+"</div>"+
      (p.dlg?'<div class="dlg"><b>'+esc(p.who)+":</b> "+esc(p.dlg)+"</div>":"")+"</div></div>"}).join("");
@@ -538,6 +597,7 @@ function renderIssue(rec){
    '<div class="byline">'+esc(rec.series)+" #"+rec.num+" · "+esc(rec.id)+' · by '+esc("Justin Addam Higgins")+"</div>"+
    '<div class="chips"><span class="chip">'+esc(rec.series)+'</span><span class="chip">Issue #'+rec.num+'</span><span class="chip">'+rec.pages.length+' pages</span><span class="chip">'+rec.words+' words</span><span class="chip">Signature original</span></div>'+
    '<div class="actions"><button class="btn red" id="rdbtn">🔊 Read aloud</button>'+
+   '<button class="btn" id="readbtn">📖 Reader</button>'+
    '<button class="btn ghost" id="copybtn">⧉ Copy story</button>'+
    '<button class="btn ghost" id="dlbtn">⬇ Download .txt</button>'+
    '<button class="btn ghost" id="dljson">⬇ .json</button>'+
@@ -556,6 +616,7 @@ function renderIssue(rec){
    '<div class="pages"><h2>Full issue — page by page</h2>'+pages+"</div>"+
    '<p><a href="#">← Back to the racks</a></p></div>';
   $("rdbtn").onclick=function(){rdSpeak(CURTEXT)};
+  $("readbtn").onclick=openReader;
   $("copybtn").onclick=function(){copyText(CURTEXT,"copybtn")};
   $("dlbtn").onclick=function(){download(rec.id+".txt",CURTEXT,"text/plain")};
   $("dljson").onclick=function(){download(rec.id+".json",JSON.stringify(rec,null,1),"application/json")};
@@ -600,6 +661,45 @@ function download(name,text,mime){
   var b=new Blob([text],{type:mime}),u=URL.createObjectURL(b),a=document.createElement("a");
   a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);
 }
+
+/* ============ full-screen comic reader (tap zones, pinch-zoom, page picker) ============ */
+var RD_P=0,RD_Z=1;
+function openReader(){if(!CUR)return;RD_P=0;RD_Z=1;
+ $("readerTitle").textContent=CUR.title+" — "+CUR.series+" #"+CUR.num;
+ var dr=$("rdDrawer");dr.innerHTML="";dr.classList.remove("show");
+ for(var i=0;i<CUR.pages.length;i++){(function(i){var b=document.createElement("button");b.textContent=i+1;b.dataset.p=i;
+   b.onclick=function(){RD_P=i;rdShow()};dr.appendChild(b)})(i)}
+ rdShow();$("readerModal").classList.add("show");document.body.style.overflow="hidden"}
+function rdApplyZoom(){var svg=$("rdArt").querySelector("svg");if(svg)svg.style.transform="scale("+RD_Z+")"}
+function rdShow(){if(!CUR)return;var p=CUR.pages[RD_P];
+ $("rdArt").innerHTML=panelSVG(p,CUR.chars,CUR.skey,CUR.id+"r"+RD_P);rdApplyZoom();
+ $("rdCap").innerHTML="<b>PAGE "+(RD_P+1)+" OF "+CUR.pages.length+"</b> — "+esc(p.cap)+
+  (p.dlg?'<div class="dlg"><b>'+esc(p.who)+":</b> "+esc(p.dlg)+"</div>":"");
+ var bs=$("rdDrawer").querySelectorAll("button");
+ for(var i=0;i<bs.length;i++)bs[i].classList.toggle("on",i===RD_P)}
+function rdAdv(d){if(!CUR)return;RD_P=(RD_P+d+CUR.pages.length)%CUR.pages.length;rdShow()}
+function rdClose(){$("readerModal").classList.remove("show");document.body.style.overflow=""}
+function rdZoom(d){RD_Z=Math.min(3,Math.max(1,Math.round((RD_Z+d)*4)/4));rdApplyZoom()}
+$("rdClose").onclick=rdClose;
+$("rdPrev").onclick=function(){rdAdv(-1)};
+$("rdNext").onclick=function(){rdAdv(1)};
+$("rdPages").onclick=function(){$("rdDrawer").classList.toggle("show")};
+$("rdZin").onclick=function(){rdZoom(0.25)};
+$("rdZout").onclick=function(){rdZoom(-0.25)};
+$("rdZreset").onclick=function(){RD_Z=1;rdApplyZoom()};
+document.addEventListener("keydown",function(e){
+ if(!$("readerModal").classList.contains("show"))return;
+ if(e.key==="Escape")rdClose();else if(e.key==="ArrowLeft")rdAdv(-1);else if(e.key==="ArrowRight")rdAdv(1)});
+
+/* ============ persistent series pill filter bar ============ */
+function buildSeriesPills(keys){
+ var box=$("seriespills");if(!box)return;box.innerHTML="";
+ var mk=function(lbl,val){var b=document.createElement("button");b.textContent=lbl;b.dataset.v=val;
+  b.onclick=function(){$("series").value=val;syncPills();applyFilters()};box.appendChild(b)};
+ mk("★ All","");keys.forEach(function(s){mk(s,s)});syncPills()}
+function syncPills(){var box=$("seriespills");if(!box)return;var v=$("series").value;
+ var bs=box.querySelectorAll("button");
+ for(var i=0;i<bs.length;i++)bs[i].classList.toggle("on",bs[i].dataset.v===v)}
 
 /* ============ per-issue Q&A AI (data-grounded; never invents) ============ */
 var VILLAINS=["the Quiet","the Hollow King","Madame Static","the Rust Choir","Captain Undertow","the Pale Cartographer","the Gear Thief","Old Murk","the Signal Eater","the Brass Widow"];
