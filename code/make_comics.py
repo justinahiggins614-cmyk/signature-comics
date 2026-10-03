@@ -316,6 +316,7 @@ def make_issue(i):
         "series": sname, "skey": skey, "num": num,
         "title": title, "chars": chars, "desc": desc,
         "pages": pages, "words": words, "note": GEN_NOTE,
+        "creation_mode": "GENERATED",
     }
     return rec
 

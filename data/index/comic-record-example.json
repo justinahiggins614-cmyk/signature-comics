@@ -68,7 +68,8 @@
   ],
   "words": 99,
   "note": "An original generated comic created by the Signature system. All characters, places, and events are invented.",
-  "content_hash": "a24a0ad4c24e6fce71d0b1ece9a4267b6ab38485ef6567b6afd5956ca424d7e5",
+  "creation_mode": "GENERATED",
+  "content_hash": "9b3b1d17bbbde45b5f18c98f63adff8af36ebe9a65dd243aea07758ff38685a0",
   "canonical_url": "https://justinahiggins614-cmyk.github.io/signature-comics/?issue=JAH-COMIC-000001"
  }
 }

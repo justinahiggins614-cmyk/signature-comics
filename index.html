@@ -230,7 +230,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 <details class="statdrop" open><summary class="statsum">📊 Shelf counts — tap to hide</summary>
 <!-- STATIC-COUNTS -->
 <div class="stats" id="stats"><div class="stat"><b>6,024</b><span>finished issues</span></div><div class="stat"><b>9</b><span>original series</span></div><div class="stat"><b>578K</b><span>words of story</span></div><div class="stat"><b>1M</b><span>issue goal</span></div></div>
-<p class="matchline">Catalog snapshot 2026-10-03 · 6,024 of 1,000,000 issues (0.60%)</p>
+<p class="matchline" id="staticsnap">Catalog snapshot 2026-10-03 · 6,024 of 1,000,000 issues (0.60%)</p>
 <!-- /STATIC-COUNTS -->
 </details>
 <div class="march"><div class="bar"><div class="fill" id="marchfill"></div></div><small id="marchtxt"><!-- STATIC-MARCH -->6,024 of 1,000,000 issues (0.60%) — catalog snapshot 2026-10-03<!-- /STATIC-MARCH --></small></div>
@@ -670,7 +670,9 @@ function route(){
     var hb=null;try{hb=new URLSearchParams(location.search).get("hero")}catch(eh){}
     if(hb&&/^[A-Za-z0-9-]+$/.test(hb)){try{history.replaceState(null,"","./")}catch(e2){}location.hash="#hero="+hb;return;}
     var sq=null;try{sq=new URLSearchParams(location.search).get("series")}catch(e3){}
-    if(sq&&SNAME[sq]){try{history.replaceState(null,"","./")}catch(e4){}$("series").value=SNAME[sq];applyFilters();return;}}
+    if(sq&&SNAME[sq]){try{history.replaceState(null,"","./")}catch(e4){}$("series").value=SNAME[sq];applyFilters();return;}
+    var ch=null;try{ch=new URLSearchParams(location.search).get("character")}catch(e5){}
+    if(ch){try{history.replaceState(null,"","./")}catch(e6){}$("q").value=ch;applyFilters();var ctl=document.querySelector(".controls");if(ctl)ctl.scrollIntoView();return;}}
   else{openIssue(m[1]);return}
   rdStop();$("issueview").style.display="none";$("heroview").style.display="none";$("home").style.display="block";document.title="The Signature Comic Store";setIssueHead(null);
 }

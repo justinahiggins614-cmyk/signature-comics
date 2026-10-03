@@ -209,8 +209,27 @@ function heroConversational(ql) {
     || /^(bye|goodbye|good ?night|see you|later)\b/.test(ql)
     || /how are you|how('| i)s it going|how do you feel/.test(ql);
 }
+function heroAppearances(code) {
+  if (typeof IDX === "undefined" || !IDX || !IDX.length) return null;
+  var out = [];
+  for (var i = 0; i < IDX.length; i++) {
+    var b = IDX[i];
+    if (b.c && b.c.indexOf(code) >= 0) out.push(b);
+  }
+  return out;
+}
 function renderHero(h) {
   var my = h.custom ? true : false;
+  var apps = heroAppearances(h.code), appsHtml = "";
+  if (apps && apps.length) {
+    appsHtml = '<div class="cast"><h3>\uD83D\uDCDA Appearances — ' + apps.length +
+      ' issue' + (apps.length === 1 ? "" : "s") + '</h3><p style="font-size:.85em">' +
+      apps.slice(0, 12).map(function (b) {
+        return '<a href="#issue=' + b.id + '">' + esc(b.s) + ' #' + b.n + '</a>';
+      }).join(" \u00B7 ") +
+      (apps.length > 12 ? ' <span style="color:var(--mut)">\u2026and ' +
+        (apps.length - 12) + ' more</span>' : '') + '</p></div>';
+  }
   var heroGreet = (typeof JAHtalk !== "undefined") ?
     esc(JAHtalk.greet(heroAIProfile(h, false))) : "";
   $("heroview").innerHTML =
@@ -235,6 +254,7 @@ function renderHero(h) {
      '<br><b>Powers:</b> ' + esc(h.powers.join(", ")) +
      '<br><b>Look:</b> ' + esc(h.look.desc) + '</div>' +
    '<div class="desc" style="margin-top:10px">' + esc(h.backstory) + '</div>' +
+   appsHtml +
    '<div class="collect"><b style="width:100%;color:var(--yel)">&#11088; COLLECT &amp; CONNECT</b>' +
    '<a class="btn" href="https://justinahiggins614-cmyk.github.io/signature-3d-print/" target="_blank" rel="noopener">' +
      '&#129717; Get the action figure (3D Print Depository)</a>' +
@@ -316,6 +336,7 @@ function creatorRecord() {
     series: $("chSeries").value.trim().toUpperCase() || "THE SIGNATURE CHRONICLES",
     by: $("chBy").value.trim() || "An anonymous creator",
     note: "Signature-original character created by a reader in the Hero Creator, not affiliated with any publisher.",
+    creation_mode: "USER-CREATED",
     custom: true
   };
 }
@@ -501,6 +522,7 @@ function wireCreator() {
             if(!h||typeof h!=="object"||!h.id||!h.code){skipped++;return}
             if(have[h.id]){skipped++;return}
             h.custom=true;
+            h.creation_mode="USER-CREATED";
             if(!h.note)h.note="Signature-original character imported by a reader in the Hero Creator, not affiliated with any publisher.";
             mine.push(h);have[h.id]=1;added++;
           });

@@ -217,6 +217,7 @@ def main():
             "powers": powers,
             "look": {"desc": look, "suit": suit, "cape": cape},
             "backstory": backstory, "series": series, "note": ORIGIN_NOTE,
+            "creation_mode": "GENERATED",
         })
     if bad:
         print("TRADEMARK FAILURES:")

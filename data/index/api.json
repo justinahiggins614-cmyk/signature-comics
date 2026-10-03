@@ -15,10 +15,10 @@
   "TIDEBOUND": 750
  },
  "goal": 1000000,
- "updated": "2026-10-03T14:09:09Z",
+ "updated": "2026-10-03T14:16:40Z",
  "schema_version": "1.0",
  "catalog_version": "1.0",
- "index_sha256": "7292c1f1c8df7b3823455511452892f454bb9c9b12a1f9611a9b4c1428ec280f",
+ "index_sha256": "6f651e5bef21864cb5d114bb9b0f9082b995bcf839c4d6555a36a75070242b99",
  "total_heroes": 20,
  "total_events": 4,
  "chunk_count": 60
