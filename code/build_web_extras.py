@@ -63,6 +63,31 @@ PAGE_CSS = ("body{margin:0;background:#0d0a12;color:#f7f2e4;"
             ".serieslist{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));"
             "gap:12px;margin:18px 0}")
 
+# Pill tab bar — Manon's 2026-10-04 order (calculator screenshot as spec).
+# Same tabs, same order as index.html/browse.html; on the static issue
+# directory pages the "Issues" tab carries class "on".
+TABBAR_CSS = (".jtabbar{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;"
+              "-webkit-overflow-scrolling:touch;scrollbar-width:thin;"
+              "border-bottom:1px solid rgba(128,128,128,.25);align-items:center}"
+              ".jtabbar a.jtab{flex:0 0 auto;text-decoration:none;"
+              "border:1px solid rgba(160,160,160,.45);border-radius:999px;"
+              "padding:9px 16px;font-size:.92em;color:inherit;"
+              "background:rgba(127,127,127,.08);white-space:nowrap;"
+              "font-family:inherit;transition:background .15s ease,"
+              "border-color .15s ease,box-shadow .15s ease}"
+              ".jtabbar a.jtab:hover{border-color:#f5c518;"
+              "background:rgba(245,197,24,.16);box-shadow:0 1px 6px rgba(0,0,0,.18)}"
+              ".jtabbar a.jtab:focus-visible{outline:2px solid #f5c518;outline-offset:2px}"
+              ".jtabbar a.jtab.on{background:#f5c518;border-color:#f5c518;"
+              "color:#191919;font-weight:700}"
+              ".jtabbar a.jtab.on:hover{background:#f5c518;"
+              "box-shadow:0 1px 6px rgba(0,0,0,.25)}")
+
+TABBAR_HTML = ('<nav class="jtabbar" aria-label="Site sections">'
+               '<a class="jtab" href="index.html">🏠 Front Door</a>'
+               '<a class="jtab" href="browse.html">📚 1 Million Archive</a>'
+               '<a class="jtab on" href="issues.html">Issues</a></nav>')
+
 
 def static_page(title, body_html, crumbs):
     return ("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\">"
@@ -70,9 +95,9 @@ def static_page(title, body_html, crumbs):
             "<title>" + html.escape(title) + " — The Signature Comic Store</title>"
             "<meta name=\"description\" content=\"" + html.escape(title) +
             ": original Signature comics by Justin Addam Higgins.\">"
-            "<style>" + PAGE_CSS + "</style></head><body><div class=\"wrap\">"
+            "<style>" + PAGE_CSS + TABBAR_CSS + "</style></head><body><div class=\"wrap\">"
             "<p>" + crumbs + "</p><h1>" + html.escape(title) + "</h1>" +
-            body_html + "</div></body></html>")
+            TABBAR_HTML + body_html + "</div></body></html>")
 
 
 def build_static_pages(recs):
