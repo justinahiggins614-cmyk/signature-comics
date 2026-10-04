@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-04T02:23:27Z",
+ "generated": "2026-10-04T04:23:27Z",
  "schema_version": "1.0",
  "files": [
   {
@@ -9,7 +9,7 @@
   },
   {
    "file": "data/state.json",
-   "sha256": "be53f6209138a3e2c9fa3c14903ee9e80a574deb25467a0ebc01f141cf0d3a50",
+   "sha256": "68556683775557f6279c64b4110a36fc94fb3cbd019fbbc5cb3f9d842ff84847",
    "bytes": 20
   },
   {
@@ -489,13 +489,38 @@
   },
   {
    "file": "data/volumes/comics-c00096.json.gz",
-   "sha256": "f441ef2afc143594ef61ca93ea83dfbd388fbfb7793f4ce7cb688888e593fc6f",
-   "bytes": 7895
+   "sha256": "910df40eec34498657c154e10f48967bf2231ce620ae781fdd20d0f3d9fc0647",
+   "bytes": 25943
+  },
+  {
+   "file": "data/volumes/comics-c00097.json.gz",
+   "sha256": "bec52d11161dd7b0ffbbe90fbb52b866eac666863e460e30e23564eda2429451",
+   "bytes": 25890
+  },
+  {
+   "file": "data/volumes/comics-c00098.json.gz",
+   "sha256": "d24d40f45bda19b51a04c9346ba8baffa3df5e50b75c6e37fe3972fa499cdc96",
+   "bytes": 25815
+  },
+  {
+   "file": "data/volumes/comics-c00099.json.gz",
+   "sha256": "8fb5b12fbee3adea1d9a41f915b67ab051f660f933df47077de8ddfa101db9c6",
+   "bytes": 25951
+  },
+  {
+   "file": "data/volumes/comics-c00100.json.gz",
+   "sha256": "cccd60340f68c93c9ba39c33940899b554f86cebcd28fe734837c605b97a6dbf",
+   "bytes": 25863
+  },
+  {
+   "file": "data/volumes/comics-c00101.json.gz",
+   "sha256": "1cc6c555ecb0b777a28a24d2ba9a079436e072c8c314481a380ecad223bf2dd7",
+   "bytes": 7698
   },
   {
    "file": "data/index/api.json",
-   "sha256": "ffbd7802fe9ad50b3ffb0c874a0f3ad80c9e233e99b3d40e0e53d4aa21c12345",
-   "bytes": 486
+   "sha256": "0e2bcd94eb3fbe0aa468474441e3c252108f468b00d4a70270a23a89f9fba515",
+   "bytes": 487
   },
   {
    "file": "data/index/changelog.json",
@@ -509,8 +534,8 @@
   },
   {
    "file": "data/index/characters-index.json",
-   "sha256": "56d3f61d0b3025369feabf83e0c7cd11b7d549ffc89fa145e4e1b82d9b5f0093",
-   "bytes": 3233602
+   "sha256": "0673197b6fd10fa4759b4fdb307d81d650b76b88c9b4979e52ccc3e5825391d0",
+   "bytes": 3330478
   },
   {
    "file": "data/index/comic-record-example.json",
@@ -519,12 +544,12 @@
   },
   {
    "file": "data/index/comics-catalog.json",
-   "sha256": "101e02d8b3bd979b95552fa506bfab85274537f4cef7e57b51c6084450106a72",
-   "bytes": 1147836
+   "sha256": "7492222b40cadb87b287f03b91d8c39f3c5cd0c2a3a1e0ed57b29eda4a842df8",
+   "bytes": 1208775
   },
   {
    "file": "data/index/comics-manifest.json",
-   "sha256": "8b7a9eb90e35d892db347607d06f1634118c0cb2573a2d9b68b8e1b54e951ceb",
+   "sha256": "4d1c5dc73c42bb49a656ed093ddb13ec8e26d7f1b137c99b8e1e6346bcc8a530",
    "bytes": 2234
   },
   {
@@ -534,8 +559,8 @@
   },
   {
    "file": "data/index/comics.idx.json.gz",
-   "sha256": "a057b11eaea55bd442515856a8a028f0cfd71302820524c8bc5ba93c105499ca",
-   "bytes": 650302
+   "sha256": "b5a5e9237a65bbd2199c670ca3e7c53df1f4bc5db611932f2c3c25104132210c",
+   "bytes": 684209
   },
   {
    "file": "data/index/event-schema.json",
@@ -544,18 +569,18 @@
   },
   {
    "file": "data/index/events-index.json",
-   "sha256": "903608a6d54d9294438b74aaf3f742e379806aa438f56a0e0b2251221976226c",
+   "sha256": "652e742fbbc34528fe708cba5227d0332755519898cedcabfded6ff1afef7fc0",
    "bytes": 4665
   },
   {
    "file": "data/index/hash-manifest.json",
-   "sha256": "e9998b595c3b6bb59b410ee05da9b26c0e8059a19880077cf9aa97db68aebb86",
-   "bytes": 17211
+   "sha256": "0a973900281cb5d88d434c0f3fea00e509d33fcbe29e886236c6ffef3db9a4d2",
+   "bytes": 17996
   },
   {
    "file": "data/index/hashes.json.gz",
-   "sha256": "5d79fe0fd5d9efaa0519a42c5cf372b4176ee2e278b1d2f0a89557df20fe02ce",
-   "bytes": 397643
+   "sha256": "b7edb9e475ee4e707a8e89772e464526a3426b6cd9ef4cb5e12ada15cbaa2674",
+   "bytes": 418558
   },
   {
    "file": "data/index/hero-schema.json",
@@ -564,12 +589,12 @@
   },
   {
    "file": "data/index/heroes-index.json",
-   "sha256": "66317628c8a839405072f620d9fe73e81a7ca7938bd79af40d19bc42355b32a8",
+   "sha256": "0bf52b373a7ec9bcccca657a0ec29dc87107310b54fcfa7c5d5b035152b9ee91",
    "bytes": 16262
   },
   {
    "file": "data/index/series-index.json",
-   "sha256": "aae0f8949f96a783c19c4631f5983c97e0517c3e6696978f19f6281da148f479",
+   "sha256": "f0ab1fe93d8ab4032202d920a90061ec59615be7655d3df8499c845913293f54",
    "bytes": 6012
   },
   {
