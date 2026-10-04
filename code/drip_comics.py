@@ -116,6 +116,7 @@ def build_sitemap(idx):
         urls.append(SITE + "?series=" + k)
     # static per-series directory pages (pre-rendered issue fallbacks, series-tier)
     urls.append(SITE + "issues.html")
+    urls.append(SITE + "browse.html")
     for k, n, _ in SERIES:
         urls.append(SITE + "issues-" + k + ".html")
     for k, n in EXTRA_SERIES:
@@ -128,6 +129,9 @@ def build_sitemap(idx):
                 urls.append(SITE + "?hero=" + h["id"])
     for r in idx:
         urls.append(SITE + "?issue=" + r["id"])
+    # ?comic= is the deep-link alias used by the A–Z archive (browse.html)
+    for r in idx:
+        urls.append(SITE + "?comic=" + r["id"])
     xml = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:

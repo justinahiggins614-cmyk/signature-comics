@@ -115,8 +115,10 @@ def main():
     n_urls = sm.count("<url>")
     heroes = json.load(open(os.path.join(ROOT, "data", "heroes.json"),
                             encoding="utf-8"))
-    # 1 home + 9 series + 1 issues.html + 9 issues-<skey>.html + heroes + issues
-    expect = 1 + 9 + 1 + 9 + len(heroes) + total
+    # 1 home + 9 ?series= (8 make-series + event) + 1 issues.html
+    # + 1 browse.html + 9 issues-<skey>.html + heroes
+    # + issues (?issue=) + issues (?comic= alias)
+    expect = 1 + 9 + 1 + 1 + 9 + len(heroes) + total + total
     check("sitemap url count", n_urls == expect, "%d vs %d" % (n_urls, expect))
     try:
         import xml.dom.minidom

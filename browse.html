@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A–Z Issue Archive — The Signature Comic Store</title>
+<meta name="description" content="The full A–Z archive of The Signature Comic Store: every original Signature comic issue, browsable by series and by title letter. By Justin Addam Higgins.">
+<meta property="og:title" content="A–Z Issue Archive — The Signature Comic Store">
+<meta property="og:description" content="Every original Signature comic issue, A–Z by series and by title.">
+<style>
+body{margin:0;background:#0d0a12;color:#f7f2e4;font-family:Trebuchet MS,Verdana,Arial,sans-serif;line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px 60px}
+a{color:#ffd23f}
+h1{color:#fff;text-shadow:2px 2px 0 #e63946;margin:.4em 0 .1em;font-size:1.7em}
+h2{color:#ffd23f;margin:1.4em 0 .4em;font-size:1.15em}
+.kicker{color:#e63946;font-weight:bold;letter-spacing:2px;font-size:.8em;margin-top:14px}
+.countline{color:#b9aed6;font-size:.95em;margin:.4em 0 1em}
+.countline b{color:#ffd23f}
+.sectsub{color:#b9aed6;font-size:.92em;margin:.2em 0 .8em}
+details.lazy{background:#1c1528;border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:8px;margin:10px 0;overflow:hidden}
+details.lazy summary{cursor:pointer;padding:14px 16px;font-weight:bold;font-size:1.05em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:44px}
+details.lazy summary::-webkit-details-marker{display:none}
+details.lazy summary .sn{color:#fff}
+details.lazy summary .cnt{background:#e63946;color:#fff;font-size:.75em;padding:3px 10px;border-radius:20px;white-space:nowrap}
+details.lazy summary:hover{background:#241b34}
+details.lazy[open] summary{border-bottom:2px solid #000;background:#241b34}
+.issues{padding:6px 16px 14px;max-height:70vh;overflow-y:auto}
+.irow{padding:9px 4px;border-bottom:1px dashed #3a2d52;font-size:.95em}
+.irow:last-child{border-bottom:none}
+.irow a{font-weight:bold;text-decoration:none}
+.irow a:hover{text-decoration:underline}
+.imeta{display:block;font-size:.8em;color:#b9aed6;margin-top:2px}
+.loading{color:#b9aed6;padding:12px 4px;font-style:italic}
+.searchbox{display:flex;gap:8px;margin:10px 0 4px}
+.searchbox input{flex:1;min-width:0;background:#0d0a12;border:2px solid #ffd23f;color:#f7f2e4;border-radius:8px;padding:12px;font-size:1em;font-family:inherit}
+.searchbox input:focus{outline:2px solid #e63946}
+.sr{color:#b9aed6;font-size:.85em;margin:6px 0}
+.crumbs{margin:14px 0 0;font-size:.9em}
+.crumbs a{color:#ffd23f}
+.btn{display:inline-block;background:#e63946;color:#fff;border:3px solid #000;box-shadow:3px 3px 0 #000;border-radius:8px;padding:10px 18px;font-weight:bold;text-decoration:none;font-family:inherit}
+.btn:hover{background:#ff4d5e}
+.btn.ghost{background:#1c1528;color:#ffd23f}
+@media(max-width:600px){h1{font-size:1.35em}.issues{max-height:60vh}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="crumbs"><a href="./">← The Signature Comic Store</a></p>
+<div class="kicker">THE FULL CATALOG · ORIGINAL SIGNATURE COMICS</div>
+<h1>📚 The A–Z Issue Archive</h1>
+<p class="countline" id="countline"><b>10,024</b> original issues across <b>9</b> series · catalog snapshot 2026-10-04</p>
+<p class="sectsub">Every issue is an original Signature comic by Justin Addam Higgins — no real publishers' characters, titles, or likenesses. Tap a series or a letter to open its shelf; each issue link opens the full comic in the store.</p>
+
+<h2>🔎 Search every issue</h2>
+<div class="searchbox">
+<input type="search" id="bq" placeholder="Title, hero, or JAH-COMIC-######…" aria-label="Search all issues">
+</div>
+<p class="sr" id="bsr" aria-live="polite"></p>
+<div class="issues" id="bresults" style="max-height:none;display:none"></div>
+
+<h2>🦸 Browse by series</h2>
+<p class="sectsub">Open a series shelf to see every issue in it, oldest first.</p>
+<details class="lazy"><summary><span class="sn">COSMIC CROSSOVER EVENTS</span> <span class="cnt">24 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-event.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">EMBERFALL</span> <span class="cnt">1,250 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-ember.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">JUNIOR SIGNALS</span> <span class="cnt">1,250 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-junior.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">STARFARER&#x27;S LOG</span> <span class="cnt">1,250 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-starlog.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">THE CLOCKWORK MENAGERIE</span> <span class="cnt">1,250 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-clockwork.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">THE GLOAMING WATCH</span> <span class="cnt">1,250 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-gloam.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">THE HOLLOW CIRCUIT</span> <span class="cnt">1,250 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-circuit.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">THE SIGNALBEARERS</span> <span class="cnt">1,250 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-signal.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">TIDEBOUND</span> <span class="cnt">1,250 issues</span></summary><div class="issues" data-state="unloaded" data-sort="num" data-url="data/index/browse/series-tide.json.gz"></div></details>
+
+
+<h2>🔤 Browse A–Z by title</h2>
+<p class="sectsub">Open a letter to see every issue whose title starts with it, A–Z.</p>
+<details class="lazy"><summary><span class="sn">0-9</span> <span class="cnt">0 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-0-9.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">A</span> <span class="cnt">176 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-A.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">B</span> <span class="cnt">514 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-B.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">C</span> <span class="cnt">234 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-C.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">D</span> <span class="cnt">305 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-D.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">E</span> <span class="cnt">453 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-E.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">F</span> <span class="cnt">290 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-F.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">G</span> <span class="cnt">378 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-G.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">H</span> <span class="cnt">0 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-H.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">I</span> <span class="cnt">100 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-I.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">J</span> <span class="cnt">0 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-J.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">K</span> <span class="cnt">107 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-K.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">L</span> <span class="cnt">237 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-L.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">M</span> <span class="cnt">114 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-M.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">N</span> <span class="cnt">304 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-N.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">O</span> <span class="cnt">222 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-O.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">P</span> <span class="cnt">89 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-P.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">Q</span> <span class="cnt">79 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-Q.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">R</span> <span class="cnt">365 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-R.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">S</span> <span class="cnt">1,269 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-S.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">T</span> <span class="cnt">4,313 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-T.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">U</span> <span class="cnt">109 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-U.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">V</span> <span class="cnt">259 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-V.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">W</span> <span class="cnt">11 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-W.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">X</span> <span class="cnt">0 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-X.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">Y</span> <span class="cnt">0 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-Y.json.gz"></div></details>
+<details class="lazy"><summary><span class="sn">Z</span> <span class="cnt">96 issues</span></summary><div class="issues" data-state="unloaded" data-sort="title" data-url="data/index/browse/letter-Z.json.gz"></div></details>
+
+
+<p style="margin-top:28px"><a class="btn ghost" href="./">← Back to the store</a></p>
+</div>
+<script>
+(function(){
+"use strict";
+var BASE="data/index/browse/";
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function fetchJSONgz(url){
+  return fetch(url).then(function(r){if(!r.ok)throw new Error("http "+r.status);return r.arrayBuffer()}).then(function(ab){
+    if(typeof DecompressionStream==="undefined")throw new Error("no gzip support");
+    return new Response(new Blob([ab]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+  }).then(function(t){return JSON.parse(t)});
+}
+function rowHTML(r){
+  return '<div class="irow"><a href="./?comic='+esc(r.id)+'">'+esc(r.t)+'</a>'+
+    '<span class="imeta">'+esc(r.s)+' #'+r.n+' · '+esc(r.id)+'</span></div>';
+}
+function renderRows(box,rows,sortBy){
+  rows=rows.slice();
+  if(sortBy==="num"){rows.sort(function(a,b){return a.n-b.n})}
+  else{rows.sort(function(a,b){var x=a.t.toLowerCase(),y=b.t.toLowerCase();return x<y?-1:x>y?1:0})}
+  box.innerHTML=rows.map(rowHTML).join("");
+}
+function loadInto(box){
+  var st=box.getAttribute("data-state");
+  if(st==="loaded"||st==="loading")return;
+  box.setAttribute("data-state","loading");
+  box.innerHTML='<div class="loading">Opening the long box…</div>';
+  fetchJSONgz(box.getAttribute("data-url")).then(function(rows){
+    renderRows(box,rows,box.getAttribute("data-sort"));
+    box.setAttribute("data-state","loaded");
+  }).catch(function(e){
+    box.setAttribute("data-state","unloaded");
+    box.innerHTML='<div class="loading">Could not load these issues. Check your connection and tap the shelf again.</div>';
+  });
+}
+var ds=document.querySelectorAll("details.lazy");
+for(var i=0;i<ds.length;i++){
+  (function(d){
+    d.addEventListener("toggle",function(){if(d.open){loadInto(d.querySelector(".issues"))}});
+  })(ds[i]);
+}
+/* search: lazily loads the compact per-letter files on first use, then filters */
+var LETTER_URLS=["data/index/browse/letter-0-9.json.gz", "data/index/browse/letter-A.json.gz", "data/index/browse/letter-B.json.gz", "data/index/browse/letter-C.json.gz", "data/index/browse/letter-D.json.gz", "data/index/browse/letter-E.json.gz", "data/index/browse/letter-F.json.gz", "data/index/browse/letter-G.json.gz", "data/index/browse/letter-H.json.gz", "data/index/browse/letter-I.json.gz", "data/index/browse/letter-J.json.gz", "data/index/browse/letter-K.json.gz", "data/index/browse/letter-L.json.gz", "data/index/browse/letter-M.json.gz", "data/index/browse/letter-N.json.gz", "data/index/browse/letter-O.json.gz", "data/index/browse/letter-P.json.gz", "data/index/browse/letter-Q.json.gz", "data/index/browse/letter-R.json.gz", "data/index/browse/letter-S.json.gz", "data/index/browse/letter-T.json.gz", "data/index/browse/letter-U.json.gz", "data/index/browse/letter-V.json.gz", "data/index/browse/letter-W.json.gz", "data/index/browse/letter-X.json.gz", "data/index/browse/letter-Y.json.gz", "data/index/browse/letter-Z.json.gz"];
+var allRows=null, loadingAll=false;
+function ensureAll(cb){
+  if(allRows){cb(allRows);return}
+  if(loadingAll)return;
+  loadingAll=true;
+  $("bsr").textContent="Loading the catalog…";
+  Promise.all(LETTER_URLS.map(fetchJSONgz)).then(function(parts){
+    allRows=[];
+    for(var i=0;i<parts.length;i++){allRows=allRows.concat(parts[i])}
+    loadingAll=false;cb(allRows);
+  }).catch(function(){
+    loadingAll=false;$("bsr").textContent="Could not load the catalog. Check your connection and try again.";
+  });
+}
+function runSearch(){
+  var q=$("bq").value.trim().toLowerCase();
+  var box=$("bresults"), sr=$("bsr");
+  if(q.length<2){box.style.display="none";box.innerHTML="";sr.textContent="";return}
+  ensureAll(function(rows){
+    var hits=[];
+    for(var i=0;i<rows.length;i++){
+      var r=rows[i];
+      if((r.t+" "+r.id+" "+r.s).toLowerCase().indexOf(q)>=0){hits.push(r)}
+    }
+    hits.sort(function(a,b){var x=a.t.toLowerCase(),y=b.t.toLowerCase();return x<y?-1:x>y?1:0});
+    var shown=hits.slice(0,200);
+    box.style.display="block";
+    box.innerHTML=hits.length?shown.map(rowHTML).join(""):'<div class="loading">No issues match. Try another search.</div>';
+    sr.textContent=hits.length.toLocaleString()+" issue"+(hits.length===1?"":"s")+" match"+(hits.length>200?" — showing first 200":"");
+  });
+}
+var deb=null;
+$("bq").addEventListener("input",function(){clearTimeout(deb);deb=setTimeout(runSearch,300)});
+})();
+</script>
+</body>
+</html>

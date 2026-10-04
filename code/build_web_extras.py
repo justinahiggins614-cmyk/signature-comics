@@ -14,7 +14,7 @@ never changes issue records (they are deterministic from the seed).
 
 Usage: python3 code/build_web_extras.py
 """
-import gzip, json, os, html
+import gzip, json, os, html, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -122,6 +122,78 @@ def build_static_pages(recs):
     return pages
 
 
+def build_browse(recs):
+    """UNIFIED A–Z ARCHIVE (browse.html) + lazy per-shelf gz files.
+
+    Writes data/index/browse/series-<skey>.json.gz and
+    data/index/browse/letter-<X>.json.gz — compact [id,title,series,num]
+    rows, one small file per shelf. browse.html fetches exactly one file
+    per shelf the visitor opens (search loads the letter set once), so the
+    10,000-issue catalog never loads all at once. The count header is
+    stamped from THIS run's sealed volumes — after the index flush, never
+    one run behind.
+    """
+    bdir = os.path.join(IDXF, "browse")
+    os.makedirs(bdir, exist_ok=True)
+    by_series, by_letter = {}, {}
+    for r in recs:
+        by_series.setdefault(r["skey"], []).append(r)
+        t = (r["title"] or "").strip()
+        L = t[0].upper() if t and t[0].isalpha() else "0-9"
+        by_letter.setdefault(L, []).append(r)
+
+    def compact(r):
+        return {"id": r["id"], "t": r["title"], "s": r["series"],
+                "sk": r["skey"], "n": r["num"]}
+
+    for skey, items in by_series.items():
+        items.sort(key=lambda r: r["num"])
+        with gzip.open(os.path.join(bdir, "series-%s.json.gz" % skey),
+                       "wt", encoding="utf-8") as f:
+            json.dump([compact(r) for r in items], f, separators=(",", ":"))
+    letters = ["0-9"] + [chr(c) for c in range(65, 91)]
+    for L in letters:
+        items = sorted(by_letter.get(L, []), key=lambda r: r["title"].lower())
+        with gzip.open(os.path.join(bdir, "letter-%s.json.gz" % L),
+                       "wt", encoding="utf-8") as f:
+            json.dump([compact(r) for r in items], f, separators=(",", ":"))
+
+    sname = {r["skey"]: r["series"] for r in recs}
+    series_html = "".join(
+        '<details class="lazy"><summary><span class="sn">%s</span> '
+        '<span class="cnt">%s issues</span></summary>'
+        '<div class="issues" data-state="unloaded" data-sort="num" '
+        'data-url="data/index/browse/series-%s.json.gz"></div></details>\n'
+        % (html.escape(sname[k]), "{:,}".format(len(v)), k)
+        for k, v in sorted(by_series.items(),
+                           key=lambda kv: sname[kv[0]]))
+    letter_html = "".join(
+        '<details class="lazy"><summary><span class="sn">%s</span> '
+        '<span class="cnt">%s issues</span></summary>'
+        '<div class="issues" data-state="unloaded" data-sort="title" '
+        'data-url="data/index/browse/letter-%s.json.gz"></div></details>\n'
+        % (L, "{:,}".format(len(by_letter.get(L, []))), L)
+        for L in letters)
+
+    total = len(recs)
+    today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    tpl_p = os.path.join(HERE, "browse_template.html")
+    with open(tpl_p, encoding="utf-8") as f:
+        tpl = f.read()
+    page = (tpl
+            .replace("%%COUNT%%", "{:,}".format(total))
+            .replace("%%NSERIES%%", str(len(by_series)))
+            .replace("%%DATE%%", today)
+            .replace("%%SERIES_DETAILS%%", series_html)
+            .replace("%%LETTER_DETAILS%%", letter_html)
+            .replace("%%LETTER_URLS%%",
+                     json.dumps(["data/index/browse/letter-%s.json.gz" % L
+                                 for L in letters])))
+    with open(os.path.join(ROOT, "browse.html"), "w", encoding="utf-8") as f:
+        f.write(page)
+    return "browse.html"
+
+
 def append_static_urls(pages):
     sp = os.path.join(ROOT, "sitemap.xml")
     with open(sp, encoding="utf-8") as f:
@@ -144,6 +216,7 @@ def build_all(root=ROOT, data=DATA):
     recs = load_records()
     feed_p, n_feed = build_feed(recs)
     pages = build_static_pages(recs)
+    pages.append(build_browse(recs))
     n_added = append_static_urls(pages)
     print("WEB-EXTRAS: %d records -> %s (%d feed rows), %d static pages, "
           "%d sitemap urls added"
