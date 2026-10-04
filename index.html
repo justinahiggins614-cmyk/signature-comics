@@ -1250,7 +1250,7 @@ function buildWelc(){
  ov.addEventListener("keydown",function(e){if(e.key==="Escape")closeWelc()});
  return ov;
 }
-function openWelc(){if(!ov)buildWelc();ov.classList.add("show");var b=ov.querySelector("#welcOk");if(b)b.focus()}
+function openWelc(){if(!ov)buildWelc();ov.classList.add("show");var b=ov.querySelector("#welcOk");if(b)b.focus({preventScroll:true})}
 function closeWelc(){if(ov)ov.classList.remove("show");try{localStorage.setItem(TOUR_KEY,"1")}catch(e){}}
 /* first visit: show the overlay once; deep links (?issue=, ?series=, ?hero=, #issue=)
    go straight to the record instead */
@@ -1292,7 +1292,7 @@ function openGuide(){
   g.addEventListener("click",function(e){if(e.target===g)g.classList.remove("show")});
   g.addEventListener("keydown",function(e){if(e.key==="Escape")g.classList.remove("show")});
  }
- g.classList.add("show");var c=g.querySelector("#guideClose");if(c)c.focus();
+ g.classList.add("show");var c=g.querySelector("#guideClose");if(c)c.focus({preventScroll:true});
 }
 var gb=document.getElementById("guideBtn");if(gb)gb.addEventListener("click",openWelc);
 window.__comicsTour={start:openWelc,openGuide:openGuide};
