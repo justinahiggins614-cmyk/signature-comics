@@ -1155,25 +1155,23 @@ if(!deep){(function(){var o=null;try{o=JSON.parse(localStorage.getItem(TK)||"{}"
   if(cont){btn=cont.querySelector('[data-tab="'+o[k]+'"],[data-s="'+o[k]+'"]')}
   else{try{btn=document.querySelector('.tab[id="'+o[k]+'"]')}catch(x){}}
   if(btn&&!btn.classList.contains("on")&&btn.offsetParent!==null){btn.click()}})})()}
-}catch(e){}})();/* ============ FIRST-TIME USER GUIDE (tour + permanent guide panel) ============
-   Spotlight tour: first-visit invite, Start/Skip, Next/Back, Esc/arrows,
-   localStorage "jah-tour-seen-comics". Theme vars only; never blocks content. */
+}catch(e){}})();/* ============ FIRST-TIME USER GUIDE (2026-10-04 standard): centered welcome
+   overlay + permanent guide panel. No auto-scroll, no spotlight jumps, no
+   scrollIntoView in the tour — the page stays put; the overlay does the teaching.
+   One OK button ends it; the Guide button re-opens it anytime.
+   localStorage "jah-tour-seen-comics". */
 (function(){
 var TOUR_KEY="jah-tour-seen-comics";
-var css="#tourOv{position:fixed;inset:0;z-index:2000;display:none}"+
-"#tourOv.show{display:block}"+
-"#tourShade{position:absolute;inset:0;background:rgba(5,3,10,.78)}"+
-"#tourSpot{position:absolute;border:3px solid var(--yel);border-radius:10px;box-shadow:0 0 0 9999px rgba(5,3,10,.78);pointer-events:none;transition:all .25s}"+
-"#tourCard{position:absolute;z-index:2002;max-width:min(430px,92vw);background:var(--card);border:3px solid var(--yel);border-radius:12px;padding:16px;color:var(--paper);box-shadow:6px 6px 0 #000}"+
-"#tourCard h3{margin:0 0 6px;color:var(--yel);font-size:1.05em}"+
-"#tourCard .trow{display:flex;gap:6px;margin-top:4px;font-size:.88em}"+
-"#tourCard .trow b{color:var(--yel);min-width:86px}"+
-"#tourCard .tnav{display:flex;gap:8px;margin-top:12px;align-items:center;flex-wrap:wrap}"+
-"#tourCard .btn{min-height:44px}"+
-"#tourProg{font-size:.8em;color:var(--mut);margin-left:auto}"+
-"#tourInvite{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:2001;display:none;max-width:94vw;background:var(--card);border:3px solid var(--yel);border-radius:12px;padding:10px 14px;color:var(--paper);box-shadow:4px 4px 0 #000;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}"+
-"#tourInvite.show{display:flex}"+
-"#tourInvite .btn{min-height:44px}"+
+var css="#welcOv{position:fixed;inset:0;z-index:2000;display:none;background:rgba(5,3,10,.85);align-items:center;justify-content:center;padding:14px}"+
+"#welcOv.show{display:flex}"+
+"#welcBox{background:var(--card);border:4px solid var(--yel);border-radius:14px;max-width:min(480px,94vw);max-height:88vh;overflow-y:auto;padding:20px 20px 16px;color:var(--paper);box-shadow:6px 6px 0 #000}"+
+"#welcBox .wk{font-size:.72em;letter-spacing:.22em;color:var(--yel);font-weight:700}"+
+"#welcBox h2{color:var(--yel);margin:.2em 0;font-size:1.15em}"+
+"#welcBox ol{margin:.4em 0 .2em;padding-left:22px;font-size:.95em}"+
+"#welcBox li{margin:9px 0}"+
+"#welcBox li b{color:var(--yel)}"+
+"#welcBox .wok{display:block;width:100%;min-height:52px;font-size:1.05em;font-weight:700;background:#141021;color:var(--yel);border:3px solid var(--yel);border-radius:10px;cursor:pointer;margin-top:14px;touch-action:manipulation}"+
+"#welcBox .wfull{display:block;width:100%;min-height:44px;margin-top:8px;font-size:.92em;background:none;color:var(--mut);border:1px solid var(--yel);border-radius:10px;cursor:pointer;touch-action:manipulation}"+
 "#guideOv{position:fixed;inset:0;z-index:2000;display:none;background:rgba(5,3,10,.85);align-items:center;justify-content:center;padding:14px}"+
 "#guideOv.show{display:flex}"+
 "#guideBox{background:var(--card);border:4px solid var(--yel);border-radius:14px;max-width:660px;width:100%;max-height:88vh;overflow-y:auto;padding:20px;color:var(--paper)}"+
@@ -1182,85 +1180,39 @@ var css="#tourOv{position:fixed;inset:0;z-index:2000;display:none}"+
 "#guideBox p,#guideBox li{font-size:.92em}"+
 "#guideBox .btn{min-height:44px}";
 var st=document.createElement("style");st.textContent=css;document.head.appendChild(st);
-
-var STEPS=[
- {sel:"#q",t:"Search the racks",
-  what:"The search box at the top of the catalog.",
-  does:"Finds comics as you type — by title, by hero name, or by exact issue ID like JAH-COMIC-000123 (typing just the digits, e.g. 123, works too).",
-  how:"Tap the box and type. Hero matches also pop up as HERO buttons under the search — tap one to open that hero's file."},
- {sel:"#seriespills",t:"Filters: series, A–Z, sort",
-  what:"The series quick-filter pills, the A–Z bar, and the sort menu.",
-  does:"Narrow the 8,000+ racks to one series, one title letter, or a different order.",
-  how:"Tap a series pill (or pick from the Series menu), tap a letter for titles starting with it, or change Sort to Newest / Title A–Z / Series order."},
- {sel:"#results",t:"The comic reader",
-  what:"Every cover in the results opens a full issue.",
-  does:"Opens the issue: panel art, captions, dialogue, plus Read aloud, Copy, Download, Share, and a per-issue SHA-256 authenticity check.",
-  how:"Tap any cover. In the reader: tap the left/right edges (or ← → keys) to turn pages, open the page drawer to jump, use +/− to zoom — pinch-to-zoom works on touch screens too."},
- {sel:"#fq",t:"The Comic Finder",
-  what:"The \"Describe what you're looking for…\" box.",
-  does:"Keyword search over real catalog records — it scores title, series, heroes, and IDs, and never invents issues, heroes, or series.",
-  how:"Type a plain description (a hero, a mood, a series), hit Find it, then \"Take me there →\" on any result."},
- {sel:"#creatorBtn",t:"The Hero Creator",
-  what:"The big button under the catalog.",
-  does:"Lets you make your OWN original hero — codename, powers, look, origin — preview the portrait, save it on your device, download it, or start your own series with it.",
-  how:"Open the Hero Creator, fill in the fields, hit Preview, then Save. Famous names from other publishers are blocked with original suggestions instead."},
- {sel:"#results",t:"Read aloud, copy & download",
-  what:"Inside every open issue.",
-  does:"🔊 Read aloud narrates the story with pause/resume and speed control. ⧉ Copy story copies the text. ⬇ Download saves the issue file.",
-  how:"Open any issue and look for the buttons under the story. Keyboard: Esc closes the reader and dialogs."}
-];
-var ov,spot,card,idx=0;
 function el(html){var d=document.createElement("div");d.innerHTML=html;return d.firstChild}
-function build(){
- ov=el('<div id="tourOv" role="dialog" aria-modal="true" aria-label="Site tour"><div id="tourShade"></div><div id="tourSpot"></div><div id="tourCard" tabindex="-1"></div></div>');
+var ov=null;
+function buildWelc(){
+ ov=el('<div id="welcOv" role="dialog" aria-modal="true" aria-label="Welcome to the Comic Store"><div id="welcBox">'+
+ '<div class="wk">\uD83E\uDDB8 FIRST-TIME GUIDE</div><h2>Welcome to the Comic Store</h2>'+
+ '<p style="font-size:.95em;margin:.3em 0">Every comic here is an original Signature story \u2014 original series, original heroes. Here is how to use it:</p>'+
+ '<ol>'+
+ '<li><b>Search the racks.</b> Type a title, a hero name, or an issue ID like JAH-COMIC-000123 (just the digits works too). Matching heroes pop up as HERO buttons.</li>'+
+ '<li><b>Narrow it down.</b> Series pills, the A\u2013Z bar, and the sort menu filter the racks; the Comic Finder matches plain-word descriptions to real records \u2014 it never invents anything.</li>'+
+ '<li><b>Tap any cover</b> to open the full issue \u2014 panel art, captions, dialogue. Tap the page edges or press \u2190 \u2192 to turn pages; +/\u2212 or pinch to zoom.</li>'+
+ '<li><b>Read aloud, copy, download.</b> The reader narrates the story, copies the text, or saves the issue file. The Hero Creator under the catalog builds your own original hero.</li>'+
+ '</ol>'+
+ '<button class="wok" id="welcOk">GOT IT \u2014 SHOW ME THE COMICS</button>'+
+ '<button class="wfull" id="welcFull">Full guide \u2192</button>'+
+ '</div></div>');
  document.body.appendChild(ov);
- spot=ov.querySelector("#tourSpot");card=ov.querySelector("#tourCard");
- ov.querySelector("#tourShade").addEventListener("click",endTour);
+ ov.querySelector("#welcOk").onclick=closeWelc;
+ ov.addEventListener("click",function(e){if(e.target===ov)closeWelc()});
+ ov.querySelector("#welcFull").onclick=function(){closeWelc();openGuide()};
+ ov.addEventListener("keydown",function(e){if(e.key==="Escape")closeWelc()});
+ return ov;
 }
-function show(i){
- idx=i;var s=STEPS[i],t=document.querySelector(s.sel);
- ov.classList.add("show");
- if(t){var r=t.getBoundingClientRect(),pad=8;
-  spot.style.display="block";
-  spot.style.left=(r.left+window.scrollX-pad)+"px";spot.style.top=(r.top+window.scrollY-pad)+"px";
-  spot.style.width=(r.width+pad*2)+"px";spot.style.height=(r.height+pad*2)+"px";
- }else{spot.style.display="none"}
- var top=t?t.getBoundingClientRect().bottom+window.scrollY+14:window.scrollY+80;
- card.style.top=Math.min(top,document.body.scrollHeight-320)+"px";
- card.style.left="50%";card.style.transform="translateX(-50%)";
- card.innerHTML="<h3>"+(i+1)+". "+s.t+"</h3>"+
-  '<div class="trow"><b>WHAT</b><span>'+s.what+"</span></div>"+
-  '<div class="trow"><b>WHAT IT DOES</b><span>'+s.does+"</span></div>"+
-  '<div class="trow"><b>HOW</b><span>'+s.how+"</span></div>"+
-  '<div class="tnav">'+
-  (i>0?'<button class="btn ghost" id="tBack">← Back</button>':"")+
-  (i<STEPS.length-1?'<button class="btn" id="tNext">Next →</button>':'<button class="btn" id="tNext">Finish ✓</button>')+
-  '<button class="btn ghost" id="tSkip">Skip tour</button>'+
-  '<span id="tourProg">Step '+(i+1)+" of "+STEPS.length+"</span></div>";
- var nx=card.querySelector("#tNext");nx.onclick=function(){i<STEPS.length-1?show(i+1):endTour()};
- var bk=card.querySelector("#tBack");if(bk)bk.onclick=function(){show(i-1)};
- card.querySelector("#tSkip").onclick=endTour;
- nx.focus();
-}
-function startTour(){if(!ov)build();show(0)}
-function endTour(){if(ov)ov.classList.remove("show");try{localStorage.setItem(TOUR_KEY,"1")}catch(e){}}
-document.addEventListener("keydown",function(e){
- if(!ov||!ov.classList.contains("show"))return;
- if(e.key==="Escape")endTour();
- else if(e.key==="ArrowRight"&&idx<STEPS.length-1)show(idx+1);
- else if(e.key==="ArrowLeft"&&idx>0)show(idx-1);
-});
-/* first-visit invite: a small bar, never a blocking modal */
+function openWelc(){if(!ov)buildWelc();ov.classList.add("show");var b=ov.querySelector("#welcOk");if(b)b.focus()}
+function closeWelc(){if(ov)ov.classList.remove("show");try{localStorage.setItem(TOUR_KEY,"1")}catch(e){}}
+/* first visit: show the overlay once; deep links (?issue=, ?series=, ?hero=, #issue=)
+   go straight to the record instead */
 try{
- if(!localStorage.getItem(TOUR_KEY)){
-  var inv=el('<div id="tourInvite" role="dialog" aria-label="Take the tour"><span>👋 New to the Comic Store? Take the 1-minute tour.</span><button class="btn" id="tStart">Start tour</button><button class="btn ghost" id="tNo">Not now</button></div>');
-  document.body.appendChild(inv);
-  setTimeout(function(){inv.classList.add("show")},1200);
-  inv.querySelector("#tStart").onclick=function(){inv.classList.remove("show");startTour()};
-  inv.querySelector("#tNo").onclick=function(){inv.classList.remove("show");try{localStorage.setItem(TOUR_KEY,"1")}catch(e){}};
- }
+ var seen=!!localStorage.getItem(TOUR_KEY),deep=false;
+ try{deep=/([?&#])(issue|comic|series|hero)=/.test(location.href)}catch(e){}
+ if(deep){try{localStorage.setItem(TOUR_KEY,"1")}catch(e){}}
+ else if(!seen)setTimeout(function(){try{if(!localStorage.getItem(TOUR_KEY))openWelc()}catch(e){}},1200);
 }catch(e){}
-/* permanent guide panel */
+/* permanent guide panel (kept; the overlay's "Full guide" button opens it) */
 var guideHTML='<h2>❓ How to use the Comic Store</h2>'+
 '<p>Every comic here is an original Signature story — original series, original heroes. Here is everything this site does, in plain language.</p>'+
 "<h3>🔎 Finding comics</h3><ul>"+
@@ -1282,7 +1234,7 @@ var guideHTML='<h2>❓ How to use the Comic Store</h2>'+
 "<li><b>Preview</b> shows the portrait; <b>Edit</b> jumps back; <b>Save</b> stores the hero on this device; <b>Download</b> keeps the file; <b>Start series</b> files it as your own series.</li>"+
 "<li><b>Export/Import</b> moves heroes between devices as JSON (bad files get a plain-language message, never a crash). <b>Delete</b> removes one hero or all of them.</li>"+
 "<li>Famous names from other publishers are blocked — you get original suggestions instead. Everything you make is yours, stored only on your device.</li></ul>"+
-"<h3>⌨️ Keyboard</h3><p>In the reader: ← → turn pages, Esc closes. In the tour: ← → move, Esc exits.</p>"+
+"<h3>⌨️ Keyboard</h3><p>In the reader: ← → turn pages, Esc closes. The welcome guide and this guide close with Esc.</p>"+
 '<p style="text-align:center"><button class="btn" id="guideClose">Close guide</button></p>';
 function openGuide(){
  var g=document.getElementById("guideOv");
@@ -1294,8 +1246,9 @@ function openGuide(){
  }
  g.classList.add("show");var c=g.querySelector("#guideClose");if(c)c.focus();
 }
-var gb=document.getElementById("guideBtn");if(gb)gb.addEventListener("click",openGuide);
-window.__comicsTour={start:startTour,openGuide:openGuide};
-})();</script>
+var gb=document.getElementById("guideBtn");if(gb)gb.addEventListener("click",openWelc);
+window.__comicsTour={start:openWelc,openGuide:openGuide};
+})();
+</script>
 </body>
 </html>
