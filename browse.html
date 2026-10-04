@@ -38,6 +38,19 @@ details.lazy[open] summary{border-bottom:2px solid #000;background:#241b34}
 .crumbs{margin:14px 0 0;font-size:.9em}
 .crumbs a{color:#ffd23f}
 .btn{display:inline-block;background:#e63946;color:#fff;border:3px solid #000;box-shadow:3px 3px 0 #000;border-radius:8px;padding:10px 18px;font-weight:bold;text-decoration:none;font-family:inherit}
+/* BEST OF THE BEST — Manon's 2026-10-04 archive pattern: the AI's top pick pinned above the A–Z list */
+.bestofbest{background:#1c1528;border:3px solid #ffd23f;box-shadow:5px 5px 0 #000;border-radius:10px;margin:14px 0;overflow:hidden}
+.bestofbest h2{margin:0;padding:14px 16px 4px;color:#ffd23f}
+.bestofbest .whybest{background:#241b34;border-left:4px solid #e63946;padding:10px 14px;margin:10px 16px;font-size:.92em;color:#f7f2e4}
+.bestofbest .beststats{display:flex;flex-wrap:wrap;gap:8px;margin:12px 16px}
+.bestofbest .beststat{background:#0d0a12;border:2px solid #000;box-shadow:2px 2px 0 #000;border-radius:6px;padding:6px 12px;font-size:.82em;color:#b9aed6}
+.bestofbest .beststat b{color:#ffd23f}
+.bestofbest .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 16px 16px}
+.bestofbest .body{padding:0 16px;font-size:.95em}
+.bestflow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:12px 16px;justify-content:center;font-size:.8em}
+.bestflow .bnode{background:#0d0a12;border:2px solid #ffd23f;border-radius:8px;padding:8px 12px;text-align:center;max-width:150px;color:#f7f2e4}
+.bestflow .bnode b{display:block;color:#ffd23f;margin-bottom:2px}
+.bestflow .barrow{color:#e63946;font-size:20px;font-weight:700}
 .btn:hover{background:#ff4d5e}
 .btn.ghost{background:#1c1528;color:#ffd23f}
 @media(max-width:600px){h1{font-size:1.35em}.issues{max-height:60vh}}
@@ -70,6 +83,53 @@ details.lazy[open] summary{border-bottom:2px solid #000;background:#241b34}
 </nav>
 
 
+<section class="bestofbest" aria-labelledby="besth">
+<h2 id="besth">★ BEST OF THE BEST</h2>
+<p class="sectsub" style="padding:0 16px">The AI's top pick from this store — the single issue that best shows what a Signature comic is. Popped open for you.</p>
+<details class="lazy" open style="margin:0 16px 16px">
+<summary><span class="sn">★ THE SIGNALBEARERS #1 — "Relay of Signals"</span><span class="cnt">JAH-COMIC-000001</span></summary>
+<div class="body">
+<p class="whybest"><b>Why this is the best:</b> the first comic issue ever published in this store — the genesis issue of the Signature heroes universe. It introduces Illmir (Tamere Ohal) and Vavix (Galbex Setine), the cosmic guardians of the beacon-network. Every issue since follows the format this one set.</p>
+<div class="bestflow" aria-hidden="true"><div class="bnode"><b>The call</b>deep orbit needs Illmir</div><div class="barrow">→</div><div class="bnode"><b>The heroes</b>Illmir + Vavix</div><div class="barrow">→</div><div class="bnode"><b>The mission</b>keep the beacons lit</div><div class="barrow">→</div><div class="bnode"><b>The universe</b>Signature heroes</div></div>
+<p><b>What it does:</b> opens the Signature heroes universe — a team of cosmic guardians keeps the beacon-network of the far colonies lit, and something out in the dark keeps trying to snuff it. Full pages, full dialogue, original characters.</p>
+<p><b>Implications:</b> all <b>12,524</b> issues in this store are original Signature-universe stories — no borrowed characters, no trademarked heroes. This issue is where it all started.</p>
+<div class="beststats"><span class="beststat"><b>12,524</b> issues in store</span><span class="beststat">Issue <b>#1</b> — the genesis</span><span class="beststat">Series: <b>THE SIGNALBEARERS</b></span><span class="beststat">Heroes: <b>Illmir · Vavix</b></span></div>
+<div class="toolbar">
+<button class="btn" id="best-speak" type="button">🔊 Read aloud</button>
+<button class="btn" id="best-copy" type="button">⧉ Copy</button>
+<button class="btn" id="best-dl" type="button">⤓ Download</button>
+<a class="btn" href="./?comic=JAH-COMIC-000001">Read the full issue →</a>
+</div>
+</div>
+</details>
+</section>
+<script>
+(function(){
+"use strict";
+var plain="Best of the Best — The Signalbearers number 1, Relay of Signals, JAH-COMIC-000001. The first comic issue ever published in this store. It introduces Illmir, Tamere Ohal, and Vavix, Galbex Setine — cosmic guardians who keep the beacon-network of the far colonies lit, while something out in the dark keeps trying to snuff it.";
+var dl="THE SIGNATURE COMIC STORE — BEST OF THE BEST\nTHE SIGNALBEARERS #1 — Relay of Signals — JAH-COMIC-000001 (issue 1 of 12,524)\n\nWHY THIS IS THE BEST\nThe first comic issue ever published in this store — the genesis issue of the Signature heroes universe. Introduces Illmir (Tamere Ohal) and Vavix (Galbex Setine).\n\nWHAT IT DOES\nOpens the Signature heroes universe: cosmic guardians keep the beacon-network of the far colonies lit; something out in the dark keeps trying to snuff it. Full pages, full dialogue, original characters.\n\nIMPLICATIONS\nAll 12,524 issues are original Signature-universe stories — no borrowed characters, no trademarked heroes.\n\nFull issue: https://justinahiggins614-cmyk.github.io/signature-comics/?comic=JAH-COMIC-000001";
+function copyText(t,btn){function done(ok){var o=btn.textContent;btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent=o;},1500);}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){done(false);});}else{var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done(true);}catch(e){done(false);}document.body.removeChild(ta);}}
+function download(name,text){try{var url=URL.createObjectURL(new Blob([text],{type:"text/plain"}));var a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);try{URL.revokeObjectURL(url);}catch(e){}},800);}catch(e){}}
+var speakTimer=null;
+function speakStop(){try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}if(speakTimer){clearTimeout(speakTimer);speakTimer=null;}}
+var speakBtn=document.getElementById("best-speak");
+speakBtn.onclick=function(){
+  speakStop();
+  try{
+    if(!("speechSynthesis" in window)){speakBtn.textContent="No voice on this device";setTimeout(function(){speakBtn.textContent="🔊 Read aloud";},1800);return;}
+    if(window.speechSynthesis.speaking){speakBtn.textContent="🔊 Read aloud";return;}
+    var u=new SpeechSynthesisUtterance(plain);
+    speakBtn.textContent="⏹ Stop";
+    u.onend=function(){speakBtn.textContent="🔊 Read aloud";};
+    u.onerror=function(){speakBtn.textContent="🔊 Read aloud";};
+    window.speechSynthesis.speak(u);
+    speakTimer=setTimeout(function(){speakBtn.textContent="🔊 Read aloud";},30000);
+  }catch(e){speakBtn.textContent="🔊 Read aloud";}
+};
+document.getElementById("best-copy").onclick=function(){copyText(dl,this);};
+document.getElementById("best-dl").onclick=function(){download("JAH-COMIC-000001-best.txt",dl);};
+})();
+</script>
 <h2>🔎 Search every issue</h2>
 <div class="searchbox">
 <input type="search" id="bq" placeholder="Title, hero, or JAH-COMIC-######…" aria-label="Search all issues">
