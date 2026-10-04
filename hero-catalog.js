@@ -281,7 +281,7 @@ function renderHero(h) {
    appsHtml +
    '<div class="collect"><b style="width:100%;color:var(--yel)">&#11088; COLLECT &amp; CONNECT</b>' +
    '<a class="btn" href="https://justinahiggins614-cmyk.github.io/signature-3d-print/" target="_blank" rel="noopener">' +
-     '&#129717; Get the action figure (3D Print Depository)</a>' +
+     '&#129717; Get the action figure (3D Print Mega Mall)</a>' +
    '<a class="btn" href="https://justinahiggins614-cmyk.github.io/jah-ai-models/" target="_blank" rel="noopener">' +
      '&#129302; Talk to ' + esc(h.code) + '&rsquo;s character AI (AI Phone Book)</a></div>' +
    '<div class="honest">&#10022; ' + esc(h.note) + '</div>' + '</div></div>' +
