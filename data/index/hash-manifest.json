@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03T22:23:28Z",
+ "generated": "2026-10-04T00:23:34Z",
  "schema_version": "1.0",
  "files": [
   {
@@ -9,7 +9,7 @@
   },
   {
    "file": "data/state.json",
-   "sha256": "6d38314276013068c17adbce100d15886ba5a5ecd5559f7e3f389268a83c8747",
+   "sha256": "b55cba73f30ff875eac8af67eb5b533b8ab01292a3328af4d283d1408baa6ba7",
    "bytes": 20
   },
   {
@@ -439,12 +439,37 @@
   },
   {
    "file": "data/volumes/comics-c00086.json.gz",
-   "sha256": "6a5dc11a31e3de59054976da4cac7719b17eaf4d830904ede30a4ace0ee8c412",
-   "bytes": 7737
+   "sha256": "5f8fec44cc1f1175561d9ddb6c047e46a569e9a21db00b0962f7d37df4883829",
+   "bytes": 25755
+  },
+  {
+   "file": "data/volumes/comics-c00087.json.gz",
+   "sha256": "2260b7c4113a10617fbcab71bae3e5b4a14caa81c7a722d2089f7c0075a6c25a",
+   "bytes": 25931
+  },
+  {
+   "file": "data/volumes/comics-c00088.json.gz",
+   "sha256": "57358d85f0b93dc740e0b39eb83eb05af903b6a30a02ba6d73231fc8962b19e4",
+   "bytes": 26499
+  },
+  {
+   "file": "data/volumes/comics-c00089.json.gz",
+   "sha256": "6b5f732813d1982f86bbbf3b9bcd420ef6ba6dfc556de3cdd3888beee667961f",
+   "bytes": 25431
+  },
+  {
+   "file": "data/volumes/comics-c00090.json.gz",
+   "sha256": "9eebc087436ca5bea270a3b031b0e6d73c607a36a135b44692a34ceafa444a3d",
+   "bytes": 26003
+  },
+  {
+   "file": "data/volumes/comics-c00091.json.gz",
+   "sha256": "e4806ca017d3733958a081faa6b4ffb89cc3be71cf01b2c2efa95fc3e90e95d0",
+   "bytes": 7662
   },
   {
    "file": "data/index/api.json",
-   "sha256": "674e16cd0839155372e0a6ea75071a973db34b7fc2112dd1042933f358b48369",
+   "sha256": "99090e6ee24e2579c526f3252d63f43271620825961f55420abab63dc4d3ca2c",
    "bytes": 486
   },
   {
@@ -459,8 +484,8 @@
   },
   {
    "file": "data/index/characters-index.json",
-   "sha256": "bf805f7b887637affcaf834f9c80746d73747002c832d53707258f8cfdbbe97a",
-   "bytes": 3037062
+   "sha256": "785d5a4fef05cc61feed140b0b2abe412c94fd65e52cd0ebd180801dcb375f49",
+   "bytes": 3135868
   },
   {
    "file": "data/index/comic-record-example.json",
@@ -469,12 +494,12 @@
   },
   {
    "file": "data/index/comics-catalog.json",
-   "sha256": "9604ec97f264bda6475a1e982614e7c56a32eeb22f28bc3ab01172da8807cfef",
-   "bytes": 1026296
+   "sha256": "ebd14cbba6e6ae09e41e9e7fb5b77b86a951601d5dba91fa15eefcee9de8d00f",
+   "bytes": 1087081
   },
   {
    "file": "data/index/comics-manifest.json",
-   "sha256": "2e3a1e98157176a7242f89cd050a12aabfd108a4b2204ed0859a2892572e90ec",
+   "sha256": "86042104a80ee8b266b18d19f50cc2bd3513dde8e8521380930992243a5f064f",
    "bytes": 2234
   },
   {
@@ -484,8 +509,8 @@
   },
   {
    "file": "data/index/comics.idx.json.gz",
-   "sha256": "943e5445bc23245c261d3a07bef3172382610d4e190f20f0d1985c556e16dc39",
-   "bytes": 582576
+   "sha256": "6ff701d3aa499c8fb94ba69a8d8f9f1c16609b3b86a2b37bcd0f11798788b881",
+   "bytes": 616519
   },
   {
    "file": "data/index/event-schema.json",
@@ -494,18 +519,18 @@
   },
   {
    "file": "data/index/events-index.json",
-   "sha256": "999c0f357ed8b43f7d5350af5e02ecbfe9dc7aa823575ab57ede4aada20c4636",
+   "sha256": "d5eae9b802c8e5896d5c605a4fdf5418f3a4af41a7a6cd97b64bb423d9bbdb6c",
    "bytes": 4665
   },
   {
    "file": "data/index/hash-manifest.json",
-   "sha256": "fc7d786bd42e7361fdf49709dff7b6222d52239e6ea0175464dc2ed823bc36d2",
-   "bytes": 15640
+   "sha256": "509c59cb6f511036142992a30b92835dc917811af15104edd38f35149b0debc7",
+   "bytes": 16426
   },
   {
    "file": "data/index/hashes.json.gz",
-   "sha256": "d00f50af8155aa9f5002b17c9cfa589fcf656069bdd070ed7afe8bd09afce153",
-   "bytes": 355932
+   "sha256": "16e1dc0a3f9dbdbfd6368168b55a6aaca158019806bfa5ff55dcbc8d3fcc7959",
+   "bytes": 376794
   },
   {
    "file": "data/index/hero-schema.json",
@@ -514,12 +539,12 @@
   },
   {
    "file": "data/index/heroes-index.json",
-   "sha256": "676fcbeccf6440d3ef14d94995b8fbd3310453d35492c9ab15f1da1cf4a2ea66",
+   "sha256": "42caecf019d443370f9d10733f22f365ec177432fa1d1e1859f99443e75b02b6",
    "bytes": 16262
   },
   {
    "file": "data/index/series-index.json",
-   "sha256": "63b2f0f496ec347b5a177806ef39c04055509e6e3c512114ad78d8fa67c8f93c",
+   "sha256": "83fa89edb504a4cd0cb9655a9c6f92e8f88f6c4d55b7d3745669cb70be0edea8",
    "bytes": 6012
   },
   {
