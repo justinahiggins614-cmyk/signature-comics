@@ -268,90 +268,95 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .jtabbar a.jtab.on:hover{background:#f5c518;box-shadow:0 1px 6px rgba(0,0,0,.25)}
 </style>
 <nav class="jtabbar" aria-label="Site sections">
-<a href="https://justinahiggins614-cmyk.github.io/signature-math/">1 Signature Math</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">2 Signature Universal Paradox Immune Calculator</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">3 The Signature Dictionary</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">4 JAH Wiki</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">5 JAH-N Wiki Leaks</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-llama/">6 Signature Llama: The Fully Cyber Utilizable AI</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">7 The Signature AI Phone Book</a>
-<a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">8 Globally Rejustered Patent Catalog</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">9 Signature Spec Catalog Pending Patents</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">10 The Signature PC System Depository</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-books/">11 The Signature Book Depository</a>
-<span class="here">12 The Signature Comic Store · YOU ARE HERE</span>
-<a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">13 The Signature Global Newspaper Archive</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-backend/">14 The Signature AI Mix and Match Generator</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">15 The Signature Boundless Generator Archive</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">16 The Signature AI Mix Lab</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">17 AI Olympics</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">18 The Signature Computer Chip Maker and Archive</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">19 The Signature App Archive</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">20 The Signature AI to Robot Matcher</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-experiment-solver/">21 The Signature Experiment Solver</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">22 Signature AI Pixel</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">23 Signature Music Studio</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-fixit/">24 The Signature Mr Fix-It</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-university/">25 The Signature University</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-earth/">26 Signature Earth</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-flight-school/">27 The Signature Flight School</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-game-store/">28 The Signature Game Store</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-website-creator/">29 The Signature Website Creator</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-antivirus/">30 The Signature Antivirus</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-os-updater/">31 The Signature OS Updater</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-space-mapping/">32 Signature Space Mapping</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-cookbook/">33 The Signature Cookbook</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-spell-check/">34 Spell Check</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-image-grid-measure/">35 Grid Measure</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">36 The Signature Cyber Mega-Mall</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">37 The Signature 3D Print Mega Mall</a>
 <a class="jtab on" href="index.html">🏠 Front Door</a>
 <a class="jtab" href="browse.html">📚 1 Million Archive</a>
-<a class="jtab" href="issues.html">Issues</a><span class="here">12 The Signature Comic Store — YOU ARE HERE</span></div>
+<a class="jtab" href="issues.html">Issues</a>
 </nav>
+
+<div class="wrap" style="text-align:center;margin:36px auto;max-width:700px">
+<h2 class="secttl" style="margin-top:0">🦸✨ THE HERO CREATOR</h2>
+<p class="sectsub">Make your OWN comic hero — name, powers, look, origin — and even your OWN series, with your name on it. Saved on your device, downloadable to keep.</p>
+<button class="btn big" id="creatorBtn">🦸 OPEN THE HERO CREATOR</button>
+<div id="myHeroes" style="text-align:left;margin-top:14px"></div>
+<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+<button class="btn ghost" id="expHeroes">⬇ Export my heroes (JSON)</button>
+<button class="btn ghost" id="impHeroes">⬆ Import heroes (JSON)</button>
+<button class="btn ghost" id="delHeroes">🗑 Delete all my heroes</button>
+<input type="file" id="impFile" accept="application/json,.json" style="display:none" aria-label="Import heroes JSON file">
+</div>
+<div id="seriesMsg" class="matchline" aria-live="polite"></div>
+<div id="mySeries" style="text-align:left;margin-top:14px"></div>
+</div>
+</div>
+
+<div id="creatorModal" role="dialog" aria-label="Hero creator">
+<div id="creatorBox">
+<h2>🦸✨ HERO CREATOR</h2>
+<div id="creatorSteps" class="creatorsteps" aria-label="Creator workflow steps"></div>
+<p class="sectsub">Design a Signature-original hero. Nothing here uses anyone else's characters — this one is <b>yours</b>.</p>
+<p class="creatorwarn" style="background:#0d1526;border-color:#2a3a5f">🔒 <b>Private by design:</b> heroes you save live <b>only in this browser</b> (localStorage). Your secret identity and name are never sent anywhere, never published automatically, and never leave your device unless <b>you</b> download or share them. Delete any hero — or all of them — anytime.</p>
+<label for="chCodename">Hero codename</label>
+<input id="chCodename" maxlength="60" placeholder="e.g. LANTERNHAWK">
+<label for="chName">Secret identity (real name)</label>
+<input id="chName" maxlength="60" placeholder="e.g. Dana Reyes">
+<label for="chArch">Archetype</label>
+<select id="chArch">
+<option>The Powerhouse</option><option>The Speedster</option><option>The Dark Vigilante</option>
+<option>The Web-Slinger Type</option><option>The Extraordinary Team</option><option>The Cosmic Guardian</option>
+<option>The Armored Tinkerer</option><option>The Mystic</option><option>The Mythic Warrior</option>
+<option>The Spectrum Oathkeeper</option><option>The Elastic Detective</option><option>The Size-Changer</option>
+<option>The Ocean Warden</option><option>The Storm Heir</option><option>The Shadow Teleporter</option>
+<option>The Feral Guardian</option><option>The Cosmic Herald</option><option>The Gentle Giant</option>
+<option>The Gadget Kid</option><option>The Peak Tactician</option><option>Something Brand New</option>
+</select>
+<label for="chPowers">Powers (comma-separated)</label>
+<input id="chPowers" maxlength="200" placeholder="e.g. flight, light-warping, courage">
+<label for="chSuit">Suit color</label>
+<input id="chSuit" type="color" value="#1d4fd6" style="height:40px">
+<label for="chCape">Cape/accent color</label>
+<input id="chCape" type="color" value="#c8d4f2" style="height:40px">
+<label for="chLook">Look (describe the costume)</label>
+<textarea id="chLook" maxlength="400" placeholder="What does your hero wear?"></textarea>
+<label for="chOrigin">Origin story</label>
+<textarea id="chOrigin" maxlength="800" placeholder="How did they become a hero?"></textarea>
+<label for="chSeries">Their series (name your own!)</label>
+<input id="chSeries" maxlength="80" placeholder="e.g. THE DAWNBREAK CHRONICLES">
+<label for="chBy">Created by (your name)</label>
+<input id="chBy" maxlength="60" placeholder="Your name here">
+<div id="creatorPrev"></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center">
+<button class="btn" id="chPreview">👁 Preview</button>
+<button class="btn" id="chEdit">✎ Edit</button>
+<button class="btn big" id="chSave">💾 Save</button>
+<button class="btn" id="chDownload">⬇ Download</button>
+<button class="btn" id="chStartSeries">🚀 Start series</button>
+<button class="btn" id="chClose">Close</button>
+<span id="saveMsg" class="matchline" aria-live="polite"></span>
+</div>
+</div>
+</div>
+
+<div id="readerModal" role="dialog" aria-label="Comic reader">
+<div id="readerTop"><button class="btn ghost" id="rdClose">✕ Close</button><div class="rt" id="readerTitle"></div><button class="btn ghost" id="rdPages">📄 Pages</button></div>
+<div id="readerStage"><div id="rdPrev" role="button" aria-label="Previous page" tabindex="0"></div><div id="rdArt"></div><div id="rdNext" role="button" aria-label="Next page" tabindex="0"></div></div>
+<div id="rdCap"></div>
+<div id="readerHint">Tap the left/right edges to turn pages · pinch to zoom · ← → keys work too</div>
+<div id="readerZoom"><button id="rdZout" aria-label="Zoom out">−</button><button id="rdZreset">100%</button><button id="rdZin" aria-label="Zoom in">+</button></div>
+<div id="rdDrawer" aria-label="Page picker"></div>
+</div>
+
+<div id="issueview" class="wrap" style="display:none"></div>
+
+<div id="heroview" class="wrap" style="display:none"></div>
+
+<div id="rdbar"><span>🔊 <span class="prog" id="rdprog">Reading…</span></span><button class="btn" id="rdpause">⏸ Pause</button><button class="btn ghost" id="rdspeed" aria-label="Reading speed">1×</button><button class="btn" id="rdstop">⏹ Stop</button></div>
+
+<!-- JAH NETWORK: site list moved to page bottom, above footer -->
+
 <footer>
 <div class="wrap">
 <p><b style="color:var(--yel)">The Signature Comic Store</b> — every issue an original generated comic by/for the Signature system, by <b>Justin Addam Higgins</b>. Original heroes and stories only: no real publishers' characters, titles, or likenesses. Generated material is labeled as generated.</p>
-<nav aria-label="JAH Network footer">
-<div class="sites">THE JAH NETWORK ·
-<a href="https://justinahiggins614-cmyk.github.io/signature-math/">1 Signature Math</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">2 Signature Universal Paradox Immune Calculator</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">3 The Signature Dictionary</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">4 JAH Wiki</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">5 JAH-N Wiki Leaks</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-llama/">6 Signature Llama: The Fully Cyber Utilizable AI</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">7 The Signature AI Phone Book</a>
-<a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">8 Globally Rejustered Patent Catalog</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">9 Signature Spec Catalog Pending Patents</a>
-<a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">10 The Signature PC System Depository</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-books/">11 The Signature Book Depository</a>
-<span class="here">12 The Signature Comic Store · YOU ARE HERE</span>
-<a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">13 The Signature Global Newspaper Archive</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-backend/">14 The Signature AI Mix and Match Generator</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">15 The Signature Boundless Generator Archive</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">16 The Signature AI Mix Lab</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">17 AI Olympics</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">18 The Signature Computer Chip Maker and Archive</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">19 The Signature App Archive</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">20 The Signature AI to Robot Matcher</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-experiment-solver/">21 The Signature Experiment Solver</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">22 Signature AI Pixel</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">23 Signature Music Studio</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-fixit/">24 The Signature Mr Fix-It</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-university/">25 The Signature University</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-earth/">26 Earth</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-flight-school/">27 Flight</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-game-store/">28 Games</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-website-creator/">29 Sites</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-antivirus/">30 Antivirus</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-os-updater/">31 OS Updater</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-space-mapping/">32 Space</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-cookbook/">33 Cookbook</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-spell-check/">34 Spell Check</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-image-grid-measure/">35 Grid Measure</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">36 The Signature Cyber Mega-Mall</a>
-<a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">37 The Signature 3D Print Mega Mall</a><span class="here">12 The Signature Comic Store — YOU ARE HERE</span></div>
-</nav>
+
 <p>Free. No login. Machine-readable: <a href="data/index/api.json">api.json</a> · <a href="data/index/comics-manifest.json">manifest</a> · <a href="data/index/comics-catalog.json">comics-catalog.json</a> · <a href="data/index/comics.idx.json.gz">comic index (gzip)</a> · <a href="data/index/series-index.json">series</a> · <a href="data/index/heroes-index.json">heroes</a> · <a href="data/index/characters-index.json">characters</a> · <a href="data/index/events-index.json">events</a> · <a href="data/index/hashes.json.gz">issue hashes</a> · <a href="data/index/comics-schema.json">schema</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · <a href="issues.html">static issue directory</a> · <a href="browse.html">A–Z issue archive</a></p>
 </div>
 <div class="jah-stamp" style="margin-top:10px;text-align:center;"><img src="assets/signature-stamp.jpg" alt="Official Signature stamp" style="height:64px;width:auto;border-radius:4px;"><div style="font-size:.72em;opacity:.75;margin-top:4px;">Official Signature stamp</div></div>
@@ -1268,5 +1273,46 @@ window.__comicsTour={start:openWelc,openGuide:openGuide};
   }
 })();
 </script>
+
+<nav aria-label="JAH Network footer">
+<div class="sites">THE JAH NETWORK ·
+<a href="https://justinahiggins614-cmyk.github.io/signature-math/">1 Signature Math</a>
+<a href="https://justinahiggins614-cmyk.github.io/jah-calculator/">2 Signature Universal Paradox Immune Calculator</a>
+<a href="https://justinahiggins614-cmyk.github.io/jah-dictionary/">3 The Signature Dictionary</a>
+<a href="https://justinahiggins614-cmyk.github.io/jah-wiki/">4 JAH Wiki</a>
+<a href="https://justinahiggins614-cmyk.github.io/jah-n-wiki-leaks/">5 JAH-N Wiki Leaks</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-llama/">6 Signature Llama: The Fully Cyber Utilizable AI</a>
+<a href="https://justinahiggins614-cmyk.github.io/jah-ai-models/">7 The Signature AI Phone Book</a>
+<a href="https://justinahiggins614-cmyk.github.io/cyber-patent-catalog/">8 Globally Rejustered Patent Catalog</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-one-archive/specs.html">9 Signature Spec Catalog Pending Patents</a>
+<a href="https://justinahiggins614-cmyk.github.io/jah-computer-systems/">10 The Signature PC System Depository</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-books/">11 The Signature Book Depository</a>
+<span class="here">12 The Signature Comic Store · YOU ARE HERE</span>
+<a href="https://justinahiggins614-cmyk.github.io/signature-newspapers/">13 The Signature Global Newspaper Archive</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-backend/">14 The Signature AI Mix and Match Generator</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-boundless-generators/">15 The Signature Boundless Generator Archive</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-ai-mixlab/">16 The Signature AI Mix Lab</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-ai-olypics/">17 AI Olympics</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-chip-maker/">18 The Signature Computer Chip Maker and Archive</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-app-archive/">19 The Signature App Archive</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-ai-robot-matcher/">20 The Signature AI to Robot Matcher</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-experiment-solver/">21 The Signature Experiment Solver</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-ai-image-video-maker/">22 Signature AI Pixel</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-ai-song-maker/">23 Signature Music Studio</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-fixit/">24 The Signature Mr Fix-It</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-university/">25 The Signature University</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-earth/">26 Earth</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-flight-school/">27 Flight</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-game-store/">28 Games</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-website-creator/">29 Sites</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-antivirus/">30 Antivirus</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-os-updater/">31 OS Updater</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-space-mapping/">32 Space</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-cookbook/">33 Cookbook</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-spell-check/">34 Spell Check</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-image-grid-measure/">35 Grid Measure</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-cyber-mega-mall/">36 The Signature Cyber Mega-Mall</a>
+<a href="https://justinahiggins614-cmyk.github.io/signature-3d-print/">37 The Signature 3D Print Mega Mall</a><span class="here">12 The Signature Comic Store — YOU ARE HERE</span></div>
+</nav>
 </body>
 </html>
