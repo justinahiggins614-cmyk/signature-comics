@@ -49,11 +49,11 @@ function loadHeroes() {
   return HEROES_P;
 }
 function myHeroes() {
-  try { return JSON.parse(localStorage.getItem("sigcomics_myheroes") || "[]"); }
+  try { return JSON.parse(PS.get("sigcomics_myheroes") || "[]"); }
   catch (e) { return []; }
 }
 function saveMyHeroes(a) {
-  try { localStorage.setItem("sigcomics_myheroes", JSON.stringify(a)); }
+  try { PS.set("sigcomics_myheroes", JSON.stringify(a)); }
   catch (e) {}
 }
 /* Famous-character guard: the store only publishes ORIGINAL Signature
@@ -87,11 +87,11 @@ function suggestNames(seed) {
 }
 /* My Series: reader-started series, stored on-device. */
 function mySeries() {
-  try { return JSON.parse(localStorage.getItem("sigcomics_myseries") || "[]"); }
+  try { return JSON.parse(PS.get("sigcomics_myseries") || "[]"); }
   catch (e) { return []; }
 }
 function saveMySeries(a) {
-  try { localStorage.setItem("sigcomics_myseries", JSON.stringify(a)); }
+  try { PS.set("sigcomics_myseries", JSON.stringify(a)); }
   catch (e) {}
 }
 function upsertSeries(h) {
@@ -319,8 +319,10 @@ function renderHero(h) {
     var q = $("hqin").value.trim(); if (!q) return;
     $("hqin").value = ""; hqSay("u", q);
     var P = heroAIProfile(h, RP), ans;
-    if (heroConversational(q.toLowerCase()) && typeof JAHtalk !== "undefined")
-      ans = JAHtalk.chatFor(P, "ai:" + (P.id || P.name)).reply(q);
+    if (heroConversational(q.toLowerCase()) && typeof JAHtalk !== "undefined") {
+      var _hck = (typeof JAHProfile !== "undefined") ? JAHProfile.chatKey("ai:" + (P.id || P.name)) : ("ai:" + (P.id || P.name));
+      ans = JAHtalk.chatFor(P, _hck).reply(q);
+    }
     else
       ans = heroQaAnswer(q, h, RP);
     if (typeof JAHtalk !== "undefined") ans = JAHtalk.guard(ans, P);

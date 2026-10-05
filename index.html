@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>try{if(localStorage.getItem("jah-theme")==="dark"){document.documentElement.dataset.theme="dark"}}catch(e){}</script>
+<script src="js/signin.js"></script>
+<script>/* JAHProfile storage: signed-out behavior is byte-identical to before; signed-in profiles get per-profile namespaced storage. */
+var PS = (typeof JAHProfile !== 'undefined') ? JAHProfile.store : localStorage;</script>
+<script>try{if(PS.get("jah-theme")==="dark"){document.documentElement.dataset.theme="dark"}}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- SITE TITLE PROVISIONAL — awaiting Manon's confirmation; safe to rename everywhere -->
@@ -999,8 +1002,10 @@ function qaAsk(){
   var q=$("qin").value.trim();if(!q||!CUR)return;$("qin").value="";
   qaSay("u",q);
   var P=issueAIProfile(CUR,QA_RP),ans;
-  if(issueConversational(q.toLowerCase())&&typeof JAHtalk!=="undefined")
-    ans=JAHtalk.chatFor(P,"issue:"+CUR.id).reply(q);
+  if(issueConversational(q.toLowerCase())&&typeof JAHtalk!=="undefined"){
+    var _ick=(typeof JAHProfile!=="undefined")?JAHProfile.chatKey("issue:"+CUR.id):("issue:"+CUR.id);
+    ans=JAHtalk.chatFor(P,_ick).reply(q);
+  }
   else
     ans=QA_RP?qaRoleplay(q,CUR):qaAnswer(q,CUR);
   if(typeof JAHtalk!=="undefined")ans=JAHtalk.guard(ans,P);
@@ -1161,7 +1166,7 @@ $("fq").addEventListener("keydown",function(e){if(e.key==="Enter")fAsk()});
 init();
 </script>
 <script>(function(){var d=document.querySelectorAll(".statdrop");if(!window.matchMedia||!window.matchMedia("(max-width:767px)").matches)return;for(var i=0;i<d.length;i++)d[i].removeAttribute("open")})();</script>
-<button id="jahThemeBtn" title="Dark mode" aria-label="Toggle dark mode">◐</button><script>(function(){try{var b=document.getElementById("jahThemeBtn");function paint(){b.textContent=document.documentElement.dataset.theme==="dark"?"◑":"◐"}b.onclick=function(){var d=document.documentElement;if(d.dataset.theme==="dark"){d.dataset.theme="";try{localStorage.removeItem("jah-theme")}catch(e){}}else{d.dataset.theme="dark";try{localStorage.setItem("jah-theme","dark")}catch(e){}}paint()};paint()}catch(e){}})();</script>
+<button id="jahThemeBtn" title="Dark mode" aria-label="Toggle dark mode">◐</button><script>(function(){try{var b=document.getElementById("jahThemeBtn");function paint(){b.textContent=document.documentElement.dataset.theme==="dark"?"◑":"◐"}b.onclick=function(){var d=document.documentElement;if(d.dataset.theme==="dark"){d.dataset.theme="";try{PS.remove("jah-theme")}catch(e){}}else{d.dataset.theme="dark";try{PS.set("jah-theme","dark")}catch(e){}}paint()};paint()}catch(e){}})();</script>
 <script>/* jah-session-restore: localStorage only, nothing leaves the device */
 (function(){try{
 var SITE="sigcomics",DEEP=["series","issue","comic","hero"],path=location.pathname;
@@ -1175,18 +1180,18 @@ var deep=hasDeep();
 var lid=null;(function(){var q=new URLSearchParams(location.search),i;
  for(i=0;i<DEEP.length;i++){var v=q.get(DEEP[i]);if(v){lid=v;break}}
  if(!lid){var m=/[#&?](?:book|issue|course|print|edition|degree|college|paper|series|hero)=([A-Za-z0-9-_.]+)/.exec(location.hash||"");if(m)lid=m[1]}})();
-if(lid){try{localStorage.setItem("jah-last-"+SITE,lid)}catch(e){}}
+if(lid){try{PS.set("jah-last-"+SITE,lid)}catch(e){}}
 document.addEventListener("click",function(e){try{var t=e.target&&e.target.closest?e.target.closest("[data-id]"):null;
- if(t&&t.getAttribute("data-id")){localStorage.setItem("jah-last-"+SITE,t.getAttribute("data-id"));return}
+ if(t&&t.getAttribute("data-id")){PS.set("jah-last-"+SITE,t.getAttribute("data-id"));return}
  var a=e.target&&e.target.closest?e.target.closest("a[href]"):null;
- if(a){var hr=a.getAttribute("href")||"";for(var i=0;i<DEEP.length;i++){var m2=new RegExp("[?&]"+DEEP[i]+"=([A-Za-z0-9-_.]+)").exec(hr);if(m2){localStorage.setItem("jah-last-"+SITE,m2[1]);break}}}}catch(x){}},true);
+ if(a){var hr=a.getAttribute("href")||"";for(var i=0;i<DEEP.length;i++){var m2=new RegExp("[?&]"+DEEP[i]+"=([A-Za-z0-9-_.]+)").exec(hr);if(m2){PS.set("jah-last-"+SITE,m2[1]);break}}}}catch(x){}},true);
 /* (a) scroll save/restore per page path */
 var SK="jah-scroll-"+SITE+"-"+path,st=null;
-window.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(function(){try{localStorage.setItem(SK,String(window.scrollY))}catch(e){}},400)},{passive:true});
-if(!deep){var sv=null;try{sv=localStorage.getItem(SK)}catch(e){}
+window.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(function(){try{PS.set(SK,String(window.scrollY))}catch(e){}},400)},{passive:true});
+if(!deep){var sv=null;try{sv=PS.get(SK)}catch(e){}
  if(sv&&+sv>40){requestAnimationFrame(function(){window.scrollTo(0,+sv)})}}
 /* (c2) on listing page, scroll last-opened record into view */
-if(!deep){var rid=null;try{rid=localStorage.getItem("jah-last-"+SITE)}catch(e){}
+if(!deep){var rid=null;try{rid=PS.get("jah-last-"+SITE)}catch(e){}
  if(rid){var sel=document.querySelector('[data-id="'+rid+'"]')||document.querySelector('a[href*="'+rid+'"]');
   if(sel){var r=sel.getBoundingClientRect();
    if(r.top<0||r.bottom>window.innerHeight){setTimeout(function(){sel.scrollIntoView({block:"center"})},600)}}}}
@@ -1194,11 +1199,11 @@ if(!deep){var rid=null;try{rid=localStorage.getItem("jah-last-"+SITE)}catch(e){}
 var TK="jah-tabs-"+SITE+"-"+path;
 document.addEventListener("click",function(e){try{var b=e.target&&e.target.closest?e.target.closest(".tab,[data-tab]"):null;
  if(!b)return;var id=b.getAttribute("data-tab")||b.getAttribute("data-s")||b.id||(b.textContent||"").trim();
- var o={};try{o=JSON.parse(localStorage.getItem(TK)||"{}")}catch(x){}
+ var o={};try{o=JSON.parse(PS.get(TK)||"{}")}catch(x){}
  var c=b.closest(".tabs")||b.parentElement;
  o[c?(c.id||"i"+Array.prototype.indexOf.call((c.parentElement||document.body).children,c)):"x"]=id;
- localStorage.setItem(TK,JSON.stringify(o))}catch(x){}},true);
-if(!deep){(function(){var o=null;try{o=JSON.parse(localStorage.getItem(TK)||"{}")}catch(x){}
+ PS.set(TK,JSON.stringify(o))}catch(x){}},true);
+if(!deep){(function(){var o=null;try{o=JSON.parse(PS.get(TK)||"{}")}catch(x){}
  if(!o)return;Object.keys(o).forEach(function(k){var cont=document.getElementById(k),btn=null;
   if(cont){btn=cont.querySelector('[data-tab="'+o[k]+'"],[data-s="'+o[k]+'"]')}
   else{try{btn=document.querySelector('.tab[id="'+o[k]+'"]')}catch(x){}}
@@ -1251,14 +1256,14 @@ function buildWelc(){
  return ov;
 }
 function openWelc(){if(!ov)buildWelc();ov.classList.add("show");var b=ov.querySelector("#welcOk");if(b)b.focus({preventScroll:true})}
-function closeWelc(){if(ov)ov.classList.remove("show");try{localStorage.setItem(TOUR_KEY,"1")}catch(e){}}
+function closeWelc(){if(ov)ov.classList.remove("show");try{PS.set(TOUR_KEY,"1")}catch(e){}}
 /* first visit: show the overlay once; deep links (?issue=, ?series=, ?hero=, #issue=)
    go straight to the record instead */
 try{
- var seen=!!localStorage.getItem(TOUR_KEY),deep=false;
+ var seen=!!PS.get(TOUR_KEY),deep=false;
  try{deep=/([?&#])(issue|comic|series|hero)=/.test(location.href)}catch(e){}
- if(deep){try{localStorage.setItem(TOUR_KEY,"1")}catch(e){}}
- else if(!seen)setTimeout(function(){try{if(!localStorage.getItem(TOUR_KEY))openWelc()}catch(e){}},1200);
+ if(deep){try{PS.set(TOUR_KEY,"1")}catch(e){}}
+ else if(!seen)setTimeout(function(){try{if(!PS.get(TOUR_KEY))openWelc()}catch(e){}},1200);
 }catch(e){}
 /* permanent guide panel (kept; the overlay's "Full guide" button opens it) */
 var guideHTML='<h2>❓ How to use the Comic Store</h2>'+
@@ -1296,6 +1301,17 @@ function openGuide(){
 }
 var gb=document.getElementById("guideBtn");if(gb)gb.addEventListener("click",openWelc);
 window.__comicsTour={start:openWelc,openGuide:openGuide};
+})();
+</script>
+<script>
+(function () {
+  /* mount into the header; falls back gracefully when the header markup differs */
+  var mount = document.querySelector('header .booksearch') ||
+              document.querySelector('nav.jtabbar') ||
+              document.querySelector('header nav') ||
+              document.querySelector('header') ||
+              document.body;
+  if (window.JAHProfile && JAHProfile.ui) JAHProfile.ui.renderButton(mount);
 })();
 </script>
 </body>

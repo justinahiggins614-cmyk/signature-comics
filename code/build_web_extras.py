@@ -90,14 +90,14 @@ TABBAR_HTML = ('<nav class="jtabbar" aria-label="Site sections">'
 
 
 def static_page(title, body_html, crumbs):
-    return ("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+    return ("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><script src='js/signin.js'></script><script>/* JAHProfile storage: signed-out behavior is byte-identical to before; signed-in profiles get per-profile namespaced storage. */var PS = (typeof JAHProfile !== 'undefined') ? JAHProfile.store : localStorage;</script>"
             "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
             "<title>" + html.escape(title) + " — The Signature Comic Store</title>"
             "<meta name=\"description\" content=\"" + html.escape(title) +
             ": original Signature comics by Justin Addam Higgins.\">"
             "<style>" + PAGE_CSS + TABBAR_CSS + "</style></head><body><div class=\"wrap\">"
             "<p>" + crumbs + "</p><h1>" + html.escape(title) + "</h1>" +
-            TABBAR_HTML + body_html + "</div></body></html>")
+            TABBAR_HTML + body_html + "<script>(function () {  var mount = document.querySelector('header .booksearch') ||              document.querySelector('nav.jtabbar') ||              document.querySelector('header nav') ||              document.querySelector('header') ||              document.body;  if (window.JAHProfile && JAHProfile.ui) JAHProfile.ui.renderButton(mount);})();</script></div></body></html>")
 
 
 def build_static_pages(recs):
