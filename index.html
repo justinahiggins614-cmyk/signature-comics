@@ -1000,7 +1000,7 @@ function qaAsk(){
   qaSay("u",q);
   var P=issueAIProfile(CUR,QA_RP),ans;
   if(issueConversational(q.toLowerCase())&&typeof JAHtalk!=="undefined")
-    ans=JAHtalk.reply(P,q);
+    ans=JAHtalk.chatFor(P,"issue:"+CUR.id).reply(q);
   else
     ans=QA_RP?qaRoleplay(q,CUR):qaAnswer(q,CUR);
   if(typeof JAHtalk!=="undefined")ans=JAHtalk.guard(ans,P);

@@ -320,7 +320,7 @@ function renderHero(h) {
     $("hqin").value = ""; hqSay("u", q);
     var P = heroAIProfile(h, RP), ans;
     if (heroConversational(q.toLowerCase()) && typeof JAHtalk !== "undefined")
-      ans = JAHtalk.reply(P, q);
+      ans = JAHtalk.chatFor(P, "ai:" + (P.id || P.name)).reply(q);
     else
       ans = heroQaAnswer(q, h, RP);
     if (typeof JAHtalk !== "undefined") ans = JAHtalk.guard(ans, P);
