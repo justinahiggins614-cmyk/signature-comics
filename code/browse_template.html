@@ -45,6 +45,96 @@ details.lazy[open] summary{border-bottom:2px solid #000;background:#241b34}
 .btn:hover{background:#ff4d5e}
 .btn.ghost{background:#1c1528;color:#ffd23f}
 @media(max-width:600px){h1{font-size:1.35em}.issues{max-height:60vh}}
+:root{--ink:#0d0a12;--ink2:#171221;--paper:#f7f2e4;--yel:#ffd23f;--red:#e63946;--blu:#3a86ff;--org:#fb8500;--line:#3a2c5a;--mut:#b9aed6;--card:#1c1528}
+/* moved-store-browser: styles for the store browser + hero catalog moved off the front door (index.html) 2026-10-05 */
+
+.seriesband{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:16px 0 6px}
+
+.scard{background:var(--card);border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:8px;padding:12px 14px;cursor:pointer}
+
+.scard:hover{transform:translateY(-2px)}
+
+.scard h3{margin:.1em 0;font-size:1.02em;letter-spacing:.03em}
+
+.scard p{font-size:.82em;color:var(--mut);margin:.3em 0}
+
+.scard .cnt{font-size:.78em;color:var(--yel);font-weight:700}
+
+/* hero archetype catalog */
+.heroband{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:14px 0}
+
+.hcard{background:#101726;border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:10px;padding:10px;cursor:pointer;text-align:center}
+
+.hcard:hover{border-color:var(--yel)}
+
+.hcard h3{margin:.4em 0 .1em;color:var(--yel);font-size:1em}
+
+.hcard .arch{font-size:.78em;color:#9fc2ff}
+
+.hcard svg{width:100%;height:auto;border-radius:6px}
+
+.hcard svg{aspect-ratio:300/380}
+
+.seriespills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
+
+.seriespills button{background:var(--card);border:2px solid var(--line);color:var(--mut);border-radius:16px;padding:4px 12px;font-family:inherit;font-weight:700;font-size:.8em}
+
+.seriespills button.on{background:var(--yel);color:#1a1206;border-color:#000}
+
+.matchline{text-align:center;color:var(--mut);font-size:.85em;padding:4px 0 0;min-height:1.4em}
+
+.finderbar{display:flex;gap:8px;justify-content:center;margin:10px 0 2px;flex-wrap:wrap}
+
+.finderbar input[type=text]{min-width:min(400px,88vw);background:#0a0714;color:var(--paper);border:2px solid var(--line);border-radius:8px;padding:9px 12px;font-size:1em;font-family:inherit}
+
+.fresults{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0 2px}
+
+.fcard{background:var(--card);border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:8px;padding:10px 14px;max-width:270px;font-size:.9em;text-align:left}
+
+.fcard .fs{color:var(--yel);font-size:.8em;margin:.25em 0 .6em}
+
+.fcard .btn{padding:5px 12px;font-size:.82em}
+
+.fmsg{color:var(--mut);font-size:.92em}
+
+/* JAH NETWORK 10-FIX CONSISTENCY PASS (additive — no restyle of existing components) */
+.stbadge{display:inline-block;background:var(--yel);color:#1a1206;font-size:.68em;font-weight:900;letter-spacing:.12em;border-radius:6px;padding:3px 10px;text-transform:uppercase;white-space:nowrap;vertical-align:middle;border:2px solid #000}
+
+.az{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:8px;position:sticky;top:0;z-index:25;background:#0d0a12;border-radius:8px;padding:8px 4px}
+
+.az button{background:var(--card);border:2px solid var(--line);color:var(--mut);border-radius:6px;min-width:30px;padding:4px 6px;font-family:inherit;font-weight:700}
+
+.az button.on{background:var(--red);color:#fff;border-color:#000}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px}
+
+.card{background:var(--card);border:3px solid #000;box-shadow:5px 5px 0 #000;border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .15s}
+
+.card:hover{transform:translateY(-3px) rotate(-.5deg)}
+
+.card svg{display:block;width:100%;height:auto}
+
+.card .meta{padding:9px 10px 11px}
+
+.card .t{font-weight:900;font-size:.92em;line-height:1.3;min-height:2.4em}
+
+.card .s{font-size:.78em;color:var(--yel);font-weight:700}
+
+.card .n{font-size:.72em;color:var(--mut)}
+
+/* diagnostic pass: aspect-ratio CLS guards, reader, search feedback */
+.card .cover{aspect-ratio:400/600;background:#0a0714}
+
+.card .cover svg{width:100%;height:100%;display:block}
+
+.controls{position:sticky;top:0;z-index:20;background:rgba(13,10,18,.97);border-bottom:3px solid #000;padding:10px 0}
+
+.controls .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+
+.secttl{margin:30px 0 6px;color:#ffd23f;font-size:1.3em}
+
+.sectsub{color:var(--mut);font-size:.9em;margin:0 0 6px}
+
 </style>
 </head>
 <body>
@@ -201,6 +291,30 @@ document.getElementById("jah-askai-q").addEventListener("keydown",function(e){if
 <p class="sectsub">Open a letter to see every issue whose title starts with it, A–Z.</p>
 %%LETTER_DETAILS%%
 
+<h2>🗂 Browse the store</h2>
+<p class="sectsub">The full interactive store browser, moved off the front door — series shelves, search, series quick-filters, the Comic Finder, the A&ndash;Z letter row, and every issue. Tap any issue to open the full comic in the store.</p>
+<div id="storebrowser">
+<div class="seriesband" id="seriesband"></div>
+<div class="controls"><div class="wrap">
+<div class="row">
+<input type="search" id="q" placeholder="Search title, hero, or JAH-COMIC-######…" aria-label="Search comics">
+<select id="series" aria-label="Series filter"><option value="">All series</option></select>
+<select id="sort" aria-label="Sort"><option value="new">Newest first</option><option value="title">Title A–Z</option><option value="series">Series order</option></select>
+</div>
+<div id="seriespills" class="seriespills" role="group" aria-label="Series quick filter"></div>
+<div id="matchline" class="matchline" aria-live="polite"></div>
+<div class="finderbar" style="margin-top:10px"><input type="text" id="fq" maxlength="140" placeholder="Describe what you're looking for…" aria-label="Describe what you're looking for"><button class="btn" id="fgo">Find it</button></div>
+<p class="matchline" style="margin-top:2px">Comic Finder = catalog keyword search over real records only — it never invents issues, heroes, or series.</p>
+<div id="fresults" class="fresults"></div>
+<div class="az" id="az"></div>
+</div></div>
+<div id="searchextras"></div><div id="results"><div class="loading">Opening the long boxes…</div></div>
+</div>
+
+<h2>🦸 Hero archetype catalog</h2>
+<p class="sectsub">Signature-original heroes covering every classic archetype — the powerhouse, the speedster, the dark vigilante, the web-slinger type, the extraordinary team, the cosmic guardian, and more. All original names, looks, and backstories. Tap a hero for their full file.</p>
+<div class="heroband" id="heroband"><div class="loading">Summoning heroes…</div></div>
+
 <p style="margin-top:28px"><a class="btn ghost" href="./">← Back to the store</a></p>
 </div>
 <script>
@@ -298,6 +412,28 @@ $("bq").addEventListener("input",function(){clearTimeout(deb);deb=setTimeout(run
     var mount = document.querySelector('header') || document.body;
     JAHProfile.ui.renderGreeting(mount); /* renders ONLY when personalization is live */
   }
+})();
+</script>
+<script>
+/* globals for hero-catalog.js (it documents needing $, esc from the host page) */
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+</script>
+<script src="hero-catalog.js"></script>
+<script src="js/store-browser.js"></script>
+<script>
+/* hero archetype catalog — moved off the front door 2026-10-05; cards deep-link to the hero file on index.html */
+(function(){
+  var band = document.getElementById("heroband");
+  if(!band || typeof loadHeroes !== "function") return;
+  loadHeroes().then(function(hs){
+    band.innerHTML = hs.map(function(h){
+      return '<a class="hcard" style="text-decoration:none;color:inherit;display:block" href="index.html#hero='+encodeURIComponent(h.id)+'">'+
+        heroPortraitSVG(h, 0.62) + '<h3>'+esc(h.code)+'</h3><div class="arch">'+esc(h.archetype)+'</div></a>';
+    }).join("");
+  }).catch(function(){
+    band.innerHTML = '<div class="loading">Heroes could not load.</div>';
+  });
 })();
 </script>
 </body>
