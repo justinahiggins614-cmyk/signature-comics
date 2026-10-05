@@ -97,7 +97,7 @@ def static_page(title, body_html, crumbs):
             ": original Signature comics by Justin Addam Higgins.\">"
             "<style>" + PAGE_CSS + TABBAR_CSS + "</style></head><body><div class=\"wrap\">"
             "<p>" + crumbs + "</p><h1>" + html.escape(title) + "</h1>" +
-            TABBAR_HTML + body_html + "<script>(function () {  var mount = document.querySelector('header .booksearch') ||              document.querySelector('nav.jtabbar') ||              document.querySelector('header nav') ||              document.querySelector('header') ||              document.body;  if (window.JAHProfile && JAHProfile.ui) JAHProfile.ui.renderButton(mount);})();</script></div></body></html>")
+            TABBAR_HTML + body_html + "<script>(function () {  var mount = document.querySelector('header .booksearch') ||              document.querySelector('nav.jtabbar') ||              document.querySelector('header nav') ||              document.querySelector('header') ||              document.body;  if (window.JAHProfile && JAHProfile.ui) JAHProfile.ui.renderButton(mount);})();</script><script>(function () { if (window.JAHProfile && JAHProfile.ui) { var mount = document.querySelector('header') || document.body; JAHProfile.ui.renderGreeting(mount); } })();</script></div></body></html>")
 
 
 def build_static_pages(recs):
