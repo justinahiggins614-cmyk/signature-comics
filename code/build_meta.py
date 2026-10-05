@@ -34,6 +34,24 @@ import json
 import os
 import re
 import datetime
+import zoneinfo
+
+EDT = zoneinfo.ZoneInfo("America/New_York")
+
+
+def edt_date(ts):
+    """Snapshot date in Manon's timezone (America/New_York), not UTC.
+
+    The drip runs in the small hours; a UTC date would read as tomorrow's
+    date to him. Parse the UTC ISO timestamp and convert to EDT/EST.
+    """
+    try:
+        dt = datetime.datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=datetime.timezone.utc)
+        return dt.astimezone(EDT).date().isoformat()
+    except Exception:
+        return str(ts)[:10]
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -599,7 +617,7 @@ def stamp_static_counts(total, words, updated, n_series):
     march text on load, so the stamp is only ever a fallback."""
     p = os.path.join(ROOT, "index.html")
     src = open(p, encoding="utf-8").read()
-    date = updated[:10]
+    date = edt_date(updated)
     pct = total / 1000000 * 100
     counts_block = (
         STATIC_MARK + "\n"
