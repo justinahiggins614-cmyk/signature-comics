@@ -11,6 +11,12 @@
    "version": "1.0-meta",
    "change": "Machine-readable suite published: series/character/event indexes, JSON schemas, per-issue SHA-256 hashes, master manifest, static count stamping.",
    "issues_added": 0
+  },
+  {
+   "date": "2026-10-05",
+   "version": "1.0-meta",
+   "change": "Machine-readable suite published: series/character/event indexes, JSON schemas, per-issue SHA-256 hashes, master manifest, static count stamping.",
+   "issues_added": 0
   }
  ]
 }
