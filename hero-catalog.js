@@ -1,3 +1,6 @@
+
+function jahConfirm(msg,cb){var o=document.getElementById('jah-confirm');if(o)o.remove();o=document.createElement('div');o.id='jah-confirm';o.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px';var box=document.createElement('div');box.style.cssText='background:#1c2940;border:1px solid #35e0ff;border-radius:12px;padding:20px;max-width:92vw;color:#fff';var p=document.createElement('p');p.style.margin='0 0 16px';p.textContent=String(msg);var row=document.createElement('div');row.style.cssText='display:flex;gap:10px;justify-content:flex-end';var no=document.createElement('button');no.textContent='Cancel';no.style.cssText='padding:10px 18px;border-radius:8px;border:1px solid #666;background:#222;color:#fff;font-size:1em';var yes=document.createElement('button');yes.textContent='Confirm';yes.style.cssText='padding:10px 18px;border-radius:8px;border:none;background:#35e0ff;color:#000;font-weight:bold;font-size:1em';no.onclick=function(){o.remove();cb(false)};yes.onclick=function(){o.remove();cb(true)};row.appendChild(no);row.appendChild(yes);box.appendChild(p);box.appendChild(row);o.appendChild(box);document.body.appendChild(o);yes.focus()}
+function jahToast(m){var t=document.getElementById('jah-toast');if(!t){t=document.createElement('div');t.id='jah-toast';document.body.appendChild(t)}t.textContent=String(m);t.style.display='block';clearTimeout(t._x);t._x=setTimeout(function(){t.style.display='none'},3000)}
 /* The Signature Comic Store — hero archetype catalog, hero detail view,
    roleplay Q&A, and the Hero Creator popup. Loaded by index.html before
    the main inline script. Uses globals from index.html: $, esc,
@@ -21,7 +24,7 @@ function jnAICardHTML(prof){
    (duties?'<br><b>Duties:</b> '+duties:"")+'<br>'+JN_ENGINE_LINE+'</div>';
 }
 function jnShareLink(url){
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(function(){alert("Link copied.")},function(){prompt("Copy this link:",url)});}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(function(){jahToast("Link copied.")},function(){prompt("Copy this link:",url)});}
   else prompt("Copy this link:",url);
 }
 function jnWireHeroPanel(h){
@@ -553,8 +556,8 @@ function wireCreator() {
             mine.push(h);have[h.id]=1;added++;
           });
           saveMyHeroes(mine);renderMyHeroes();
-          alert("Imported "+added+" hero"+(added===1?"":"s")+(skipped?" ("+skipped+" skipped: invalid or duplicate)":"")+".");
-        }catch(e){alert("Could not import: that file is not a valid heroes export.")}
+          jahToast("Imported "+added+" hero"+(added===1?"":"s")+(skipped?" ("+skipped+" skipped: invalid or duplicate)":"")+".");
+        }catch(e){jahToast("Could not import: that file is not a valid heroes export.")}
         imF.value="";
       };
       rd.readAsText(f);
@@ -563,9 +566,9 @@ function wireCreator() {
   var delB=$("delHeroes");
   if(delB)delB.onclick=function(){
     var mine=myHeroes();
-    if(!mine.length){alert("No saved heroes to delete.");return}
-    if(confirm("Delete all "+mine.length+" of your saved heroes from this device? This cannot be undone.")){
-      saveMyHeroes([]);renderMyHeroes();alert("All saved heroes deleted from this device.");
-    }
+    if(!mine.length){jahToast("No saved heroes to delete.");return}
+    jahConfirm("Delete all "+mine.length+" of your saved heroes from this device? This cannot be undone.",function(ok){if(ok){
+      saveMyHeroes([]);renderMyHeroes();jahToast("All saved heroes deleted from this device.");
+    }});
   };
 }
